@@ -15,9 +15,6 @@ import {
   Clock,
   Trash2,
   UserPlus,
-  MessageCircle,
-  Ban,
-  CheckCircle,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import StatusBadge from '@/components/ui/StatusBadge';
@@ -27,12 +24,9 @@ import { formatRelativeTime } from '@/lib/utils';
 import type { Enquiry, EnquiryStatus, EnquiryComment } from '@/types';
 
 const statusOptions: { value: EnquiryStatus | ''; label: string }[] = [
-  { value: '', label: 'All Status' },
-  { value: 'new_enquiry', label: 'New Enquiry' },
-  { value: 'lead', label: 'Lead' },
-  { value: 'in_talks', label: 'In Talks' },
-  { value: 'converted', label: 'Converted' },
-  { value: 'spam', label: 'Spam' },
+  { value: '', label: 'All Enquiries' },
+  { value: 'new_enquiry', label: 'New' },
+  { value: 'lead', label: 'Moved to Leads' },
 ];
 
 export default function EnquiriesPage() {
@@ -47,8 +41,10 @@ export default function EnquiriesPage() {
   const [newComment, setNewComment] = useState('');
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showBulkDeleteModal, setShowBulkDeleteModal] = useState(false);
   const [actionMenuId, setActionMenuId] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
   const fetchEnquiries = useCallback(async () => {
     setLoading(true);
@@ -88,32 +84,83 @@ export default function EnquiriesPage() {
       });
 
       if (res.ok) {
-        toast.success(`Status updated to ${status.replace('_', ' ')}`);
+        if (status === 'lead') {
+          toast.success('Enquiry moved to Leads');
+        } else {
+          toast.success('Status updated');
+        }
         fetchEnquiries();
         setActionMenuId(null);
       } else {
-        toast.error('Failed to update status');
+        toast.error('Failed to update');
       }
     } catch {
-      toast.error('Failed to update status');
+      toast.error('Failed to update');
     }
   };
 
-  const handleMarkAsSpam = async (id: string) => {
-    try {
-      const res = await fetch(`/api/admin/enquiries/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ is_spam: true }),
-      });
+  const toggleSelectAll = () => {
+    if (selectedIds.size === enquiries.length) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(enquiries.map((e) => e.id)));
+    }
+  };
 
-      if (res.ok) {
-        toast.success('Marked as spam');
-        fetchEnquiries();
-        setActionMenuId(null);
-      }
+  const toggleSelect = (id: string) => {
+    const newSelected = new Set(selectedIds);
+    if (newSelected.has(id)) {
+      newSelected.delete(id);
+    } else {
+      newSelected.add(id);
+    }
+    setSelectedIds(newSelected);
+  };
+
+  const handleBulkMoveToLeads = async () => {
+    if (selectedIds.size === 0) return;
+    setIsSubmitting(true);
+
+    try {
+      const promises = Array.from(selectedIds).map((id) =>
+        fetch(`/api/admin/enquiries/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'lead' }),
+        })
+      );
+
+      await Promise.all(promises);
+      toast.success(`${selectedIds.size} enquiries moved to Leads`);
+      setSelectedIds(new Set());
+      fetchEnquiries();
     } catch {
-      toast.error('Failed to mark as spam');
+      toast.error('Failed to move enquiries');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedIds.size === 0) return;
+    setIsSubmitting(true);
+
+    try {
+      const promises = Array.from(selectedIds).map((id) =>
+        fetch(`/api/admin/enquiries/${id}`, {
+          method: 'DELETE',
+        })
+      );
+
+      await Promise.all(promises);
+      toast.success(`${selectedIds.size} enquiries deleted`);
+      setSelectedIds(new Set());
+      setShowBulkDeleteModal(false);
+      fetchEnquiries();
+    } catch {
+      toast.error('Failed to delete enquiries');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -221,8 +268,40 @@ export default function EnquiriesPage() {
         </div>
       </div>
 
+      {/* Bulk Actions Bar */}
+      {selectedIds.size > 0 && (
+        <div className="flex items-center gap-4 p-4 bg-slate-800 rounded-xl border border-yellow-500/50">
+          <span className="text-white font-medium">
+            {selectedIds.size} selected
+          </span>
+          <div className="flex-1" />
+          <button
+            onClick={handleBulkMoveToLeads}
+            disabled={isSubmitting}
+            className="flex items-center gap-2 px-4 py-2 bg-yellow-500 text-slate-900 rounded-lg font-medium hover:bg-yellow-400 transition-colors disabled:opacity-50"
+          >
+            <UserPlus className="w-4 h-4" />
+            Move to Leads
+          </button>
+          <button
+            onClick={() => setShowBulkDeleteModal(true)}
+            disabled={isSubmitting}
+            className="flex items-center gap-2 px-4 py-2 bg-red-500/20 text-red-400 rounded-lg font-medium hover:bg-red-500/30 transition-colors disabled:opacity-50"
+          >
+            <Trash2 className="w-4 h-4" />
+            Delete
+          </button>
+          <button
+            onClick={() => setSelectedIds(new Set())}
+            className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
+          >
+            Cancel
+          </button>
+        </div>
+      )}
+
       {/* Table */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-visible">
         {loading ? (
           <div className="flex items-center justify-center h-64">
             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-yellow-500" />
@@ -233,10 +312,18 @@ export default function EnquiriesPage() {
             <p>No enquiries found</p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-visible">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-slate-700">
+                  <th className="px-4 py-4 text-left">
+                    <input
+                      type="checkbox"
+                      checked={enquiries.length > 0 && selectedIds.size === enquiries.length}
+                      onChange={toggleSelectAll}
+                      className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-yellow-500 focus:ring-yellow-500 focus:ring-offset-0 cursor-pointer"
+                    />
+                  </th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Contact</th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Service</th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Status</th>
@@ -250,9 +337,17 @@ export default function EnquiriesPage() {
                     key={enquiry.id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="hover:bg-slate-700/30 transition-colors cursor-pointer"
+                    className={`hover:bg-slate-700/30 transition-colors cursor-pointer ${selectedIds.has(enquiry.id) ? 'bg-yellow-500/10' : ''}`}
                     onClick={() => openDetailModal(enquiry)}
                   >
+                    <td className="px-4 py-4" onClick={(e) => e.stopPropagation()}>
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.has(enquiry.id)}
+                        onChange={() => toggleSelect(enquiry.id)}
+                        className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-yellow-500 focus:ring-yellow-500 focus:ring-offset-0 cursor-pointer"
+                      />
+                    </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-slate-900 font-bold">
@@ -282,47 +377,33 @@ export default function EnquiriesPage() {
                           <MoreVertical className="w-5 h-5" />
                         </button>
                         {actionMenuId === enquiry.id && (
-                          <div className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-xl border border-slate-700 shadow-xl z-10">
-                            <button
-                              onClick={() => handleStatusChange(enquiry.id, 'lead')}
-                              className="w-full px-4 py-3 text-left text-sm text-white hover:bg-slate-700 flex items-center gap-2 rounded-t-xl"
-                            >
-                              <UserPlus className="w-4 h-4" />
-                              Mark as Lead
-                            </button>
-                            <button
-                              onClick={() => handleStatusChange(enquiry.id, 'in_talks')}
-                              className="w-full px-4 py-3 text-left text-sm text-white hover:bg-slate-700 flex items-center gap-2"
-                            >
-                              <MessageCircle className="w-4 h-4" />
-                              Mark as In Talks
-                            </button>
-                            <button
-                              onClick={() => handleStatusChange(enquiry.id, 'converted')}
-                              className="w-full px-4 py-3 text-left text-sm text-white hover:bg-slate-700 flex items-center gap-2"
-                            >
-                              <CheckCircle className="w-4 h-4" />
-                              Mark as Converted
-                            </button>
-                            <button
-                              onClick={() => handleMarkAsSpam(enquiry.id)}
-                              className="w-full px-4 py-3 text-left text-sm text-yellow-400 hover:bg-slate-700 flex items-center gap-2"
-                            >
-                              <Ban className="w-4 h-4" />
-                              Mark as Spam
-                            </button>
-                            <button
-                              onClick={() => {
-                                setSelectedEnquiry(enquiry);
-                                setShowDeleteModal(true);
-                                setActionMenuId(null);
-                              }}
-                              className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-slate-700 flex items-center gap-2 rounded-b-xl"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                              Delete
-                            </button>
-                          </div>
+                          <>
+                            {/* Backdrop to close menu */}
+                            <div 
+                              className="fixed inset-0 z-40" 
+                              onClick={() => setActionMenuId(null)}
+                            />
+                            <div className="absolute right-0 top-full mt-1 w-48 bg-slate-800 rounded-xl border border-slate-700 shadow-2xl z-50">
+                              <button
+                                onClick={() => handleStatusChange(enquiry.id, 'lead')}
+                                className="w-full px-4 py-3 text-left text-sm text-white hover:bg-slate-700 flex items-center gap-2 rounded-t-xl"
+                              >
+                                <UserPlus className="w-4 h-4" />
+                                Move to Leads
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setSelectedEnquiry(enquiry);
+                                  setShowDeleteModal(true);
+                                  setActionMenuId(null);
+                                }}
+                                className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-slate-700 flex items-center gap-2 rounded-b-xl"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                                Delete
+                              </button>
+                            </div>
+                          </>
                         )}
                       </div>
                     </td>
@@ -472,6 +553,18 @@ export default function EnquiriesPage() {
         title="Delete Enquiry"
         message="Are you sure you want to delete this enquiry? This action cannot be undone."
         confirmText="Delete"
+        variant="danger"
+        isLoading={isSubmitting}
+      />
+
+      {/* Bulk Delete Confirmation Modal */}
+      <ConfirmModal
+        isOpen={showBulkDeleteModal}
+        onClose={() => setShowBulkDeleteModal(false)}
+        onConfirm={handleBulkDelete}
+        title="Delete Selected Enquiries"
+        message={`Are you sure you want to delete ${selectedIds.size} enquiries? This action cannot be undone.`}
+        confirmText="Delete All"
         variant="danger"
         isLoading={isSubmitting}
       />

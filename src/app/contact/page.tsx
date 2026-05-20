@@ -318,25 +318,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      {/* Quick Contact Banner */}
-      <section className="py-12 bg-gradient-to-r from-yellow-500 to-yellow-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900">Need Urgent Assistance?</h2>
-              <p className="text-slate-700">Our team is available 24/7 for emergency services.</p>
-            </div>
-            <a
-              href="tel:+919876543210"
-              className="flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-xl font-semibold hover:bg-slate-800 transition-all duration-300"
-            >
-              <PhoneIcon className="w-5 h-5" />
-              +91 98765 43210
-            </a>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

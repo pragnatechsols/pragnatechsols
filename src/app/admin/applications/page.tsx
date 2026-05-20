@@ -34,6 +34,45 @@ const statusOptions: { value: ApplicationStatus | ''; label: string }[] = [
   { value: 'hired', label: 'Hired' },
 ];
 
+// Open resume in new tab using signed URL
+async function openResume(applicationId: string) {
+  try {
+    const res = await fetch(`/api/admin/resume/${applicationId}`);
+    const data = await res.json();
+    if (data.success && data.url) {
+      window.open(data.url, '_blank');
+    } else {
+      throw new Error('Failed to get resume URL');
+    }
+  } catch (error) {
+    console.error('Error opening resume:', error);
+    alert('Failed to open resume. Please try again.');
+  }
+}
+
+// Download resume using signed URL
+async function downloadResume(applicationId: string, filename: string) {
+  try {
+    const res = await fetch(`/api/admin/resume/${applicationId}`);
+    const data = await res.json();
+    if (data.success && data.url) {
+      // Create a temporary link to trigger download
+      const link = document.createElement('a');
+      link.href = data.url;
+      link.download = filename || 'resume';
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      throw new Error('Failed to get resume URL');
+    }
+  } catch (error) {
+    console.error('Error downloading resume:', error);
+    alert('Failed to download resume. Please try again.');
+  }
+}
+
 interface ApplicationWithJob extends JobApplication {
   job: Job;
 }
@@ -260,23 +299,20 @@ export default function ApplicationsPage() {
                     </td>
                     <td className="px-6 py-4 text-right" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center justify-end gap-2">
-                        <a
-                          href={app.resume_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button
+                          onClick={() => openResume(app.id)}
                           className="p-2 text-gray-400 hover:text-yellow-400 hover:bg-slate-700 rounded-lg transition-colors"
                           title="View Resume"
                         >
                           <ExternalLink className="w-4 h-4" />
-                        </a>
-                        <a
-                          href={app.resume_url}
-                          download
+                        </button>
+                        <button
+                          onClick={() => downloadResume(app.id, app.resume_filename)}
                           className="p-2 text-gray-400 hover:text-green-400 hover:bg-slate-700 rounded-lg transition-colors"
                           title="Download Resume"
                         >
                           <Download className="w-4 h-4" />
-                        </a>
+                        </button>
                         <button className="p-2 text-gray-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors">
                           <MoreVertical className="w-4 h-4" />
                         </button>
@@ -416,23 +452,20 @@ export default function ApplicationsPage() {
                 <p className="text-sm text-gray-400">Resume</p>
               </div>
               <div className="flex gap-2">
-                <a
-                  href={selectedApp.resume_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => openResume(selectedApp.id)}
                   className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-500 transition-colors flex items-center gap-2"
                 >
                   <ExternalLink className="w-4 h-4" />
                   View
-                </a>
-                <a
-                  href={selectedApp.resume_url}
-                  download
+                </button>
+                <button
+                  onClick={() => downloadResume(selectedApp.id, selectedApp.resume_filename)}
                   className="px-4 py-2 bg-yellow-500 text-slate-900 rounded-lg hover:bg-yellow-400 transition-colors flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
                   Download
-                </a>
+                </button>
               </div>
             </div>
 

@@ -32,25 +32,22 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-white/10 ${
         isScrolled
-          ? 'bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-white/5'
+          ? 'bg-[#0a0a0f]/90 backdrop-blur-xl'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center"
+          <Link href="/" className="group">
+            <motion.span
+              whileHover={{ scale: 1.02 }}
+              className="text-white font-bold text-lg tracking-tight"
             >
-              <span className="text-black font-bold text-xl">P</span>
-            </motion.div>
-            <span className="text-white font-semibold text-lg tracking-tight hidden sm:block">
-              Pragna
-            </span>
+              PRAGNA TECHSOLS
+            </motion.span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -75,7 +72,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Mobile Menu Button */
+          {/* Mobile Menu Button */}
           <motion.button
             whileTap={{ scale: 0.9 }}
             className="md:hidden text-white p-2"
