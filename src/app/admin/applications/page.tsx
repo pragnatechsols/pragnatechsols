@@ -17,6 +17,8 @@ import {
   Download,
   ExternalLink,
   Clock,
+  Eye,
+  Trash2,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import StatusBadge from '@/components/ui/StatusBadge';
@@ -89,6 +91,7 @@ export default function ApplicationsPage() {
   const [newComment, setNewComment] = useState('');
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [stats, setStats] = useState({
     total: 0,
     new: 0,
@@ -133,6 +136,37 @@ export default function ApplicationsPage() {
   useEffect(() => {
     fetchApplications();
   }, [fetchApplications]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('[data-dropdown]')) {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
+  const handleDeleteApplication = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this application? This action cannot be undone.')) return;
+    
+    try {
+      const res = await fetch(`/api/admin/applications/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (res.ok) {
+        toast.success('Application deleted');
+        fetchApplications();
+      } else {
+        toast.error('Failed to delete application');
+      }
+    } catch {
+      toast.error('Failed to delete application');
+    }
+  };
 
   const handleStatusChange = async (id: string, status: ApplicationStatus) => {
     try {
@@ -313,9 +347,45 @@ export default function ApplicationsPage() {
                         >
                           <Download className="w-4 h-4" />
                         </button>
-                        <button className="p-2 text-gray-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors">
-                          <MoreVertical className="w-4 h-4" />
-                        </button>
+                        <div className="relative" data-dropdown>
+                          <button 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveDropdown(activeDropdown === app.id ? null : app.id);
+                            }}
+                            className="p-2 text-gray-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                          >
+                            <MoreVertical className="w-4 h-4" />
+                          </button>
+                          {activeDropdown === app.id && (
+                            <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-xl shadow-lg z-50 overflow-hidden">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  openDetailModal(app);
+                                  setActiveDropdown(null);
+                                }}
+                                className="w-full px-4 py-3 text-left text-sm text-white hover:bg-slate-700 flex items-center gap-2 transition-colors"
+                              >
+                                <Eye className="w-4 h-4" />
+                                View Details
+                              </button>
+                              {(app.status === 'rejected' || app.status === 'hired') && (
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDeleteApplication(app.id);
+                                    setActiveDropdown(null);
+                                  }}
+                                  className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-slate-700 flex items-center gap-2 transition-colors"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                  Delete Application
+                                </button>
+                              )}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </td>
                   </motion.tr>

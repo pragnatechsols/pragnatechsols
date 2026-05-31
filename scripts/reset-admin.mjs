@@ -9,6 +9,11 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
+// Super Admin credentials
+const SUPER_ADMIN_EMAIL = 'adminpragna22@gmail.com';
+const SUPER_ADMIN_PASSWORD = 'Pragna@22';
+const SUPER_ADMIN_NAME = 'Super Admin';
+
 // Hash password using Web Crypto API (same as auth.ts)
 async function hashPassword(password) {
   const salt = process.env.PASSWORD_SALT || 'default_salt';
@@ -20,25 +25,31 @@ async function hashPassword(password) {
 }
 
 async function resetAdmin() {
-  console.log('🔄 Resetting admin user...\n');
+  console.log('🔄 Resetting super admin user...\n');
   
-  const passwordHash = await hashPassword('admin123');
+  const passwordHash = await hashPassword(SUPER_ADMIN_PASSWORD);
   console.log('Generated hash:', passwordHash);
   
-  // Delete existing admin
+  // Delete existing super admin (if any)
+  await supabase
+    .from('admin_users')
+    .delete()
+    .eq('email', SUPER_ADMIN_EMAIL);
+  
+  // Also delete old admin if exists
   await supabase
     .from('admin_users')
     .delete()
     .eq('email', 'admin@pragnatechsols.com');
   
-  // Create new admin
+  // Create new super admin
   const { data, error } = await supabase
     .from('admin_users')
     .insert({
-      email: 'admin@pragnatechsols.com',
+      email: SUPER_ADMIN_EMAIL,
       password_hash: passwordHash,
-      name: 'Admin User',
-      role: 'admin',
+      name: SUPER_ADMIN_NAME,
+      role: 'super_admin',
       is_active: true
     })
     .select()
@@ -47,9 +58,10 @@ async function resetAdmin() {
   if (error) {
     console.error('❌ Error:', error.message);
   } else {
-    console.log('✅ Admin user reset successfully!');
-    console.log('   Email: admin@pragnatechsols.com');
-    console.log('   Password: admin123');
+    console.log('✅ Super Admin user created successfully!');
+    console.log(`   Email: ${SUPER_ADMIN_EMAIL}`);
+    console.log(`   Password: ${SUPER_ADMIN_PASSWORD}`);
+    console.log('   Role: super_admin');
   }
 }
 

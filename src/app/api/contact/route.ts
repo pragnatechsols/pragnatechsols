@@ -10,6 +10,46 @@ const CLIENT_EMAIL = 'pragnatechsols@gmail.com';
 // From email (must be verified domain in Resend)
 const FROM_EMAIL = 'info@pragnatechsols.com';
 
+// Rate limiting configuration
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
+const MAX_REQUESTS_PER_WINDOW = 2;
+
+// In-memory store for rate limiting (resets on server restart)
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+// Clean up expired entries periodically
+function cleanupRateLimitStore() {
+  const now = Date.now();
+  for (const [key, value] of rateLimitStore.entries()) {
+    if (now > value.resetTime) {
+      rateLimitStore.delete(key);
+    }
+  }
+}
+
+// Check rate limit for an IP
+function checkRateLimit(ip: string): { allowed: boolean; remaining: number; resetIn: number } {
+  cleanupRateLimitStore();
+  
+  const now = Date.now();
+  const record = rateLimitStore.get(ip);
+  
+  if (!record || now > record.resetTime) {
+    // New window - allow request and create/reset record
+    rateLimitStore.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return { allowed: true, remaining: MAX_REQUESTS_PER_WINDOW - 1, resetIn: RATE_LIMIT_WINDOW };
+  }
+  
+  if (record.count >= MAX_REQUESTS_PER_WINDOW) {
+    // Rate limit exceeded
+    return { allowed: false, remaining: 0, resetIn: record.resetTime - now };
+  }
+  
+  // Increment count and allow
+  record.count++;
+  return { allowed: true, remaining: MAX_REQUESTS_PER_WINDOW - record.count, resetIn: record.resetTime - now };
+}
+
 interface ContactFormData {
   name: string;
   email: string;
@@ -21,6 +61,27 @@ interface ContactFormData {
 
 export async function POST(request: NextRequest) {
   try {
+    // Get client IP for rate limiting
+    const forwarded = request.headers.get('x-forwarded-for');
+    const ip = forwarded ? forwarded.split(',')[0].trim() : request.headers.get('x-real-ip') || 'unknown';
+    
+    // Check rate limit
+    const rateLimit = checkRateLimit(ip);
+    if (!rateLimit.allowed) {
+      const minutesRemaining = Math.ceil(rateLimit.resetIn / 60000);
+      return NextResponse.json(
+        { error: `Too many requests. Please try again in ${minutesRemaining} minute${minutesRemaining > 1 ? 's' : ''}.` },
+        { 
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': MAX_REQUESTS_PER_WINDOW.toString(),
+            'X-RateLimit-Remaining': '0',
+            'X-RateLimit-Reset': Math.ceil(rateLimit.resetIn / 1000).toString(),
+          }
+        }
+      );
+    }
+
     const body: ContactFormData = await request.json();
     const { name, email, phone, company, service, message } = body;
 

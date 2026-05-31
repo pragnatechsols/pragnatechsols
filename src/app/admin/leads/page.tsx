@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Search,
@@ -8,14 +8,14 @@ import {
   ChevronDown,
   MoreVertical,
   Users,
-  LayoutGrid,
-  List,
   Calendar,
   User,
   Phone,
   Mail,
   Building,
   Clock,
+  Eye,
+  Trash2,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import StatusBadge from '@/components/ui/StatusBadge';
@@ -41,22 +41,12 @@ const priorityOptions: { value: LeadPriority | ''; label: string }[] = [
   { value: 'low', label: 'Low' },
 ];
 
-const kanbanColumns: { id: LeadStatus; label: string; color: string }[] = [
-  { id: 'new_lead', label: 'New Leads', color: 'bg-blue-500' },
-  { id: 'contacted', label: 'Contacted', color: 'bg-cyan-500' },
-  { id: 'in_discussion', label: 'In Discussion', color: 'bg-yellow-500' },
-  { id: 'proposal_sent', label: 'Proposal Sent', color: 'bg-orange-500' },
-  { id: 'converted', label: 'Converted', color: 'bg-green-500' },
-  { id: 'lost', label: 'Lost', color: 'bg-red-500' },
-];
-
 export default function LeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<LeadStatus | ''>('');
   const [priorityFilter, setPriorityFilter] = useState<LeadPriority | ''>('');
-  const [viewMode, setViewMode] = useState<'table' | 'kanban'>('table');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
@@ -64,6 +54,7 @@ export default function LeadsPage() {
   const [newNote, setNewNote] = useState('');
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [stats, setStats] = useState({
     total: 0,
     converted: 0,
@@ -76,7 +67,7 @@ export default function LeadsPage() {
     try {
       const params = new URLSearchParams({
         page: page.toString(),
-        limit: viewMode === 'kanban' ? '100' : '10',
+        limit: '10',
         ...(search && { search }),
         ...(statusFilter && { status: statusFilter }),
         ...(priorityFilter && { priority: priorityFilter }),
@@ -104,11 +95,42 @@ export default function LeadsPage() {
     } finally {
       setLoading(false);
     }
-  }, [page, search, statusFilter, priorityFilter, viewMode]);
+  }, [page, search, statusFilter, priorityFilter]);
 
   useEffect(() => {
     fetchLeads();
   }, [fetchLeads]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('[data-dropdown]')) {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
+  const handleDeleteLead = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this lead?')) return;
+    
+    try {
+      const res = await fetch(`/api/admin/leads/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (res.ok) {
+        toast.success('Lead deleted');
+        fetchLeads();
+      } else {
+        toast.error('Failed to delete lead');
+      }
+    } catch {
+      toast.error('Failed to delete lead');
+    }
+  };
 
   const handleStatusChange = async (id: string, status: LeadStatus) => {
     try {
@@ -186,10 +208,6 @@ export default function LeadsPage() {
     }
   };
 
-  const getLeadsByStatus = (status: LeadStatus) => {
-    return leads.filter((lead) => lead.lead_status === status);
-  };
-
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -197,24 +215,6 @@ export default function LeadsPage() {
         <div>
           <h1 className="text-2xl font-bold text-white">Leads</h1>
           <p className="text-gray-400 mt-1">Manage and track your sales leads</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setViewMode('table')}
-            className={`p-2 rounded-lg transition-colors ${
-              viewMode === 'table' ? 'bg-yellow-500 text-slate-900' : 'bg-slate-800 text-gray-400 hover:text-white'
-            }`}
-          >
-            <List className="w-5 h-5" />
-          </button>
-          <button
-            onClick={() => setViewMode('kanban')}
-            className={`p-2 rounded-lg transition-colors ${
-              viewMode === 'kanban' ? 'bg-yellow-500 text-slate-900' : 'bg-slate-800 text-gray-400 hover:text-white'
-            }`}
-          >
-            <LayoutGrid className="w-5 h-5" />
-          </button>
         </div>
       </div>
 
@@ -274,49 +274,6 @@ export default function LeadsPage() {
         <div className="flex items-center justify-center h-64">
           <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-yellow-500" />
         </div>
-      ) : viewMode === 'kanban' ? (
-        /* Kanban View */
-        <div className="flex gap-4 overflow-x-auto pb-4">
-          {kanbanColumns.map((column) => (
-            <div key={column.id} className="flex-shrink-0 w-72">
-              <div className="mb-4 flex items-center gap-2">
-                <div className={`w-3 h-3 rounded-full ${column.color}`} />
-                <h3 className="text-white font-medium">{column.label}</h3>
-                <span className="text-gray-400 text-sm">({getLeadsByStatus(column.id).length})</span>
-              </div>
-              <div className="space-y-3 min-h-[400px] p-2 bg-slate-800/30 rounded-xl">
-                {getLeadsByStatus(column.id).map((lead) => (
-                  <motion.div
-                    key={lead.id}
-                    layoutId={lead.id}
-                    onClick={() => openDetailModal(lead)}
-                    className="p-4 bg-slate-800 rounded-xl border border-slate-700 hover:border-yellow-500/50 cursor-pointer transition-colors"
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-slate-900 text-sm font-bold">
-                        {lead.full_name.charAt(0)}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-white font-medium truncate">{lead.full_name}</p>
-                        <p className="text-xs text-gray-400 truncate">{lead.company_name || lead.email}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between mt-3">
-                      <StatusBadge status={lead.priority} variant="priority" />
-                      <span className="text-xs text-gray-400">{formatRelativeTime(lead.created_at)}</span>
-                    </div>
-                    {lead.follow_up_date && (
-                      <div className="flex items-center gap-1 mt-2 text-xs text-yellow-400">
-                        <Calendar className="w-3 h-3" />
-                        Follow-up: {formatDate(lead.follow_up_date)}
-                      </div>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
       ) : (
         /* Table View */
         <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
@@ -373,9 +330,43 @@ export default function LeadsPage() {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-right" onClick={(e) => e.stopPropagation()}>
-                        <button className="p-2 text-gray-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors">
-                          <MoreVertical className="w-5 h-5" />
-                        </button>
+                        <div className="relative inline-block" data-dropdown>
+                          <button 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveDropdown(activeDropdown === lead.id ? null : lead.id);
+                            }}
+                            className="p-2 text-gray-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                          >
+                            <MoreVertical className="w-5 h-5" />
+                          </button>
+                          {activeDropdown === lead.id && (
+                            <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-xl shadow-lg z-50 overflow-hidden">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  openDetailModal(lead);
+                                  setActiveDropdown(null);
+                                }}
+                                className="w-full px-4 py-3 text-left text-sm text-white hover:bg-slate-700 flex items-center gap-2 transition-colors"
+                              >
+                                <Eye className="w-4 h-4" />
+                                View Details
+                              </button>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDeleteLead(lead.id);
+                                  setActiveDropdown(null);
+                                }}
+                                className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-slate-700 flex items-center gap-2 transition-colors"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                                Delete Lead
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </td>
                     </motion.tr>
                   ))}
@@ -386,8 +377,8 @@ export default function LeadsPage() {
         </div>
       )}
 
-      {/* Pagination (Table View Only) */}
-      {viewMode === 'table' && totalPages > 1 && (
+      {/* Pagination */}
+      {totalPages > 1 && (
         <div className="flex justify-center gap-2">
           <button
             onClick={() => setPage(Math.max(1, page - 1))}
