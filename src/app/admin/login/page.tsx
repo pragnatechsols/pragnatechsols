@@ -138,13 +138,6 @@ export default function AdminLoginPage() {
               )}
             </motion.button>
           </form>
-
-          {/* Demo Credentials */}
-          <div className="mt-6 p-4 bg-slate-800/50 rounded-xl border border-slate-700">
-            <p className="text-xs text-gray-400 text-center">
-              Demo credentials: admin@pragnatechsols.com / admin123
-            </p>
-          </div>
         </div>
       </motion.div>
     </div>
