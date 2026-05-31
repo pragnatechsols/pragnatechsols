@@ -1,8 +1,7 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 interface PageTransitionProps {
   children: ReactNode;
@@ -10,37 +9,41 @@ interface PageTransitionProps {
 
 export default function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname();
+  const [isVisible, setIsVisible] = useState(true);
 
-  // Handle hash navigation after page transition animation completes
+  // Handle scroll and visibility on navigation
   useEffect(() => {
+    // Force visibility
+    setIsVisible(true);
+    
     const hash = window.location.hash;
-    if (hash) {
-      // Wait for animation to complete before scrolling
-      const timer = setTimeout(() => {
+    
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      if (hash) {
         const element = document.querySelector(hash);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 350); // Slightly longer than the animation duration (300ms)
+      } else {
+        window.scrollTo(0, 0);
+      }
       
-      return () => clearTimeout(timer);
-    } else {
-      // Scroll to top for non-hash navigations
-      window.scrollTo(0, 0);
-    }
+      // Force repaint on mobile
+      document.body.style.opacity = '0.99';
+      requestAnimationFrame(() => {
+        document.body.style.opacity = '1';
+      });
+    }, 50);
+    
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={pathname}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <div 
+      className={`transition-opacity duration-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+    >
+      {children}
+    </div>
   );
 }
