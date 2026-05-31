@@ -25,31 +25,37 @@ const services = [
     icon: <BoltIcon className="w-6 h-6" />,
     title: 'Electrical',
     description: 'Complete electrical solutions for residential, commercial, and industrial projects.',
+    href: '/services#electrical',
   },
   {
     icon: <WrenchScrewdriverIcon className="w-6 h-6" />,
     title: 'HVAC',
     description: 'Heating, ventilation, and air conditioning systems for optimal comfort.',
+    href: '/services#hvac',
   },
   {
     icon: <BeakerIcon className="w-6 h-6" />,
     title: 'Plumbing',
     description: 'Comprehensive plumbing solutions including installation and maintenance.',
+    href: '/services#plumbing',
   },
   {
     icon: <FireIcon className="w-6 h-6" />,
     title: 'Fire & Safety',
     description: 'Advanced fire detection, suppression systems, and safety compliance.',
+    href: '/services#fire-safety',
   },
   {
     icon: <SunIcon className="w-6 h-6" />,
     title: 'Solar Projects',
     description: 'Sustainable solar energy solutions for reduced energy costs.',
+    href: '/services#solar-projects',
   },
   {
     icon: <VideoCameraIcon className="w-6 h-6" />,
     title: 'CCTV',
     description: 'State-of-the-art surveillance systems for comprehensive security.',
+    href: '/services#cctv',
   },
 ];
 
@@ -186,7 +192,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden bg-[#0a0a0f]">
+      <section ref={containerRef} className="relative min-h-[110vh] flex items-center overflow-visible bg-[#0a0a0f]">
         {/* Gradient orbs */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-yellow-500/20 rounded-full blur-[128px]" />
@@ -204,7 +210,7 @@ export default function Home() {
         />
 
         <motion.div style={{ y, opacity }} className="relative w-full">
-          <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-32">
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-32 pb-40">
             {/* Top line */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -214,7 +220,7 @@ export default function Home() {
             >
               <div className="h-px w-12 bg-yellow-400" />
               <span className="text-yellow-400 text-sm font-medium tracking-[0.2em] uppercase">
-                A-Grade Licensed Contractor
+                Engineering Excellence Since 2010
               </span>
             </motion.div>
 
@@ -384,7 +390,7 @@ export default function Home() {
                 <span className="text-outline text-yellow-400">Delivered with Excellence</span>
               </h2>
               <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                With over 15 years of experience and a government-approved A-Grade license, 
+                With over 15 years of experience and a commitment to excellence, 
                 we bring unmatched expertise to every project we undertake.
               </p>
               <MagneticButton href="/about">Learn More</MagneticButton>
@@ -392,7 +398,7 @@ export default function Home() {
 
             <StaggerContainer className="grid grid-cols-2 gap-6">
               {[
-                { num: '01', title: 'A-Grade Licensed', desc: 'Govt. Approved Contractor' },
+                { num: '01', title: 'Trusted Partner', desc: 'Reliable & Professional' },
                 { num: '02', title: '15+ Years', desc: 'Industry Experience' },
                 { num: '03', title: 'Expert Team', desc: '50+ Skilled Engineers' },
                 { num: '04', title: 'Quality Assured', desc: 'Certified Processes' },

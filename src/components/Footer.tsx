@@ -20,14 +20,14 @@ const quickLinks = [
 ];
 
 const services = [
-  'Electrical',
-  'HVAC',
-  'Plumbing',
-  'Fire & Safety',
-  'Solar Projects',
-  'CCTV',
-  'RO, STP & WTP',
-  'Retrofit Services',
+  { label: 'Electrical', slug: 'electrical' },
+  { label: 'HVAC', slug: 'hvac' },
+  { label: 'Plumbing', slug: 'plumbing' },
+  { label: 'Fire & Safety', slug: 'fire-safety' },
+  { label: 'Solar Projects', slug: 'solar-projects' },
+  { label: 'CCTV', slug: 'cctv' },
+  { label: 'RO, STP & WTP', slug: 'ro-stp-wtp' },
+  { label: 'Retrofit Services', slug: 'retrofit-services' },
 ];
 
 export default function Footer() {
@@ -61,7 +61,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-gray-400 text-sm">
-              Govt. Approved &apos;A&apos; Grade Electrical Licence Contractor providing comprehensive MEPF consultancy and engineering services.
+              Your trusted partner for comprehensive MEPF consultancy and engineering services.
             </p>
             {/* Social Media Icons */}
             <div className="flex space-x-3">
@@ -125,16 +125,16 @@ export default function Footer() {
             <ul className="space-y-2">
               {services.map((service) => (
                 <motion.li
-                  key={service}
+                  key={service.slug}
                   whileHover={{ x: 5 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
                   <Link
-                    href="/services"
+                    href={`/services#${service.slug}`}
                     className="text-gray-400 hover:text-yellow-400 text-sm transition-colors duration-200 flex items-center gap-2"
                   >
                     <span className="w-1 h-1 bg-indigo-500/50 rounded-full" />
-                    {service}
+                    {service.label}
                   </Link>
                 </motion.li>
               ))}
@@ -154,9 +154,14 @@ export default function Footer() {
                 <div className="w-8 h-8 bg-slate-800 rounded-lg flex items-center justify-center group-hover:bg-yellow-500/20 transition-colors">
                   <MapPinIcon className="w-4 h-4 text-yellow-400" />
                 </div>
-                <span className="text-gray-400 text-sm">
+                <a
+                  href="https://www.google.com/maps/search/Vijayawada,+Andhra+Pradesh,+India"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-yellow-400 text-sm transition-colors duration-200"
+                >
                   Vijayawada, Andhra Pradesh, India
-                </span>
+                </a>
               </li>
               <li className="flex items-center space-x-3 group">
                 <div className="w-8 h-8 bg-slate-800 rounded-lg flex items-center justify-center group-hover:bg-yellow-500/20 transition-colors">

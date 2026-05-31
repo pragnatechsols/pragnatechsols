@@ -2,19 +2,21 @@
 
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 interface ServiceCardProps {
   icon: ReactNode;
   title: string;
   description: string;
+  href?: string;
 }
 
-export default function ServiceCard({ icon, title, description }: ServiceCardProps) {
-  return (
+export default function ServiceCard({ icon, title, description, href }: ServiceCardProps) {
+  const CardContent = (
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-      className="group relative p-8 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-yellow-400/30 transition-all duration-300 overflow-hidden"
+      className="group relative p-8 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-yellow-400/30 transition-all duration-300 overflow-hidden h-full"
     >
       {/* Subtle glow on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -40,4 +42,14 @@ export default function ServiceCard({ icon, title, description }: ServiceCardPro
       </div>
     </motion.div>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className="block h-full">
+        {CardContent}
+      </Link>
+    );
+  }
+
+  return CardContent;
 }

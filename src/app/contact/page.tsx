@@ -27,6 +27,7 @@ const contactInfo = [
     title: 'Visit Us',
     content: 'Vijayawada, Andhra Pradesh, India',
     subContent: 'Near Benz Circle',
+    href: 'https://www.google.com/maps/search/Vijayawada,+Andhra+Pradesh,+India',
   },
   {
     icon: <EnvelopeIcon className="w-6 h-6" />,
@@ -59,16 +60,44 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [phoneError, setPhoneError] = useState('');
+
+  const validatePhone = (phone: string): boolean => {
+    // Remove spaces, dashes, and parentheses
+    const cleanedPhone = phone.replace(/[\s\-()]/g, '');
+    // Check for valid Indian phone number (10 digits, optionally with +91 prefix)
+    const phoneRegex = /^(\+91)?[6-9]\d{9}$/;
+    return phoneRegex.test(cleanedPhone);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+
+    // Clear phone error when user starts typing
+    if (name === 'phone') {
+      setPhoneError('');
+    }
+  };
+
+  const handlePhoneBlur = () => {
+    if (formData.phone && !validatePhone(formData.phone)) {
+      setPhoneError('Please enter a valid 10-digit Indian phone number');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate phone before submission
+    if (!validatePhone(formData.phone)) {
+      setPhoneError('Please enter a valid 10-digit Indian phone number');
+      return;
+    }
+    
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setErrorMessage('');
@@ -178,10 +207,14 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
+                      onBlur={handlePhoneBlur}
                       required
-                      className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
+                      className={`w-full px-4 py-3 bg-slate-800 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200 ${phoneError ? 'border-red-500' : 'border-slate-700'}`}
                       placeholder="+91 98765 43210"
                     />
+                    {phoneError && (
+                      <p className="mt-1 text-sm text-red-400">{phoneError}</p>
+                    )}
                   </div>
                 </div>
 
@@ -273,7 +306,11 @@ export default function ContactPage() {
                     </div>
                     <h3 className="text-white font-semibold mb-2">{info.title}</h3>
                     {info.href ? (
-                      <a href={info.href} className="text-gray-400 hover:text-yellow-400 transition-colors duration-200">
+                      <a 
+                        href={info.href} 
+                        className="text-gray-400 hover:text-yellow-400 transition-colors duration-200"
+                        {...(info.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      >
                         {info.content}
                       </a>
                     ) : (

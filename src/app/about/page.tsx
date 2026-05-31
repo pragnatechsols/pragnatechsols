@@ -11,14 +11,35 @@ import {
 
 export const metadata: Metadata = {
   title: 'About Us | Pragna Techsols',
-  description: 'Learn about Pragna Techsols - A Govt. Approved A Grade Electrical Licence Contractor with expertise in MEPF consultancy and engineering services.',
+  description: 'Learn about Pragna Techsols - Your trusted partner for MEPF consultancy and engineering services with over 15 years of expertise.',
 };
+
+const founders = [
+  {
+    name: 'Founder Name 1',
+    role: 'Founder & CEO',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
+    description: 'With over 20 years of experience in the MEPF industry, leading Pragna Techsols to deliver excellence.',
+  },
+  {
+    name: 'Founder Name 2',
+    role: 'Co-Founder & COO',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80',
+    description: 'Expert in operations and project management, ensuring seamless execution of all projects.',
+  },
+  {
+    name: 'Founder Name 3',
+    role: 'Co-Founder & CTO',
+    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80',
+    description: 'Technical visionary driving innovation in electrical and automation solutions.',
+  },
+];
 
 const certifications = [
   {
     icon: <ShieldCheckIcon className="w-8 h-8" />,
-    title: "Govt. Approved 'A' Grade",
-    description: "Licensed electrical contractor recognized by government authorities",
+    title: "Quality Certified",
+    description: "Recognized for excellence in electrical contracting services",
   },
   {
     icon: <AcademicCapIcon className="w-8 h-8" />,
@@ -104,7 +125,7 @@ export default function AboutPage() {
                   has been marked by consistent growth, innovation, and an unwavering commitment to quality.
                 </p>
                 <p>
-                  As a Government Approved &apos;A&apos; Grade Electrical Licence Contractor, we take pride in our 
+                  As an established and certified MEPF solutions provider, we take pride in our 
                   technical expertise and the trust our clients place in us. Our team of skilled engineers 
                   and technicians brings together decades of combined experience in mechanical, electrical, 
                   plumbing, and fire safety systems.
@@ -150,8 +171,47 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Certifications */}
+      {/* Founders Section */}
       <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1 bg-yellow-500/10 text-yellow-400 rounded-full text-sm font-medium mb-4">
+              Leadership
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Meet Our Founders
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Visionary leaders committed to excellence, innovation, and building lasting relationships.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {founders.map((founder) => (
+              <div 
+                key={founder.name}
+                className="bg-slate-800/50 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-500/50 transition-all duration-300 group"
+              >
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src={founder.image}
+                    alt={founder.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6 text-center">
+                  <h3 className="text-xl font-semibold text-white mb-1">{founder.name}</h3>
+                  <p className="text-yellow-400 text-sm font-medium mb-3">{founder.role}</p>
+                  <p className="text-gray-400 text-sm">{founder.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications */}
+      <section className="py-20 bg-slate-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="inline-block px-4 py-1 bg-indigo-500/10 text-indigo-400 rounded-full text-sm font-medium mb-4">

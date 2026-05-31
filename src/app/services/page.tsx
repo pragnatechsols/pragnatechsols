@@ -20,6 +20,7 @@ const services = [
   {
     icon: <BoltIcon className="w-10 h-10" />,
     title: 'Electrical',
+    slug: 'electrical',
     shortDesc: 'Complete electrical solutions for all project types',
     description: 'Our electrical services encompass the complete spectrum of electrical engineering solutions. From low voltage distribution systems to high voltage installations, we design, install, and maintain electrical infrastructure that meets the highest safety and efficiency standards.',
     features: [
@@ -35,6 +36,7 @@ const services = [
   {
     icon: <WrenchScrewdriverIcon className="w-10 h-10" />,
     title: 'HVAC',
+    slug: 'hvac',
     shortDesc: 'Heating, Ventilation & Air Conditioning systems',
     description: 'We provide comprehensive HVAC solutions designed for optimal comfort and energy efficiency. Our team specializes in designing and implementing climate control systems for residential, commercial, and industrial spaces.',
     features: [
@@ -50,6 +52,7 @@ const services = [
   {
     icon: <BeakerIcon className="w-10 h-10" />,
     title: 'Plumbing',
+    slug: 'plumbing',
     shortDesc: 'Comprehensive plumbing & sanitary solutions',
     description: 'Our plumbing services cover everything from basic installations to complex industrial systems. We ensure efficient water supply, drainage, and sanitary systems that comply with all regulatory standards.',
     features: [
@@ -65,6 +68,7 @@ const services = [
   {
     icon: <FireIcon className="w-10 h-10" />,
     title: 'Fire & Safety',
+    slug: 'fire-safety',
     shortDesc: 'Advanced fire detection & suppression systems',
     description: 'Safety is our priority. We design and implement fire detection, alarm, and suppression systems that protect lives and property. Our solutions comply with all national and international fire safety standards.',
     features: [
@@ -80,6 +84,7 @@ const services = [
   {
     icon: <SunIcon className="w-10 h-10" />,
     title: 'Solar Projects',
+    slug: 'solar-projects',
     shortDesc: 'Sustainable solar energy solutions',
     description: 'Embrace clean energy with our solar solutions. We design and install solar power systems that reduce your carbon footprint and energy costs while contributing to a sustainable future.',
     features: [
@@ -95,6 +100,7 @@ const services = [
   {
     icon: <VideoCameraIcon className="w-10 h-10" />,
     title: 'CCTV',
+    slug: 'cctv',
     shortDesc: 'State-of-the-art surveillance systems',
     description: 'Protect your premises with our advanced CCTV and surveillance solutions. We provide end-to-end security systems with the latest technology for comprehensive monitoring and recording.',
     features: [
@@ -110,6 +116,7 @@ const services = [
   {
     icon: <CogIcon className="w-10 h-10" />,
     title: 'RO, STP & WTP',
+    slug: 'ro-stp-wtp',
     shortDesc: 'Water treatment & purification systems',
     description: 'We specialize in water treatment solutions including Reverse Osmosis, Sewage Treatment Plants, and Water Treatment Plants. Our systems ensure clean, safe water while meeting environmental regulations.',
     features: [
@@ -125,6 +132,7 @@ const services = [
   {
     icon: <ShieldCheckIcon className="w-10 h-10" />,
     title: 'Retrofit Services',
+    slug: 'retrofit-services',
     shortDesc: 'Modernization & upgrade solutions',
     description: 'Upgrade and modernize your existing infrastructure with our retrofit services. We help you improve efficiency, safety, and compliance while extending the life of your systems.',
     features: [
@@ -172,7 +180,8 @@ export default function ServicesPage() {
             {services.map((service, index) => (
               <div 
                 key={service.title}
-                className={`grid lg:grid-cols-2 gap-8 items-center ${
+                id={service.slug}
+                className={`scroll-mt-24 grid lg:grid-cols-2 gap-8 items-center ${
                   index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
                 }`}
               >

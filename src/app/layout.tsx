@@ -17,12 +17,12 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Pragna Techsols | MEPF Consultancy & Engineering Services",
-  description: "Govt. Approved 'A' Grade Electrical Licence Contractor providing comprehensive MEPF Consultancy and Engineering Services for Domestic, Commercial & Industrial projects in Vijayawada, Andhra Pradesh.",
+  description: "Your trusted partner for comprehensive MEPF Consultancy and Engineering Services for Domestic, Commercial & Industrial projects in Vijayawada, Andhra Pradesh.",
   keywords: "MEPF, Electrical, HVAC, Plumbing, Fire Safety, Solar, CCTV, Vijayawada, Engineering Services, Contractor",
   authors: [{ name: "Pragna Techsols" }],
   openGraph: {
     title: "Pragna Techsols | MEPF Consultancy & Engineering Services",
-    description: "Govt. Approved 'A' Grade Electrical Licence Contractor providing comprehensive MEPF Consultancy and Engineering Services.",
+    description: "Your trusted partner for comprehensive MEPF Consultancy and Engineering Services.",
     type: "website",
     locale: "en_IN",
   },
