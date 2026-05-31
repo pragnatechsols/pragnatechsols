@@ -181,6 +181,15 @@ function Counter({ value, suffix = '' }: { value: string; suffix?: string }) {
 
 export default function Home() {
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
@@ -193,15 +202,15 @@ export default function Home() {
     <>
       {/* Hero Section */}
       <section ref={containerRef} className="relative min-h-[110vh] flex items-center overflow-visible bg-[#0a0a0f]">
-        {/* Gradient orbs */}
+        {/* Gradient orbs - simplified for mobile */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-yellow-500/20 rounded-full blur-[128px]" />
-          <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-indigo-500/20 rounded-full blur-[128px]" />
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-yellow-500/20 rounded-full blur-[128px] md:blur-[128px] will-change-transform" />
+          <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-indigo-500/20 rounded-full blur-[128px] md:blur-[128px] will-change-transform" />
         </div>
 
         {/* Grid pattern */}
         <div 
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.03] hidden md:block"
           style={{
             backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
                               linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
@@ -209,7 +218,10 @@ export default function Home() {
           }}
         />
 
-        <motion.div style={{ y, opacity }} className="relative w-full">
+        <motion.div 
+          style={isMobile ? {} : { y, opacity }} 
+          className="relative w-full"
+        >
           <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-32 pb-40">
             {/* Top line */}
             <motion.div

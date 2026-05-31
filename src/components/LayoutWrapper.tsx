@@ -33,7 +33,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
   return (
     <ClientWrapper>
       <Navbar />
-      <main className="flex-grow pt-16">{children}</main>
+      <main className="flex-grow pt-20">{children}</main>
       <Footer />
     </ClientWrapper>
   );
