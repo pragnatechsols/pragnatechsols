@@ -325,7 +325,7 @@ export default function Home() {
       </section>
 
       {/* Marquee Section */}
-      <section className="py-8 bg-yellow-400 overflow-hidden">
+      <section className="py-8 bg-yellow-400 overflow-hidden relative z-10" style={{ backgroundColor: '#facc15' }}>
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(2)].map((_, i) => (
             <div key={i} className="flex items-center gap-8 mx-8">
