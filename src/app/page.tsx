@@ -294,7 +294,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 pt-12 border-t border-white/10"
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 pt-12 pb-16 border-t border-white/10"
             >
               {stats.map((stat) => (
                 <div key={stat.label}>
