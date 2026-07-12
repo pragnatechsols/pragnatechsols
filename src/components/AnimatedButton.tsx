@@ -30,9 +30,9 @@ export default function AnimatedButton({
   const baseStyles = 'relative inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 overflow-hidden';
   
   const variants = {
-    primary: 'bg-yellow-500 hover:bg-yellow-400 text-slate-900',
-    secondary: 'bg-slate-800 hover:bg-slate-700 text-white border border-slate-700',
-    outline: 'bg-transparent hover:bg-yellow-500/10 text-yellow-400 border border-yellow-500/50 hover:border-yellow-400',
+    primary: 'bg-amber-500 hover:bg-amber-400 text-[#3d2063]',
+    secondary: 'bg-[#4f2e88] hover:bg-[#5e3a9e] text-white border border-[#5e3a9e]',
+    outline: 'bg-transparent hover:bg-amber-500/10 text-amber-400 border border-amber-500/50 hover:border-amber-400',
   };
 
   const sizes = {
@@ -56,7 +56,7 @@ export default function AnimatedButton({
       {/* Glow effect for primary */}
       {variant === 'primary' && (
         <motion.span
-          className="absolute inset-0 bg-gradient-to-r from-yellow-400/0 via-yellow-300/30 to-yellow-400/0"
+          className="absolute inset-0 bg-gradient-to-r from-amber-400/0 via-amber-300/30 to-amber-400/0"
           initial={{ x: '-100%' }}
           whileHover={{ x: '100%' }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}

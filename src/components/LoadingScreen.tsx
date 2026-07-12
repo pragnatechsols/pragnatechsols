@@ -37,85 +37,9 @@ export default function LoadingScreen() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
-          className="fixed inset-0 z-[10000] bg-slate-950 flex items-center justify-center"
+          className="fixed inset-0 z-[10000] bg-[#3d2063] flex items-center justify-center"
         >
           <div className="relative flex flex-col items-center">
-            {/* Circuit Animation Container */}
-            <div className="relative w-40 h-40 mb-8">
-              {/* Outer rotating ring */}
-              <motion.div
-                className="absolute inset-0 rounded-full border-2 border-yellow-500/20"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-              />
-              
-              {/* Middle pulsing ring */}
-              <motion.div
-                className="absolute inset-4 rounded-full border-2 border-indigo-500/30"
-                animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              />
-
-              {/* Inner rotating ring - opposite direction */}
-              <motion.div
-                className="absolute inset-8 rounded-full border-2 border-yellow-400/40"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-              />
-
-              {/* Center logo */}
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 1, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center shadow-lg shadow-yellow-500/30">
-                  <span className="text-slate-900 font-bold text-3xl">P</span>
-                </div>
-              </motion.div>
-
-              {/* Electric sparks */}
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 bg-yellow-400 rounded-full"
-                  style={{
-                    top: '50%',
-                    left: '50%',
-                    transformOrigin: '0 0',
-                  }}
-                  animate={{
-                    x: [0, Math.cos((i * Math.PI) / 4) * 70],
-                    y: [0, Math.sin((i * Math.PI) / 4) * 70],
-                    opacity: [0, 1, 0],
-                    scale: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    delay: i * 0.15,
-                    ease: 'easeOut',
-                  }}
-                />
-              ))}
-
-              {/* Energy waves */}
-              {[...Array(3)].map((_, i) => (
-                <motion.div
-                  key={`wave-${i}`}
-                  className="absolute inset-0 rounded-full border border-yellow-500/30"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1.8, opacity: [0, 0.5, 0] }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: i * 0.6,
-                    ease: 'easeOut',
-                  }}
-                />
-              ))}
-            </div>
-
             {/* Company Name */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -124,15 +48,15 @@ export default function LoadingScreen() {
               className="text-center mb-6"
             >
               <h1 className="text-2xl font-bold text-white">
-                Pragna <span className="text-yellow-400">Techsols</span>
+                Pragna <span className="text-amber-400">Techsols</span>
               </h1>
               <p className="text-gray-500 text-sm mt-1">Engineering Excellence</p>
             </motion.div>
 
             {/* Progress Bar */}
-            <div className="w-48 h-1 bg-slate-800 rounded-full overflow-hidden">
+            <div className="w-48 h-1 bg-[#4f2e88] rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full"
+                className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: `${Math.min(progress, 100)}%` }}
                 transition={{ duration: 0.3 }}
@@ -165,15 +89,15 @@ export default function LoadingScreen() {
               >
                 <path
                   d="M 50 0 L 50 30 M 50 70 L 50 100 M 0 50 L 30 50 M 70 50 L 100 50"
-                  stroke="#eab308"
+                  stroke="#e0b044"
                   strokeWidth="0.5"
                   fill="none"
                 />
-                <circle cx="50" cy="50" r="3" fill="#eab308" />
-                <circle cx="50" cy="30" r="2" fill="#eab308" />
-                <circle cx="50" cy="70" r="2" fill="#eab308" />
-                <circle cx="30" cy="50" r="2" fill="#eab308" />
-                <circle cx="70" cy="50" r="2" fill="#eab308" />
+                <circle cx="50" cy="50" r="3" fill="#e0b044" />
+                <circle cx="50" cy="30" r="2" fill="#e0b044" />
+                <circle cx="50" cy="70" r="2" fill="#e0b044" />
+                <circle cx="30" cy="50" r="2" fill="#e0b044" />
+                <circle cx="70" cy="50" r="2" fill="#e0b044" />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#circuit-pattern)" />
@@ -204,9 +128,9 @@ export default function LoadingScreen() {
             />
             <defs>
               <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#eab308" stopOpacity="0" />
-                <stop offset="50%" stopColor="#eab308" stopOpacity="1" />
-                <stop offset="100%" stopColor="#eab308" stopOpacity="0" />
+                <stop offset="0%" stopColor="#e0b044" stopOpacity="0" />
+                <stop offset="50%" stopColor="#e0b044" stopOpacity="1" />
+                <stop offset="100%" stopColor="#e0b044" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>

@@ -72,7 +72,7 @@ export default function AdminDashboardPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500" />
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500" />
       </div>
     );
   }
@@ -125,35 +125,35 @@ export default function AdminDashboardPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-slate-800/50 rounded-xl border border-slate-700 p-6"
+          className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] p-6"
         >
           <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <MessageSquare className="w-5 h-5 text-yellow-400" />
+            <MessageSquare className="w-5 h-5 text-amber-400" />
             Enquiries Overview
           </h2>
           <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <div className="flex items-center gap-2 text-blue-400 mb-1">
                 <Clock className="w-4 h-4" />
                 <span className="text-sm">New</span>
               </div>
               <p className="text-2xl font-bold text-white">{stats?.enquiries.new_count || 0}</p>
             </div>
-            <div className="p-4 bg-slate-700/50 rounded-lg">
-              <div className="flex items-center gap-2 text-yellow-400 mb-1">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
+              <div className="flex items-center gap-2 text-amber-400 mb-1">
                 <TrendingUp className="w-4 h-4" />
                 <span className="text-sm">In Talks</span>
               </div>
               <p className="text-2xl font-bold text-white">{stats?.enquiries.in_talks_count || 0}</p>
             </div>
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <div className="flex items-center gap-2 text-green-400 mb-1">
                 <CheckCircle className="w-4 h-4" />
                 <span className="text-sm">Converted</span>
               </div>
               <p className="text-2xl font-bold text-white">{stats?.enquiries.converted_count || 0}</p>
             </div>
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <div className="flex items-center gap-2 text-red-400 mb-1">
                 <XCircle className="w-4 h-4" />
                 <span className="text-sm">Spam</span>
@@ -168,35 +168,35 @@ export default function AdminDashboardPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-slate-800/50 rounded-xl border border-slate-700 p-6"
+          className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] p-6"
         >
           <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <Users className="w-5 h-5 text-yellow-400" />
+            <Users className="w-5 h-5 text-amber-400" />
             Leads Overview
           </h2>
           <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <div className="flex items-center gap-2 text-blue-400 mb-1">
                 <Clock className="w-4 h-4" />
                 <span className="text-sm">New Leads</span>
               </div>
               <p className="text-2xl font-bold text-white">{stats?.leads.new_lead_count || 0}</p>
             </div>
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <div className="flex items-center gap-2 text-cyan-400 mb-1">
                 <TrendingUp className="w-4 h-4" />
                 <span className="text-sm">In Discussion</span>
               </div>
               <p className="text-2xl font-bold text-white">{stats?.leads.in_discussion_count || 0}</p>
             </div>
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <div className="flex items-center gap-2 text-green-400 mb-1">
                 <CheckCircle className="w-4 h-4" />
                 <span className="text-sm">Converted</span>
               </div>
               <p className="text-2xl font-bold text-white">{stats?.leads.converted_count || 0}</p>
             </div>
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <div className="flex items-center gap-2 text-red-400 mb-1">
                 <XCircle className="w-4 h-4" />
                 <span className="text-sm">Lost</span>
@@ -211,30 +211,30 @@ export default function AdminDashboardPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="bg-slate-800/50 rounded-xl border border-slate-700 p-6"
+          className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] p-6"
         >
           <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <FileText className="w-5 h-5 text-yellow-400" />
+            <FileText className="w-5 h-5 text-amber-400" />
             Applications Overview
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <p className="text-sm text-gray-400">New</p>
               <p className="text-2xl font-bold text-blue-400">{stats?.applications.new_count || 0}</p>
             </div>
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <p className="text-sm text-gray-400">Shortlisted</p>
               <p className="text-2xl font-bold text-purple-400">{stats?.applications.shortlisted_count || 0}</p>
             </div>
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <p className="text-sm text-gray-400">Interview</p>
-              <p className="text-2xl font-bold text-yellow-400">{stats?.applications.interview_count || 0}</p>
+              <p className="text-2xl font-bold text-amber-400">{stats?.applications.interview_count || 0}</p>
             </div>
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <p className="text-sm text-gray-400">Hired</p>
               <p className="text-2xl font-bold text-green-400">{stats?.applications.hired_count || 0}</p>
             </div>
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <p className="text-sm text-gray-400">Rejected</p>
               <p className="text-2xl font-bold text-red-400">{stats?.applications.rejected_count || 0}</p>
             </div>
@@ -246,18 +246,18 @@ export default function AdminDashboardPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="bg-slate-800/50 rounded-xl border border-slate-700 p-6"
+          className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] p-6"
         >
           <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <Briefcase className="w-5 h-5 text-yellow-400" />
+            <Briefcase className="w-5 h-5 text-amber-400" />
             Jobs Overview
           </h2>
           <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <p className="text-sm text-gray-400">Active Jobs</p>
               <p className="text-3xl font-bold text-green-400">{stats?.jobs.active_jobs || 0}</p>
             </div>
-            <div className="p-4 bg-slate-700/50 rounded-lg">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-lg">
               <p className="text-sm text-gray-400">Total Jobs</p>
               <p className="text-3xl font-bold text-white">{stats?.jobs.total_jobs || 0}</p>
             </div>

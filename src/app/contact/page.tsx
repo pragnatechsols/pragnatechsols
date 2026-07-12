@@ -25,9 +25,9 @@ const contactInfo = [
   {
     icon: <MapPinIcon className="w-6 h-6" />,
     title: 'Visit Us',
-    content: 'Vijayawada, Andhra Pradesh, India',
-    subContent: 'Near Benz Circle',
-    href: 'https://www.google.com/maps/search/Vijayawada,+Andhra+Pradesh,+India',
+    content: 'Flat No 12, Vinayaka Apartment, D.No 74-8-15/12, JD Nagar, Patamata, Vijayawada, Andhra Pradesh 520006',
+    subContent: 'Patamata, Vijayawada',
+    href: 'https://www.google.com/maps/place/PRAGNA+TECHSOLS/@16.4916814,80.6647926,1192m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3a35fb7f4dd2beff:0xc8b9ba0c00714323!8m2!3d16.4916763!4d80.6673729!16s%2Fg%2F11yxvd3c6l',
   },
   {
     icon: <EnvelopeIcon className="w-6 h-6" />,
@@ -38,8 +38,8 @@ const contactInfo = [
   {
     icon: <PhoneIcon className="w-6 h-6" />,
     title: 'Call Us',
-    content: '+91 98765 43210',
-    href: 'tel:+919876543210',
+    content: '+91 70363 35500',
+    href: 'tel:+917036335500',
   },
   {
     icon: <ClockIcon className="w-6 h-6" />,
@@ -136,13 +136,13 @@ export default function ContactPage() {
     <>
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950/30 to-slate-950" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-500/10 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3d2063] via-[#2e1a52]/30 to-[#3d2063]" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full filter blur-3xl" />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1 bg-yellow-500/10 text-yellow-400 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block px-4 py-1 bg-amber-500/10 text-amber-400 rounded-full text-sm font-medium mb-4">
               Contact Us
             </span>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -158,7 +158,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 bg-slate-900/50">
+      <section className="py-20 bg-[#442676]/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -176,7 +176,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200"
                     placeholder="Your name"
                   />
                 </div>
@@ -193,7 +193,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200"
                       placeholder="you@example.com"
                     />
                   </div>
@@ -209,8 +209,8 @@ export default function ContactPage() {
                       onChange={handleChange}
                       onBlur={handlePhoneBlur}
                       required
-                      className={`w-full px-4 py-3 bg-slate-800 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200 ${phoneError ? 'border-red-500' : 'border-slate-700'}`}
-                      placeholder="+91 98765 43210"
+                      className={`w-full px-4 py-3 bg-[#4f2e88] border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${phoneError ? 'border-red-500' : 'border-[#5e3a9e]'}`}
+                      placeholder="+91 70363 35500"
                     />
                     {phoneError && (
                       <p className="mt-1 text-sm text-red-400">{phoneError}</p>
@@ -229,11 +229,11 @@ export default function ContactPage() {
                       value={formData.service}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200 cursor-pointer"
+                      className="w-full px-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 cursor-pointer"
                     >
                       <option value="" disabled className="text-gray-400">Select a service</option>
                       {services.map((service) => (
-                        <option key={service.id} value={service.name} className="bg-slate-800">
+                        <option key={service.id} value={service.name} className="bg-[#4f2e88]">
                           {service.name}
                         </option>
                       ))}
@@ -253,7 +253,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200 resize-none"
+                    className="w-full px-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 resize-none"
                     placeholder="Describe your project requirements, budget range, timeline, and any specific needs..."
                   />
                 </div>
@@ -261,11 +261,11 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-yellow-500 hover:bg-yellow-400 text-slate-900 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-amber-500 hover:bg-amber-400 text-[#3d2063] px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-slate-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-[#3d2063]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
@@ -299,16 +299,16 @@ export default function ContactPage() {
                 {contactInfo.map((info) => (
                   <div
                     key={info.title}
-                    className="bg-slate-800/50 rounded-xl p-6 border border-slate-700 hover:border-yellow-500/50 transition-all duration-300"
+                    className="bg-[#4f2e88]/50 rounded-xl p-6 border border-[#5e3a9e] hover:border-amber-500/50 transition-all duration-300"
                   >
-                    <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center mb-4">
-                      <div className="text-slate-900">{info.icon}</div>
+                    <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center mb-4">
+                      <div className="text-[#3d2063]">{info.icon}</div>
                     </div>
                     <h3 className="text-white font-semibold mb-2">{info.title}</h3>
                     {info.href ? (
                       <a 
                         href={info.href} 
-                        className="text-gray-400 hover:text-yellow-400 transition-colors duration-200"
+                        className="text-gray-400 hover:text-amber-400 transition-colors duration-200"
                         {...(info.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                       >
                         {info.content}
@@ -324,10 +324,10 @@ export default function ContactPage() {
               </div>
 
               {/* Map Placeholder */}
-              <div className="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden">
+              <div className="bg-[#4f2e88]/50 rounded-2xl border border-[#5e3a9e] overflow-hidden">
                 <div className="aspect-[4/3] relative">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122251.75751058389!2d80.54927853125!3d16.5061743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35eff9482d944b%3A0x939b7e84ab4a0265!2sVijayawada%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1698900000000!5m2!1sen!2sin"
+                    src="https://maps.google.com/maps?q=16.4916763,80.6673729&z=17&hl=en&output=embed"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -341,7 +341,7 @@ export default function ContactPage() {
 
               {/* WhatsApp Button */}
               <a
-                href="https://wa.me/919876543210?text=Hi%2C%20I%27m%20interested%20in%20your%20MEPF%20services."
+                href="https://wa.me/917036335500?text=Hi%2C%20I%27m%20interested%20in%20your%20MEPF%20services."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-3 w-full bg-green-600 hover:bg-green-500 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300"

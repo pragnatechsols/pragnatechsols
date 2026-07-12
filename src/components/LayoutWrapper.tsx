@@ -18,10 +18,11 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
   }, []);
 
   const isAdminRoute = pathname?.startsWith('/admin');
+  const isHome = pathname === '/';
 
   // Prevent hydration mismatch by rendering a minimal shell until mounted
   if (!mounted) {
-    return <div className="min-h-screen bg-slate-950">{children}</div>;
+    return <div className="min-h-screen bg-[#3d2063]">{children}</div>;
   }
 
   // Admin routes get their own layout without public navbar/footer
@@ -29,11 +30,13 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
     return <>{children}</>;
   }
 
-  // Public routes get the standard layout
+  // Public routes get the standard layout.
+  // Home hero is full-bleed behind the floating navbar; inner pages get
+  // extra top padding so the floating pill clears their page titles.
   return (
     <ClientWrapper>
       <Navbar />
-      <main className="flex-grow pt-20">{children}</main>
+      <main className={`flex-grow ${isHome ? '' : 'pt-24'}`}>{children}</main>
       <Footer />
     </ClientWrapper>
   );

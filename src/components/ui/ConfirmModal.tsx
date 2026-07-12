@@ -21,8 +21,8 @@ const variantStyles = {
     button: 'bg-red-500 hover:bg-red-600',
   },
   warning: {
-    icon: 'bg-yellow-500/20 text-yellow-400',
-    button: 'bg-yellow-500 hover:bg-yellow-600 text-slate-900',
+    icon: 'bg-amber-500/20 text-amber-400',
+    button: 'bg-amber-500 hover:bg-amber-600 text-[#3d2063]',
   },
   info: {
     icon: 'bg-blue-500/20 text-blue-400',
@@ -63,7 +63,7 @@ export default function ConfirmModal({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.2 }}
-              className="w-full max-w-md bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden"
+              className="w-full max-w-md bg-[#4f2e88] rounded-2xl shadow-2xl border border-[#5e3a9e] overflow-hidden"
             >
               <div className="p-6">
                 {/* Icon & Title */}
@@ -88,7 +88,7 @@ export default function ConfirmModal({
                   <button
                     onClick={onClose}
                     disabled={isLoading}
-                    className="flex-1 px-4 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-medium transition-colors disabled:opacity-50"
+                    className="flex-1 px-4 py-2.5 bg-[#5e3a9e] hover:bg-[#6d47b0] text-white rounded-xl font-medium transition-colors disabled:opacity-50"
                   >
                     {cancelText}
                   </button>

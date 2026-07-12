@@ -238,11 +238,11 @@ export default function SettingsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-slate-800/50 rounded-xl border border-slate-700 p-6"
+          className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] p-6"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-yellow-500/20 rounded-lg">
-              <User className="w-5 h-5 text-yellow-400" />
+            <div className="p-2 bg-amber-500/20 rounded-lg">
+              <User className="w-5 h-5 text-amber-400" />
             </div>
             <div>
               <h2 className="text-lg font-semibold text-white">Profile Settings</h2>
@@ -260,7 +260,7 @@ export default function SettingsPage() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
                   placeholder="Enter your name"
                 />
               </div>
@@ -272,7 +272,7 @@ export default function SettingsPage() {
                   type="email"
                   value={currentUser?.email || ''}
                   disabled
-                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-gray-400 cursor-not-allowed"
+                  className="w-full px-4 py-3 bg-[#5e3a9e]/50 border border-[#6d47b0] rounded-xl text-gray-400 cursor-not-allowed"
                 />
               </div>
             </div>
@@ -281,12 +281,12 @@ export default function SettingsPage() {
               <button 
                 type="submit"
                 disabled={isUpdatingProfile}
-                className="px-6 py-2 bg-yellow-500 text-slate-900 rounded-lg font-medium hover:bg-yellow-400 transition-colors disabled:opacity-50"
+                className="px-6 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-medium hover:bg-amber-400 transition-colors disabled:opacity-50"
               >
                 {isUpdatingProfile ? 'Saving...' : 'Save Changes'}
               </button>
               {currentUser?.role && (
-                <span className="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">
+                <span className="px-3 py-1 bg-amber-500/20 text-amber-400 rounded-full text-sm">
                   {currentUser.role === 'super_admin' ? 'Super Admin' : 'Admin'}
                 </span>
               )}
@@ -299,11 +299,11 @@ export default function SettingsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-slate-800/50 rounded-xl border border-slate-700 p-6"
+          className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] p-6"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-yellow-500/20 rounded-lg">
-              <Lock className="w-5 h-5 text-yellow-400" />
+            <div className="p-2 bg-amber-500/20 rounded-lg">
+              <Lock className="w-5 h-5 text-amber-400" />
             </div>
             <div>
               <h2 className="text-lg font-semibold text-white">Security</h2>
@@ -321,7 +321,7 @@ export default function SettingsPage() {
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 placeholder="Enter current password"
               />
             </div>
@@ -335,7 +335,7 @@ export default function SettingsPage() {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   required
-                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                   placeholder="Enter new password"
                 />
               </div>
@@ -348,7 +348,7 @@ export default function SettingsPage() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                   placeholder="Confirm new password"
                 />
               </div>
@@ -356,7 +356,7 @@ export default function SettingsPage() {
             <button
               type="submit"
               disabled={isUpdatingPassword}
-              className="px-6 py-2 bg-yellow-500 text-slate-900 rounded-lg font-medium hover:bg-yellow-400 transition-colors disabled:opacity-50"
+              className="px-6 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-medium hover:bg-amber-400 transition-colors disabled:opacity-50"
             >
               {isUpdatingPassword ? 'Updating...' : 'Update Password'}
             </button>
@@ -369,12 +369,12 @@ export default function SettingsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-slate-800/50 rounded-xl border border-slate-700 p-6"
+            className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] p-6"
           >
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-yellow-500/20 rounded-lg">
-                  <Shield className="w-5 h-5 text-yellow-400" />
+                <div className="p-2 bg-amber-500/20 rounded-lg">
+                  <Shield className="w-5 h-5 text-amber-400" />
                 </div>
                 <div>
                   <h2 className="text-lg font-semibold text-white">Admin Management</h2>
@@ -386,7 +386,7 @@ export default function SettingsPage() {
               {canCreateMore && !showCreateForm && (
                 <button
                   onClick={() => setShowCreateForm(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-yellow-500 text-slate-900 rounded-lg font-medium hover:bg-yellow-400 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-medium hover:bg-amber-400 transition-colors"
                 >
                   <Plus className="w-4 h-4" />
                   Add Admin
@@ -400,7 +400,7 @@ export default function SettingsPage() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 onSubmit={handleCreateAdmin}
-                className="mb-6 p-4 bg-slate-700/30 rounded-xl border border-slate-600"
+                className="mb-6 p-4 bg-[#5e3a9e]/30 rounded-xl border border-[#6d47b0]"
               >
                 <h3 className="text-white font-medium mb-4">Create New Admin</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
@@ -413,7 +413,7 @@ export default function SettingsPage() {
                       value={newAdminName}
                       onChange={(e) => setNewAdminName(e.target.value)}
                       required
-                      className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                      className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                       placeholder="Admin name"
                     />
                   </div>
@@ -426,7 +426,7 @@ export default function SettingsPage() {
                       value={newAdminEmail}
                       onChange={(e) => setNewAdminEmail(e.target.value)}
                       required
-                      className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                      className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                       placeholder="admin@example.com"
                     />
                   </div>
@@ -440,7 +440,7 @@ export default function SettingsPage() {
                       onChange={(e) => setNewAdminPassword(e.target.value)}
                       required
                       minLength={8}
-                      className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                      className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                       placeholder="Min 8 characters"
                     />
                   </div>
@@ -449,7 +449,7 @@ export default function SettingsPage() {
                   <button
                     type="submit"
                     disabled={isCreatingAdmin}
-                    className="px-6 py-2 bg-yellow-500 text-slate-900 rounded-lg font-medium hover:bg-yellow-400 transition-colors disabled:opacity-50"
+                    className="px-6 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-medium hover:bg-amber-400 transition-colors disabled:opacity-50"
                   >
                     {isCreatingAdmin ? 'Creating...' : 'Create Admin'}
                   </button>
@@ -461,7 +461,7 @@ export default function SettingsPage() {
                       setNewAdminPassword('');
                       setNewAdminName('');
                     }}
-                    className="px-6 py-2 bg-slate-600 text-white rounded-lg font-medium hover:bg-slate-500 transition-colors"
+                    className="px-6 py-2 bg-[#6d47b0] text-white rounded-lg font-medium hover:bg-[#7d55c0] transition-colors"
                   >
                     Cancel
                   </button>
@@ -474,12 +474,12 @@ export default function SettingsPage() {
               {admins.map((admin) => (
                 <div
                   key={admin.id}
-                  className="flex items-center justify-between p-4 bg-slate-700/30 rounded-xl"
+                  className="flex items-center justify-between p-4 bg-[#5e3a9e]/30 rounded-xl"
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${admin.role === 'super_admin' ? 'bg-yellow-500/20' : 'bg-slate-600'}`}>
+                    <div className={`p-2 rounded-lg ${admin.role === 'super_admin' ? 'bg-amber-500/20' : 'bg-[#6d47b0]'}`}>
                       {admin.role === 'super_admin' ? (
-                        <Shield className="w-5 h-5 text-yellow-400" />
+                        <Shield className="w-5 h-5 text-amber-400" />
                       ) : (
                         <UserCheck className="w-5 h-5 text-gray-400" />
                       )}
@@ -492,8 +492,8 @@ export default function SettingsPage() {
                   <div className="flex items-center gap-3">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                       admin.role === 'super_admin' 
-                        ? 'bg-yellow-500/20 text-yellow-400' 
-                        : 'bg-slate-600 text-gray-300'
+                        ? 'bg-amber-500/20 text-amber-400' 
+                        : 'bg-[#6d47b0] text-gray-300'
                     }`}>
                       {admin.role === 'super_admin' ? 'Super Admin' : 'Admin'}
                     </span>

@@ -36,7 +36,7 @@ const successStories = [
       author: 'Rajesh Kumar',
       role: 'Plant Manager',
     },
-    gradient: 'from-yellow-400 to-orange-500',
+    gradient: 'from-amber-400 to-orange-500',
   },
   {
     id: 2,
@@ -80,7 +80,7 @@ const successStories = [
       author: 'Venkat Rao',
       role: 'Facilities Director',
     },
-    gradient: 'from-amber-400 to-yellow-500',
+    gradient: 'from-amber-400 to-amber-500',
   },
   {
     id: 4,
@@ -146,7 +146,7 @@ const successStories = [
       author: 'Meera Joshi',
       role: 'Admin Head',
     },
-    gradient: 'from-indigo-400 to-purple-500',
+    gradient: 'from-purple-400 to-purple-500',
   },
 ];
 
@@ -198,7 +198,7 @@ function StoryCard({ story, index }: { story: typeof successStories[0]; index: n
             <div className="text-white">{story.icon}</div>
           </div>
           <div>
-            <span className="text-sm text-yellow-400 font-medium">{story.category}</span>
+            <span className="text-sm text-amber-400 font-medium">{story.category}</span>
             <h3 className="text-xl font-bold text-white">{story.title}</h3>
           </div>
         </div>
@@ -206,7 +206,7 @@ function StoryCard({ story, index }: { story: typeof successStories[0]; index: n
         <p className="text-gray-500 text-sm mb-4">Client: {story.client}</p>
 
         <div className="space-y-4 mb-6">
-          <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+          <div className="bg-[#4f2e88]/50 rounded-xl p-4 border border-[#5e3a9e]">
             <h4 className="text-red-400 font-semibold text-sm mb-2 flex items-center gap-2">
               <span className="w-2 h-2 bg-red-400 rounded-full"></span>
               The Challenge
@@ -214,7 +214,7 @@ function StoryCard({ story, index }: { story: typeof successStories[0]; index: n
             <p className="text-gray-400 text-sm">{story.problem}</p>
           </div>
 
-          <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+          <div className="bg-[#4f2e88]/50 rounded-xl p-4 border border-[#5e3a9e]">
             <h4 className="text-blue-400 font-semibold text-sm mb-2 flex items-center gap-2">
               <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
               Our Solution
@@ -222,7 +222,7 @@ function StoryCard({ story, index }: { story: typeof successStories[0]; index: n
             <p className="text-gray-400 text-sm">{story.solution}</p>
           </div>
 
-          <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+          <div className="bg-[#4f2e88]/50 rounded-xl p-4 border border-[#5e3a9e]">
             <h4 className="text-green-400 font-semibold text-sm mb-2 flex items-center gap-2">
               <CheckCircleIcon className="w-4 h-4" />
               The Result
@@ -235,7 +235,7 @@ function StoryCard({ story, index }: { story: typeof successStories[0]; index: n
         <div className="grid grid-cols-3 gap-4 mb-6">
           {story.stats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-xl font-bold text-yellow-400">{stat.value}</div>
+              <div className="text-xl font-bold text-amber-400">{stat.value}</div>
               <div className="text-gray-500 text-xs">{stat.label}</div>
             </div>
           ))}
@@ -247,16 +247,16 @@ function StoryCard({ story, index }: { story: typeof successStories[0]; index: n
         <motion.div
           whileHover={{ scale: 1.02, y: -5 }}
           transition={{ type: 'spring', stiffness: 300 }}
-          className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-2xl p-8 border border-slate-700 overflow-hidden"
+          className="relative bg-gradient-to-br from-[#4f2e88]/80 to-[#2e1a52]/80 rounded-2xl p-8 border border-[#5e3a9e] overflow-hidden"
         >
           {/* Quote mark */}
-          <div className="absolute top-4 right-4 text-6xl text-yellow-500/10 font-serif">"</div>
+          <div className="absolute top-4 right-4 text-6xl text-amber-500/10 font-serif">"</div>
 
           <div className="relative">
             {/* Rating */}
             <div className="flex gap-1 mb-4">
               {[...Array(5)].map((_, i) => (
-                <StarIconSolid key={i} className="w-5 h-5 text-yellow-400" />
+                <StarIconSolid key={i} className="w-5 h-5 text-amber-400" />
               ))}
             </div>
 
@@ -265,7 +265,7 @@ function StoryCard({ story, index }: { story: typeof successStories[0]; index: n
             </p>
 
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-lg">
                   {story.testimonial.author.charAt(0)}
                 </span>
@@ -296,19 +296,19 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof clientTes
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -5, scale: 1.02 }}
-      className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700 hover:border-yellow-500/30 transition-all duration-300"
+      className="bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e] hover:border-amber-500/30 transition-all duration-300"
     >
       <div className="flex gap-1 mb-4">
         {[...Array(testimonial.rating)].map((_, i) => (
-          <StarIconSolid key={i} className="w-4 h-4 text-yellow-400" />
+          <StarIconSolid key={i} className="w-4 h-4 text-amber-400" />
         ))}
       </div>
 
       <p className="text-gray-400 text-sm mb-4 leading-relaxed">"{testimonial.text}"</p>
 
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
-          <span className="text-slate-900 font-bold">{testimonial.name.charAt(0)}</span>
+        <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center">
+          <span className="text-[#3d2063] font-bold">{testimonial.name.charAt(0)}</span>
         </div>
         <div>
           <div className="font-medium text-white text-sm">{testimonial.name}</div>
@@ -324,11 +324,11 @@ export default function TestimonialsContent() {
     <>
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950/30 to-slate-950" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3d2063] via-[#2e1a52]/30 to-[#3d2063]" />
         <CircuitPattern className="opacity-30" />
         <FloatingParticles count={15} />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-500/10 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full filter blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -337,7 +337,7 @@ export default function TestimonialsContent() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="inline-block px-4 py-1 bg-yellow-500/10 text-yellow-400 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block px-4 py-1 bg-amber-500/10 text-amber-400 rounded-full text-sm font-medium mb-4">
               Success Stories
             </span>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -354,22 +354,22 @@ export default function TestimonialsContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700"
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-[#4f2e88]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#5e3a9e]"
           >
             <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">500+</div>
+              <div className="text-3xl font-bold text-amber-400">500+</div>
               <div className="text-gray-400 text-sm">Projects Delivered</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">100+</div>
+              <div className="text-3xl font-bold text-amber-400">100+</div>
               <div className="text-gray-400 text-sm">Happy Clients</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">98%</div>
+              <div className="text-3xl font-bold text-amber-400">98%</div>
               <div className="text-gray-400 text-sm">Satisfaction Rate</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">15+</div>
+              <div className="text-3xl font-bold text-amber-400">15+</div>
               <div className="text-gray-400 text-sm">Years Experience</div>
             </div>
           </motion.div>
@@ -377,7 +377,7 @@ export default function TestimonialsContent() {
       </section>
 
       {/* Success Stories */}
-      <section className="py-20 bg-slate-900/50">
+      <section className="py-20 bg-[#442676]/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-white mb-4">Featured Projects</h2>
@@ -403,7 +403,7 @@ export default function TestimonialsContent() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-indigo-500/10 text-indigo-400 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block px-4 py-1 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium mb-4">
               Client Testimonials
             </span>
             <h2 className="text-3xl font-bold text-white mb-4">What Our Clients Say</h2>
@@ -421,7 +421,7 @@ export default function TestimonialsContent() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-yellow-500 to-yellow-600">
+      <section className="py-16 bg-gradient-to-r from-amber-500 to-amber-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -431,10 +431,10 @@ export default function TestimonialsContent() {
             className="flex flex-col md:flex-row items-center justify-between gap-6"
           >
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#3d2063]">
                 Ready to Write Your Success Story?
               </h2>
-              <p className="text-slate-700 mt-2">
+              <p className="text-[#2e1a52] mt-2">
                 Let's discuss how we can help you achieve your engineering goals.
               </p>
             </div>
@@ -442,7 +442,7 @@ export default function TestimonialsContent() {
               href="/contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-xl font-semibold hover:bg-slate-800 transition-all duration-300"
+              className="flex items-center gap-2 bg-[#2e1a52] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#4f2e88] transition-all duration-300"
             >
               Start Your Project
             </motion.a>

@@ -147,14 +147,14 @@ export default function CustomCursor() {
         }}
       >
         <motion.div
-          className="w-1.5 h-1.5 rounded-full bg-yellow-400"
+          className="w-1.5 h-1.5 rounded-full bg-amber-400"
           animate={{
             scale: isClicking ? 2 : isHovering ? 0 : 1,
             opacity: isVisible ? 1 : 0,
           }}
           transition={{ type: 'spring', stiffness: 500, damping: 30 }}
           style={{
-            boxShadow: '0 0 8px rgba(250, 204, 21, 0.6)',
+            boxShadow: '0 0 8px rgba(224, 176, 68, 0.6)',
           }}
         />
       </motion.div>

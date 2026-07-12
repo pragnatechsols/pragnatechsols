@@ -32,11 +32,11 @@ const services = [
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 border-t border-slate-800 relative overflow-hidden">
+    <footer className="bg-[#2e1a52] border-t border-[#4f2e88] relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-yellow-500/10 rounded-full filter blur-3xl" />
-        <div className="absolute top-0 right-0 w-72 h-72 bg-indigo-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-amber-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute top-0 right-0 w-72 h-72 bg-purple-500/10 rounded-full filter blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -52,12 +52,12 @@ export default function Footer() {
             <div className="flex items-center space-x-2">
               <motion.div
                 whileHover={{ scale: 1.05, rotate: 5 }}
-                className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center shadow-lg shadow-yellow-500/20"
+                className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center shadow-lg shadow-amber-500/20"
               >
-                <span className="text-slate-900 font-bold text-xl">P</span>
+                <span className="text-[#3d2063] font-bold text-xl">P</span>
               </motion.div>
               <span className="text-white font-bold text-xl">
-                Pragna <span className="text-yellow-400">Techsols</span>
+                Pragna <span className="text-amber-400">Techsols</span>
               </span>
             </div>
             <p className="text-gray-400 text-sm">
@@ -76,7 +76,7 @@ export default function Footer() {
                   href="#"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-gray-400 hover:bg-yellow-500 hover:text-slate-900 transition-colors duration-200"
+                  className="w-10 h-10 rounded-full bg-[#4f2e88] flex items-center justify-center text-gray-400 hover:bg-amber-500 hover:text-[#3d2063] transition-colors duration-200"
                   aria-label={social.label}
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -104,9 +104,9 @@ export default function Footer() {
                 >
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-yellow-400 text-sm transition-colors duration-200 flex items-center gap-2"
+                    className="text-gray-400 hover:text-amber-400 text-sm transition-colors duration-200 flex items-center gap-2"
                   >
-                    <span className="w-1 h-1 bg-yellow-500/50 rounded-full" />
+                    <span className="w-1 h-1 bg-amber-500/50 rounded-full" />
                     {link.label}
                   </Link>
                 </motion.li>
@@ -131,9 +131,9 @@ export default function Footer() {
                 >
                   <Link
                     href={`/services#${service.slug}`}
-                    className="text-gray-400 hover:text-yellow-400 text-sm transition-colors duration-200 flex items-center gap-2"
+                    className="text-gray-400 hover:text-amber-400 text-sm transition-colors duration-200 flex items-center gap-2"
                   >
-                    <span className="w-1 h-1 bg-indigo-500/50 rounded-full" />
+                    <span className="w-1 h-1 bg-purple-500/50 rounded-full" />
                     {service.label}
                   </Link>
                 </motion.li>
@@ -151,38 +151,38 @@ export default function Footer() {
             <h3 className="text-white font-semibold text-lg mb-4">Contact Info</h3>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3 group">
-                <div className="w-8 h-8 bg-slate-800 rounded-lg flex items-center justify-center group-hover:bg-yellow-500/20 transition-colors">
-                  <MapPinIcon className="w-4 h-4 text-yellow-400" />
+                <div className="w-8 h-8 bg-[#4f2e88] rounded-lg flex items-center justify-center group-hover:bg-amber-500/20 transition-colors">
+                  <MapPinIcon className="w-4 h-4 text-amber-400" />
                 </div>
                 <a
-                  href="https://www.google.com/maps/search/Vijayawada,+Andhra+Pradesh,+India"
+                  href="https://www.google.com/maps/place/PRAGNA+TECHSOLS/@16.4916814,80.6647926,1192m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3a35fb7f4dd2beff:0xc8b9ba0c00714323!8m2!3d16.4916763!4d80.6673729!16s%2Fg%2F11yxvd3c6l"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-yellow-400 text-sm transition-colors duration-200"
+                  className="text-gray-400 hover:text-amber-400 text-sm transition-colors duration-200"
                 >
-                  Vijayawada, Andhra Pradesh, India
+                  Flat No 12, Vinayaka Apartment, D.No 74-8-15/12, JD Nagar, Patamata, Vijayawada, Andhra Pradesh 520006
                 </a>
               </li>
               <li className="flex items-center space-x-3 group">
-                <div className="w-8 h-8 bg-slate-800 rounded-lg flex items-center justify-center group-hover:bg-yellow-500/20 transition-colors">
-                  <EnvelopeIcon className="w-4 h-4 text-yellow-400" />
+                <div className="w-8 h-8 bg-[#4f2e88] rounded-lg flex items-center justify-center group-hover:bg-amber-500/20 transition-colors">
+                  <EnvelopeIcon className="w-4 h-4 text-amber-400" />
                 </div>
                 <a
                   href="mailto:pragnatechsols@gmail.com"
-                  className="text-gray-400 hover:text-yellow-400 text-sm transition-colors duration-200"
+                  className="text-gray-400 hover:text-amber-400 text-sm transition-colors duration-200"
                 >
                   pragnatechsols@gmail.com
                 </a>
               </li>
               <li className="flex items-center space-x-3 group">
-                <div className="w-8 h-8 bg-slate-800 rounded-lg flex items-center justify-center group-hover:bg-yellow-500/20 transition-colors">
-                  <PhoneIcon className="w-4 h-4 text-yellow-400" />
+                <div className="w-8 h-8 bg-[#4f2e88] rounded-lg flex items-center justify-center group-hover:bg-amber-500/20 transition-colors">
+                  <PhoneIcon className="w-4 h-4 text-amber-400" />
                 </div>
                 <a
-                  href="tel:+919876543210"
-                  className="text-gray-400 hover:text-yellow-400 text-sm transition-colors duration-200"
+                  href="tel:+917036335500"
+                  className="text-gray-400 hover:text-amber-400 text-sm transition-colors duration-200"
                 >
-                  +91 98765 43210
+                  +91 70363 35500
                 </a>
               </li>
             </ul>

@@ -24,14 +24,14 @@ export function CircuitPattern({ className = '' }: { className?: string }) {
             stroke="currentColor"
             strokeWidth="0.5"
             fill="none"
-            className="text-yellow-500/10"
+            className="text-amber-500/10"
           />
           {/* Connection nodes */}
-          <circle cx="40" cy="40" r="2" className="fill-yellow-500/20" />
-          <circle cx="40" cy="25" r="1.5" className="fill-indigo-500/20" />
-          <circle cx="40" cy="55" r="1.5" className="fill-indigo-500/20" />
-          <circle cx="25" cy="40" r="1.5" className="fill-indigo-500/20" />
-          <circle cx="55" cy="40" r="1.5" className="fill-indigo-500/20" />
+          <circle cx="40" cy="40" r="2" className="fill-amber-500/20" />
+          <circle cx="40" cy="25" r="1.5" className="fill-purple-500/20" />
+          <circle cx="40" cy="55" r="1.5" className="fill-purple-500/20" />
+          <circle cx="25" cy="40" r="1.5" className="fill-purple-500/20" />
+          <circle cx="55" cy="40" r="1.5" className="fill-purple-500/20" />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#circuit-grid)" />
@@ -49,14 +49,14 @@ export function AnimatedWires({ className = '' }: { className?: string }) {
     >
       <defs>
         <linearGradient id="wireGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#eab308" stopOpacity="0" />
-          <stop offset="50%" stopColor="#eab308" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#eab308" stopOpacity="0" />
+          <stop offset="0%" stopColor="#e0b044" stopOpacity="0" />
+          <stop offset="50%" stopColor="#e0b044" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#e0b044" stopOpacity="0" />
         </linearGradient>
         <linearGradient id="wireGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#6366f1" stopOpacity="0" />
-          <stop offset="50%" stopColor="#6366f1" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
+          <stop offset="0%" stopColor="#a855f7" stopOpacity="0" />
+          <stop offset="50%" stopColor="#a855f7" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#a855f7" stopOpacity="0" />
         </linearGradient>
       </defs>
 
@@ -103,15 +103,15 @@ export function ElectricalNode({
     <div className={`relative ${className}`}>
       {animated && (
         <motion.div
-          className={`absolute ${sizes[size]} bg-yellow-500/30 rounded-full`}
+          className={`absolute ${sizes[size]} bg-amber-500/30 rounded-full`}
           animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         />
       )}
       <div
-        className={`${sizes[size]} bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full`}
+        className={`${sizes[size]} bg-gradient-to-br from-amber-400 to-amber-600 rounded-full`}
         style={{
-          boxShadow: '0 0 10px rgba(250, 204, 21, 0.5)',
+          boxShadow: '0 0 10px rgba(224, 176, 68, 0.5)',
         }}
       />
     </div>
@@ -133,10 +133,10 @@ export function GlowingLine({
       className={`relative ${isHorizontal ? 'w-full h-px' : 'w-px h-full'} ${className}`}
     >
       <div
-        className={`absolute inset-0 bg-gradient-to-${isHorizontal ? 'r' : 'b'} from-transparent via-yellow-500/50 to-transparent`}
+        className={`absolute inset-0 bg-gradient-to-${isHorizontal ? 'r' : 'b'} from-transparent via-amber-500/50 to-transparent`}
       />
       <motion.div
-        className={`absolute ${isHorizontal ? 'w-20 h-full' : 'w-full h-20'} bg-gradient-to-${isHorizontal ? 'r' : 'b'} from-transparent via-yellow-400 to-transparent`}
+        className={`absolute ${isHorizontal ? 'w-20 h-full' : 'w-full h-20'} bg-gradient-to-${isHorizontal ? 'r' : 'b'} from-transparent via-amber-400 to-transparent`}
         animate={{
           [isHorizontal ? 'x' : 'y']: ['0%', '500%'],
         }}
@@ -162,11 +162,11 @@ export function CircuitDivider({ className = '' }: { className?: string }) {
       >
         <defs>
           <linearGradient id="dividerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#eab308" stopOpacity="0" />
-            <stop offset="20%" stopColor="#eab308" stopOpacity="0.3" />
-            <stop offset="50%" stopColor="#eab308" stopOpacity="0.5" />
-            <stop offset="80%" stopColor="#eab308" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#eab308" stopOpacity="0" />
+            <stop offset="0%" stopColor="#e0b044" stopOpacity="0" />
+            <stop offset="20%" stopColor="#e0b044" stopOpacity="0.3" />
+            <stop offset="50%" stopColor="#e0b044" stopOpacity="0.5" />
+            <stop offset="80%" stopColor="#e0b044" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#e0b044" stopOpacity="0" />
           </linearGradient>
         </defs>
         <line
@@ -178,11 +178,11 @@ export function CircuitDivider({ className = '' }: { className?: string }) {
           strokeWidth="1"
         />
         {/* Center node */}
-        <circle cx="50%" cy="50%" r="4" fill="#eab308" opacity="0.5" />
-        <circle cx="50%" cy="50%" r="2" fill="#eab308" />
+        <circle cx="50%" cy="50%" r="4" fill="#e0b044" opacity="0.5" />
+        <circle cx="50%" cy="50%" r="2" fill="#e0b044" />
         {/* Side nodes */}
-        <circle cx="25%" cy="50%" r="2" fill="#6366f1" opacity="0.5" />
-        <circle cx="75%" cy="50%" r="2" fill="#6366f1" opacity="0.5" />
+        <circle cx="25%" cy="50%" r="2" fill="#a855f7" opacity="0.5" />
+        <circle cx="75%" cy="50%" r="2" fill="#a855f7" opacity="0.5" />
       </svg>
     </div>
   );
@@ -214,7 +214,7 @@ export function FloatingParticles({
         return (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-yellow-400/30 rounded-full"
+            className="absolute w-1 h-1 bg-amber-400/30 rounded-full"
             style={{
               left: `${left}%`,
               top: `${top}%`,
@@ -252,9 +252,9 @@ export function EnergyFlowLine({
     >
       <defs>
         <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#eab308" stopOpacity="0" />
-          <stop offset="50%" stopColor="#eab308" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#eab308" stopOpacity="0" />
+          <stop offset="0%" stopColor="#e0b044" stopOpacity="0" />
+          <stop offset="50%" stopColor="#e0b044" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#e0b044" stopOpacity="0" />
         </linearGradient>
       </defs>
       <motion.path

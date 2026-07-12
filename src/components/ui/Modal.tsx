@@ -41,15 +41,15 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.2 }}
-              className={`w-full ${sizeClasses[size]} bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden`}
+              className={`w-full ${sizeClasses[size]} bg-[#4f2e88] rounded-2xl shadow-2xl border border-[#5e3a9e] overflow-hidden`}
             >
               {/* Header */}
               {title && (
-                <div className="flex items-center justify-between px-6 py-4 border-b border-slate-700">
+                <div className="flex items-center justify-between px-6 py-4 border-b border-[#5e3a9e]">
                   <h2 className="text-lg font-semibold text-white">{title}</h2>
                   <button
                     onClick={onClose}
-                    className="p-2 text-gray-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                    className="p-2 text-gray-400 hover:text-white hover:bg-[#5e3a9e] rounded-lg transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>

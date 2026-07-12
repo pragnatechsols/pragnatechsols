@@ -235,7 +235,7 @@ export default function LeadsPage() {
             placeholder="Search leads..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="w-full pl-12 pr-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
           />
         </div>
         <div className="relative">
@@ -243,7 +243,7 @@ export default function LeadsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value as LeadStatus | '')}
-            className="pl-12 pr-10 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-500 cursor-pointer min-w-[160px]"
+            className="pl-12 pr-10 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer min-w-[160px]"
           >
             {statusOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -257,7 +257,7 @@ export default function LeadsPage() {
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value as LeadPriority | '')}
-            className="px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-500 cursor-pointer min-w-[140px]"
+            className="px-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer min-w-[140px]"
           >
             {priorityOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -272,11 +272,11 @@ export default function LeadsPage() {
       {/* Content */}
       {loading ? (
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-yellow-500" />
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-amber-500" />
         </div>
       ) : (
         /* Table View */
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+        <div className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] overflow-hidden">
           {leads.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-64 text-gray-400">
               <Users className="w-12 h-12 mb-4" />
@@ -286,7 +286,7 @@ export default function LeadsPage() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-slate-700">
+                  <tr className="border-b border-[#5e3a9e]">
                     <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Contact</th>
                     <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Service</th>
                     <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Status</th>
@@ -295,18 +295,18 @@ export default function LeadsPage() {
                     <th className="px-6 py-4 text-right text-xs font-medium text-gray-400 uppercase">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-700">
+                <tbody className="divide-y divide-[#5e3a9e]">
                   {leads.map((lead) => (
                     <motion.tr
                       key={lead.id}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="hover:bg-slate-700/30 transition-colors cursor-pointer"
+                      className="hover:bg-[#5e3a9e]/30 transition-colors cursor-pointer"
                       onClick={() => openDetailModal(lead)}
                     >
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-slate-900 font-bold">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-[#3d2063] font-bold">
                             {lead.full_name.charAt(0)}
                           </div>
                           <div>
@@ -336,19 +336,19 @@ export default function LeadsPage() {
                               e.stopPropagation();
                               setActiveDropdown(activeDropdown === lead.id ? null : lead.id);
                             }}
-                            className="p-2 text-gray-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                            className="p-2 text-gray-400 hover:text-white hover:bg-[#5e3a9e] rounded-lg transition-colors"
                           >
                             <MoreVertical className="w-5 h-5" />
                           </button>
                           {activeDropdown === lead.id && (
-                            <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-xl shadow-lg z-50 overflow-hidden">
+                            <div className="absolute right-0 mt-2 w-48 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl shadow-lg z-50 overflow-hidden">
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   openDetailModal(lead);
                                   setActiveDropdown(null);
                                 }}
-                                className="w-full px-4 py-3 text-left text-sm text-white hover:bg-slate-700 flex items-center gap-2 transition-colors"
+                                className="w-full px-4 py-3 text-left text-sm text-white hover:bg-[#5e3a9e] flex items-center gap-2 transition-colors"
                               >
                                 <Eye className="w-4 h-4" />
                                 View Details
@@ -359,7 +359,7 @@ export default function LeadsPage() {
                                   handleDeleteLead(lead.id);
                                   setActiveDropdown(null);
                                 }}
-                                className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-slate-700 flex items-center gap-2 transition-colors"
+                                className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-[#5e3a9e] flex items-center gap-2 transition-colors"
                               >
                                 <Trash2 className="w-4 h-4" />
                                 Delete Lead
@@ -383,7 +383,7 @@ export default function LeadsPage() {
           <button
             onClick={() => setPage(Math.max(1, page - 1))}
             disabled={page === 1}
-            className="px-4 py-2 bg-slate-800 text-white rounded-lg disabled:opacity-50 hover:bg-slate-700"
+            className="px-4 py-2 bg-[#4f2e88] text-white rounded-lg disabled:opacity-50 hover:bg-[#5e3a9e]"
           >
             Previous
           </button>
@@ -393,7 +393,7 @@ export default function LeadsPage() {
           <button
             onClick={() => setPage(Math.min(totalPages, page + 1))}
             disabled={page === totalPages}
-            className="px-4 py-2 bg-slate-800 text-white rounded-lg disabled:opacity-50 hover:bg-slate-700"
+            className="px-4 py-2 bg-[#4f2e88] text-white rounded-lg disabled:opacity-50 hover:bg-[#5e3a9e]"
           >
             Next
           </button>
@@ -415,29 +415,29 @@ export default function LeadsPage() {
           <div className="p-6 space-y-6">
             {/* Contact Info */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <User className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <User className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Full Name</p>
                   <p className="text-white">{selectedLead.full_name}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <Mail className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <Mail className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Email</p>
                   <p className="text-white">{selectedLead.email}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <Phone className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <Phone className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Phone</p>
                   <p className="text-white">{selectedLead.phone}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <Building className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <Building className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Company</p>
                   <p className="text-white">{selectedLead.company_name || '-'}</p>
@@ -452,7 +452,7 @@ export default function LeadsPage() {
                 <select
                   value={selectedLead.lead_status}
                   onChange={(e) => handleStatusChange(selectedLead.id, e.target.value as LeadStatus)}
-                  className="px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm"
+                  className="px-3 py-2 bg-[#5e3a9e] border border-[#6d47b0] rounded-lg text-white text-sm"
                 >
                   {statusOptions.slice(1).map((option) => (
                     <option key={option.value} value={option.value}>
@@ -466,7 +466,7 @@ export default function LeadsPage() {
                 <select
                   value={selectedLead.priority}
                   onChange={(e) => handlePriorityChange(selectedLead.id, e.target.value as LeadPriority)}
-                  className="px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm"
+                  className="px-3 py-2 bg-[#5e3a9e] border border-[#6d47b0] rounded-lg text-white text-sm"
                 >
                   {priorityOptions.slice(1).map((option) => (
                     <option key={option.value} value={option.value}>
@@ -485,9 +485,9 @@ export default function LeadsPage() {
                   <p className="text-gray-400 text-sm">No activity yet</p>
                 ) : (
                   notes.map((note) => (
-                    <div key={note.id} className="p-3 bg-slate-700/50 rounded-lg border-l-2 border-yellow-500">
+                    <div key={note.id} className="p-3 bg-[#5e3a9e]/50 rounded-lg border-l-2 border-amber-500">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-medium text-yellow-400">{note.admin_name}</span>
+                        <span className="text-sm font-medium text-amber-400">{note.admin_name}</span>
                         <span className="text-xs text-gray-400">{formatRelativeTime(note.created_at)}</span>
                       </div>
                       <p className="text-sm text-white">{note.note}</p>
@@ -506,12 +506,12 @@ export default function LeadsPage() {
                   value={newNote}
                   onChange={(e) => setNewNote(e.target.value)}
                   placeholder="Add a note..."
-                  className="flex-1 px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="flex-1 px-4 py-2 bg-[#5e3a9e] border border-[#6d47b0] rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
                 <button
                   onClick={handleAddNote}
                   disabled={!newNote.trim() || isSubmitting}
-                  className="px-4 py-2 bg-yellow-500 text-slate-900 rounded-lg font-medium hover:bg-yellow-400 transition-colors disabled:opacity-50"
+                  className="px-4 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-medium hover:bg-amber-400 transition-colors disabled:opacity-50"
                 >
                   Add
                 </button>

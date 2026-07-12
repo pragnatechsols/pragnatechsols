@@ -122,9 +122,9 @@ export default function CareersPage() {
       
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950/30 to-slate-950" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-500/10 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3d2063] via-[#2e1a52]/30 to-[#3d2063]" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full filter blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -133,12 +133,12 @@ export default function CareersPage() {
             transition={{ duration: 0.5 }}
             className="text-center"
           >
-            <span className="inline-block px-4 py-1 bg-yellow-500/10 text-yellow-400 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block px-4 py-1 bg-amber-500/10 text-amber-400 rounded-full text-sm font-medium mb-4">
               Join Our Team
             </span>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               Build Your Career<br />
-              <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
                 With Us
               </span>
             </h1>
@@ -151,7 +151,7 @@ export default function CareersPage() {
       </section>
 
       {/* Search & Filters */}
-      <section className="py-8 bg-slate-900/50 sticky top-16 z-20 backdrop-blur-sm">
+      <section className="py-8 bg-[#442676]/50 sticky top-16 z-20 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1">
@@ -161,13 +161,13 @@ export default function CareersPage() {
                 placeholder="Search positions..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full pl-12 pr-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
             </div>
             <select
               value={departmentFilter}
               onChange={(e) => setDepartmentFilter(e.target.value)}
-              className="px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 min-w-[160px]"
+              className="px-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500 min-w-[160px]"
             >
               <option value="">All Departments</option>
               {departments.map((dept) => (
@@ -179,7 +179,7 @@ export default function CareersPage() {
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value as EmploymentType | '')}
-              className="px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 min-w-[140px]"
+              className="px-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500 min-w-[140px]"
             >
               <option value="">All Types</option>
               <option value="full_time">Full Time</option>
@@ -197,7 +197,7 @@ export default function CareersPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
             <div className="flex items-center justify-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500" />
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500" />
             </div>
           ) : jobs.length === 0 ? (
             <motion.div
@@ -219,11 +219,11 @@ export default function CareersPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="group bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 hover:border-yellow-500/50 transition-all duration-300"
+                  className="group bg-[#4f2e88]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#5e3a9e] hover:border-amber-500/50 transition-all duration-300"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center gap-6">
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white group-hover:text-yellow-400 transition-colors mb-2">
+                      <h3 className="text-xl font-semibold text-white group-hover:text-amber-400 transition-colors mb-2">
                         {job.title}
                       </h3>
                       <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-4">
@@ -249,7 +249,7 @@ export default function CareersPage() {
                           {job.skills.slice(0, 4).map((skill) => (
                             <span
                               key={skill}
-                              className="px-3 py-1 bg-slate-700 text-gray-300 rounded-lg text-xs"
+                              className="px-3 py-1 bg-[#5e3a9e] text-gray-300 rounded-lg text-xs"
                             >
                               {skill}
                             </span>
@@ -265,7 +265,7 @@ export default function CareersPage() {
                     <div className="flex items-center gap-4">
                       <button
                         onClick={() => setSelectedJob(selectedJob?.id === job.id ? null : job)}
-                        className="text-yellow-400 hover:text-yellow-300 font-medium flex items-center gap-1"
+                        className="text-amber-400 hover:text-amber-300 font-medium flex items-center gap-1"
                       >
                         {selectedJob?.id === job.id ? 'Hide Details' : 'View Details'}
                         <ChevronRight
@@ -278,7 +278,7 @@ export default function CareersPage() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleApply(job)}
-                        className="px-6 py-2 bg-yellow-500 text-slate-900 rounded-lg font-semibold hover:bg-yellow-400 transition-colors"
+                        className="px-6 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-semibold hover:bg-amber-400 transition-colors"
                       >
                         Apply Now
                       </motion.button>
@@ -293,16 +293,16 @@ export default function CareersPage() {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="mt-6 pt-6 border-t border-slate-700"
+                        className="mt-6 pt-6 border-t border-[#5e3a9e]"
                       >
                         <div className="prose prose-invert max-w-none">
                           <h4 className="text-white font-medium mb-3">Job Description</h4>
                           <p className="text-gray-300 whitespace-pre-wrap">{job.description}</p>
                         </div>
                         {job.salary_range && (
-                          <div className="mt-4 p-4 bg-slate-700/50 rounded-xl">
+                          <div className="mt-4 p-4 bg-[#5e3a9e]/50 rounded-xl">
                             <span className="text-gray-400 text-sm">Salary Range:</span>
-                            <span className="text-yellow-400 font-semibold ml-2">{job.salary_range}</span>
+                            <span className="text-amber-400 font-semibold ml-2">{job.salary_range}</span>
                           </div>
                         )}
                       </motion.div>
@@ -331,7 +331,7 @@ export default function CareersPage() {
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="w-full max-w-2xl bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 my-8"
+                className="w-full max-w-2xl bg-[#4f2e88] rounded-2xl shadow-2xl border border-[#5e3a9e] my-8"
               >
                 {submitSuccess ? (
                   <div className="p-8 text-center">
@@ -352,14 +352,14 @@ export default function CareersPage() {
                         setSubmitSuccess(false);
                         setResumeFile(null);
                       }}
-                      className="px-6 py-3 bg-yellow-500 text-slate-900 rounded-xl font-semibold hover:bg-yellow-400 transition-colors"
+                      className="px-6 py-3 bg-amber-500 text-[#3d2063] rounded-xl font-semibold hover:bg-amber-400 transition-colors"
                     >
                       Done
                     </button>
                   </div>
                 ) : (
                   <>
-                    <div className="flex items-center justify-between p-6 border-b border-slate-700">
+                    <div className="flex items-center justify-between p-6 border-b border-[#5e3a9e]">
                       <div>
                         <h2 className="text-xl font-bold text-white">Apply for {selectedJob.title}</h2>
                         <p className="text-gray-400 text-sm">{selectedJob.department} • {selectedJob.location}</p>
@@ -382,7 +382,7 @@ export default function CareersPage() {
                             type="text"
                             name="full_name"
                             required
-                            className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                             placeholder="John Doe"
                           />
                         </div>
@@ -394,7 +394,7 @@ export default function CareersPage() {
                             type="email"
                             name="email"
                             required
-                            className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                             placeholder="john@example.com"
                           />
                         </div>
@@ -406,8 +406,8 @@ export default function CareersPage() {
                             type="tel"
                             name="phone"
                             required
-                            className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                            placeholder="+91 98765 43210"
+                            className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                            placeholder="+91 70363 35500"
                           />
                         </div>
                         <div>
@@ -418,7 +418,7 @@ export default function CareersPage() {
                             type="text"
                             name="current_location"
                             required
-                            className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                             placeholder="City, Country"
                           />
                         </div>
@@ -431,7 +431,7 @@ export default function CareersPage() {
                             name="years_of_experience"
                             min="0"
                             required
-                            className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                             placeholder="5"
                           />
                         </div>
@@ -442,7 +442,7 @@ export default function CareersPage() {
                           <input
                             type="text"
                             name="current_company"
-                            className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                             placeholder="Company Name"
                           />
                         </div>
@@ -454,7 +454,7 @@ export default function CareersPage() {
                             type="text"
                             name="notice_period"
                             required
-                            className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                             placeholder="e.g., 30 days, Immediate"
                           />
                         </div>
@@ -465,7 +465,7 @@ export default function CareersPage() {
                           <input
                             type="url"
                             name="portfolio_url"
-                            className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                             placeholder="https://"
                           />
                         </div>
@@ -479,7 +479,7 @@ export default function CareersPage() {
                           name="why_hire_you"
                           required
                           rows={4}
-                          className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none"
+                          className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
                           placeholder="Tell us about your skills, experience, and what makes you a great fit..."
                         />
                       </div>
@@ -492,7 +492,7 @@ export default function CareersPage() {
                           className={`border-2 border-dashed rounded-xl p-6 text-center transition-colors ${
                             resumeFile
                               ? 'border-green-500/50 bg-green-500/10'
-                              : 'border-slate-600 hover:border-yellow-500/50'
+                              : 'border-[#6d47b0] hover:border-amber-500/50'
                           }`}
                         >
                           <input
@@ -528,14 +528,14 @@ export default function CareersPage() {
                           type="button"
                           onClick={() => setShowApplicationForm(false)}
                           disabled={isSubmitting}
-                          className="flex-1 px-4 py-3 bg-slate-700 text-white rounded-xl font-medium hover:bg-slate-600 transition-colors disabled:opacity-50"
+                          className="flex-1 px-4 py-3 bg-[#5e3a9e] text-white rounded-xl font-medium hover:bg-[#6d47b0] transition-colors disabled:opacity-50"
                         >
                           Cancel
                         </button>
                         <button
                           type="submit"
                           disabled={isSubmitting || !resumeFile}
-                          className="flex-1 px-4 py-3 bg-yellow-500 text-slate-900 rounded-xl font-semibold hover:bg-yellow-400 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                          className="flex-1 px-4 py-3 bg-amber-500 text-[#3d2063] rounded-xl font-semibold hover:bg-amber-400 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                         >
                           {isSubmitting ? (
                             <>
@@ -560,7 +560,7 @@ export default function CareersPage() {
       </AnimatePresence>
 
       {/* CTA Section */}
-      <section className="py-20 bg-slate-900/50">
+      <section className="py-20 bg-[#442676]/50">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -575,7 +575,7 @@ export default function CareersPage() {
             </p>
             <a
               href="mailto:careers@pragnatechsols.com"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-slate-900 rounded-xl font-semibold hover:from-yellow-500 hover:to-yellow-700 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-600 text-[#3d2063] rounded-xl font-semibold hover:from-amber-500 hover:to-amber-700 transition-all"
             >
               Send Your Resume
               <ChevronRight className="w-5 h-5" />

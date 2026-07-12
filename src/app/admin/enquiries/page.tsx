@@ -248,7 +248,7 @@ export default function EnquiriesPage() {
             placeholder="Search enquiries..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+            className="w-full pl-12 pr-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           />
         </div>
         <div className="relative">
@@ -256,7 +256,7 @@ export default function EnquiriesPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value as EnquiryStatus | '')}
-            className="pl-12 pr-10 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent cursor-pointer min-w-[180px]"
+            className="pl-12 pr-10 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent cursor-pointer min-w-[180px]"
           >
             {statusOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -270,7 +270,7 @@ export default function EnquiriesPage() {
 
       {/* Bulk Actions Bar */}
       {selectedIds.size > 0 && (
-        <div className="flex items-center gap-4 p-4 bg-slate-800 rounded-xl border border-yellow-500/50">
+        <div className="flex items-center gap-4 p-4 bg-[#4f2e88] rounded-xl border border-amber-500/50">
           <span className="text-white font-medium">
             {selectedIds.size} selected
           </span>
@@ -278,7 +278,7 @@ export default function EnquiriesPage() {
           <button
             onClick={handleBulkMoveToLeads}
             disabled={isSubmitting}
-            className="flex items-center gap-2 px-4 py-2 bg-yellow-500 text-slate-900 rounded-lg font-medium hover:bg-yellow-400 transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-medium hover:bg-amber-400 transition-colors disabled:opacity-50"
           >
             <UserPlus className="w-4 h-4" />
             Move to Leads
@@ -301,10 +301,10 @@ export default function EnquiriesPage() {
       )}
 
       {/* Table */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-visible">
+      <div className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] overflow-visible">
         {loading ? (
           <div className="flex items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-yellow-500" />
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-amber-500" />
           </div>
         ) : enquiries.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-64 text-gray-400">
@@ -315,13 +315,13 @@ export default function EnquiriesPage() {
           <div className="overflow-visible">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-slate-700">
+                <tr className="border-b border-[#5e3a9e]">
                   <th className="px-4 py-4 text-left">
                     <input
                       type="checkbox"
                       checked={enquiries.length > 0 && selectedIds.size === enquiries.length}
                       onChange={toggleSelectAll}
-                      className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-yellow-500 focus:ring-yellow-500 focus:ring-offset-0 cursor-pointer"
+                      className="w-4 h-4 rounded border-[#6d47b0] bg-[#5e3a9e] text-amber-500 focus:ring-amber-500 focus:ring-offset-0 cursor-pointer"
                     />
                   </th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Contact</th>
@@ -331,13 +331,13 @@ export default function EnquiriesPage() {
                   <th className="px-6 py-4 text-right text-xs font-medium text-gray-400 uppercase">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-700">
+              <tbody className="divide-y divide-[#5e3a9e]">
                 {enquiries.map((enquiry) => (
                   <motion.tr
                     key={enquiry.id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className={`hover:bg-slate-700/30 transition-colors cursor-pointer ${selectedIds.has(enquiry.id) ? 'bg-yellow-500/10' : ''}`}
+                    className={`hover:bg-[#5e3a9e]/30 transition-colors cursor-pointer ${selectedIds.has(enquiry.id) ? 'bg-amber-500/10' : ''}`}
                     onClick={() => openDetailModal(enquiry)}
                   >
                     <td className="px-4 py-4" onClick={(e) => e.stopPropagation()}>
@@ -345,12 +345,12 @@ export default function EnquiriesPage() {
                         type="checkbox"
                         checked={selectedIds.has(enquiry.id)}
                         onChange={() => toggleSelect(enquiry.id)}
-                        className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-yellow-500 focus:ring-yellow-500 focus:ring-offset-0 cursor-pointer"
+                        className="w-4 h-4 rounded border-[#6d47b0] bg-[#5e3a9e] text-amber-500 focus:ring-amber-500 focus:ring-offset-0 cursor-pointer"
                       />
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-slate-900 font-bold">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-[#3d2063] font-bold">
                           {enquiry.full_name.charAt(0)}
                         </div>
                         <div>
@@ -372,7 +372,7 @@ export default function EnquiriesPage() {
                       <div className="relative" onClick={(e) => e.stopPropagation()}>
                         <button
                           onClick={() => setActionMenuId(actionMenuId === enquiry.id ? null : enquiry.id)}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                          className="p-2 text-gray-400 hover:text-white hover:bg-[#5e3a9e] rounded-lg transition-colors"
                         >
                           <MoreVertical className="w-5 h-5" />
                         </button>
@@ -383,10 +383,10 @@ export default function EnquiriesPage() {
                               className="fixed inset-0 z-40" 
                               onClick={() => setActionMenuId(null)}
                             />
-                            <div className="absolute right-0 top-full mt-1 w-48 bg-slate-800 rounded-xl border border-slate-700 shadow-2xl z-50">
+                            <div className="absolute right-0 top-full mt-1 w-48 bg-[#4f2e88] rounded-xl border border-[#5e3a9e] shadow-2xl z-50">
                               <button
                                 onClick={() => handleStatusChange(enquiry.id, 'lead')}
-                                className="w-full px-4 py-3 text-left text-sm text-white hover:bg-slate-700 flex items-center gap-2 rounded-t-xl"
+                                className="w-full px-4 py-3 text-left text-sm text-white hover:bg-[#5e3a9e] flex items-center gap-2 rounded-t-xl"
                               >
                                 <UserPlus className="w-4 h-4" />
                                 Move to Leads
@@ -397,7 +397,7 @@ export default function EnquiriesPage() {
                                   setShowDeleteModal(true);
                                   setActionMenuId(null);
                                 }}
-                                className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-slate-700 flex items-center gap-2 rounded-b-xl"
+                                className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-[#5e3a9e] flex items-center gap-2 rounded-b-xl"
                               >
                                 <Trash2 className="w-4 h-4" />
                                 Delete
@@ -421,7 +421,7 @@ export default function EnquiriesPage() {
           <button
             onClick={() => setPage(Math.max(1, page - 1))}
             disabled={page === 1}
-            className="px-4 py-2 bg-slate-800 text-white rounded-lg disabled:opacity-50 hover:bg-slate-700 transition-colors"
+            className="px-4 py-2 bg-[#4f2e88] text-white rounded-lg disabled:opacity-50 hover:bg-[#5e3a9e] transition-colors"
           >
             Previous
           </button>
@@ -431,7 +431,7 @@ export default function EnquiriesPage() {
           <button
             onClick={() => setPage(Math.min(totalPages, page + 1))}
             disabled={page === totalPages}
-            className="px-4 py-2 bg-slate-800 text-white rounded-lg disabled:opacity-50 hover:bg-slate-700 transition-colors"
+            className="px-4 py-2 bg-[#4f2e88] text-white rounded-lg disabled:opacity-50 hover:bg-[#5e3a9e] transition-colors"
           >
             Next
           </button>
@@ -453,29 +453,29 @@ export default function EnquiriesPage() {
           <div className="p-6 space-y-6">
             {/* Contact Info */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <User className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <User className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Full Name</p>
                   <p className="text-white">{selectedEnquiry.full_name}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <Mail className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <Mail className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Email</p>
                   <p className="text-white">{selectedEnquiry.email}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <Phone className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <Phone className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Phone</p>
                   <p className="text-white">{selectedEnquiry.phone}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <Building className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <Building className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Company</p>
                   <p className="text-white">{selectedEnquiry.company_name || '-'}</p>
@@ -485,7 +485,7 @@ export default function EnquiriesPage() {
 
             {/* Service & Status */}
             <div className="flex items-center gap-4">
-              <span className="px-4 py-2 bg-yellow-500/10 text-yellow-400 rounded-lg text-sm font-medium">
+              <span className="px-4 py-2 bg-amber-500/10 text-amber-400 rounded-lg text-sm font-medium">
                 {selectedEnquiry.service_interested}
               </span>
               <StatusBadge status={selectedEnquiry.status} variant="enquiry" />
@@ -496,7 +496,7 @@ export default function EnquiriesPage() {
             </div>
 
             {/* Message */}
-            <div className="p-4 bg-slate-700/50 rounded-xl">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-xl">
               <p className="text-xs text-gray-400 mb-2">Message</p>
               <p className="text-white whitespace-pre-wrap">{selectedEnquiry.message}</p>
             </div>
@@ -509,9 +509,9 @@ export default function EnquiriesPage() {
                   <p className="text-gray-400 text-sm">No comments yet</p>
                 ) : (
                   comments.map((comment) => (
-                    <div key={comment.id} className="p-3 bg-slate-700/50 rounded-lg">
+                    <div key={comment.id} className="p-3 bg-[#5e3a9e]/50 rounded-lg">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-medium text-yellow-400">{comment.admin_name}</span>
+                        <span className="text-sm font-medium text-amber-400">{comment.admin_name}</span>
                         <span className="text-xs text-gray-400">{formatRelativeTime(comment.created_at)}</span>
                       </div>
                       <p className="text-sm text-white">{comment.comment}</p>
@@ -527,12 +527,12 @@ export default function EnquiriesPage() {
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
                   placeholder="Add a comment..."
-                  className="flex-1 px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="flex-1 px-4 py-2 bg-[#5e3a9e] border border-[#6d47b0] rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
                 <button
                   onClick={handleAddComment}
                   disabled={!newComment.trim() || isSubmitting}
-                  className="px-4 py-2 bg-yellow-500 text-slate-900 rounded-lg font-medium hover:bg-yellow-400 transition-colors disabled:opacity-50"
+                  className="px-4 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-medium hover:bg-amber-400 transition-colors disabled:opacity-50"
                 >
                   Add
                 </button>

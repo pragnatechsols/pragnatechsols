@@ -92,9 +92,9 @@ export default function ProjectsContent() {
     <>
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-purple-950/30 to-slate-950" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3d2063] via-purple-950/30 to-[#3d2063]" />
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full filter blur-3xl" />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -113,20 +113,20 @@ export default function ProjectsContent() {
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center bg-slate-800/50 rounded-2xl p-6 border border-slate-700">
-              <div className="text-3xl font-bold text-yellow-400">500+</div>
+            <div className="text-center bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e]">
+              <div className="text-3xl font-bold text-amber-400">500+</div>
               <div className="text-gray-400 text-sm mt-1">Projects Completed</div>
             </div>
-            <div className="text-center bg-slate-800/50 rounded-2xl p-6 border border-slate-700">
-              <div className="text-3xl font-bold text-yellow-400">50+</div>
+            <div className="text-center bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e]">
+              <div className="text-3xl font-bold text-amber-400">50+</div>
               <div className="text-gray-400 text-sm mt-1">Ongoing Projects</div>
             </div>
-            <div className="text-center bg-slate-800/50 rounded-2xl p-6 border border-slate-700">
-              <div className="text-3xl font-bold text-yellow-400">10+</div>
+            <div className="text-center bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e]">
+              <div className="text-3xl font-bold text-amber-400">10+</div>
               <div className="text-gray-400 text-sm mt-1">States Covered</div>
             </div>
-            <div className="text-center bg-slate-800/50 rounded-2xl p-6 border border-slate-700">
-              <div className="text-3xl font-bold text-yellow-400">100%</div>
+            <div className="text-center bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e]">
+              <div className="text-3xl font-bold text-amber-400">100%</div>
               <div className="text-gray-400 text-sm mt-1">Client Satisfaction</div>
             </div>
           </div>
@@ -134,7 +134,7 @@ export default function ProjectsContent() {
       </section>
 
       {/* Filter Categories */}
-      <section className="py-8 bg-slate-900/50 sticky top-16 z-40 backdrop-blur-sm border-b border-slate-800">
+      <section className="py-8 bg-[#442676]/50 sticky top-16 z-40 backdrop-blur-sm border-b border-[#4f2e88]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
             {categories.map((category) => (
@@ -143,8 +143,8 @@ export default function ProjectsContent() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
                   category === selectedCategory
-                    ? 'bg-yellow-500 text-slate-900'
-                    : 'bg-slate-800 text-gray-300 hover:bg-slate-700 hover:text-white'
+                    ? 'bg-amber-500 text-[#3d2063]'
+                    : 'bg-[#4f2e88] text-gray-300 hover:bg-[#5e3a9e] hover:text-white'
                 }`}
               >
                 {category}
@@ -172,7 +172,7 @@ export default function ProjectsContent() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-indigo-900/50 via-purple-900/50 to-indigo-900/50">
+      <section className="py-20 bg-gradient-to-r from-purple-900/50 via-purple-900/50 to-purple-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
@@ -185,13 +185,13 @@ export default function ProjectsContent() {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 href="/contact"
-                className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/25"
+                className="bg-amber-500 hover:bg-amber-400 text-[#3d2063] px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/25"
               >
                 Get Started
               </Link>
               <Link
                 href="/services"
-                className="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-semibold border border-slate-700 transition-all duration-300"
+                className="bg-[#4f2e88] hover:bg-[#5e3a9e] text-white px-8 py-4 rounded-xl font-semibold border border-[#5e3a9e] transition-all duration-300"
               >
                 View Services
               </Link>

@@ -70,8 +70,8 @@ export default function AdminLayoutClient({ children }: AdminLayoutClientProps) 
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500" />
+      <div className="min-h-screen bg-[#3d2063] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500" />
       </div>
     );
   }
@@ -86,16 +86,16 @@ export default function AdminLayoutClient({ children }: AdminLayoutClientProps) 
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 flex">
+    <div className="min-h-screen bg-[#3d2063] flex">
       <ToastProvider />
 
       {/* Sidebar - Desktop */}
-      <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-slate-900 border-r border-slate-800">
+      <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-[#2e1a52] border-r border-[#4f2e88]">
         {/* Logo */}
-        <div className="flex items-center h-16 px-6 border-b border-slate-800">
+        <div className="flex items-center h-16 px-6 border-b border-[#4f2e88]">
           <Link href="/admin" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-              <span className="text-slate-900 font-bold text-sm">P</span>
+            <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+              <span className="text-[#3d2063] font-bold text-sm">P</span>
             </div>
             <span className="text-white font-semibold">Admin Panel</span>
           </Link>
@@ -111,8 +111,8 @@ export default function AdminLayoutClient({ children }: AdminLayoutClientProps) 
                 href={item.href}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                   isActive
-                    ? 'bg-yellow-500/10 text-yellow-400'
-                    : 'text-gray-400 hover:text-white hover:bg-slate-800'
+                    ? 'bg-amber-500/10 text-amber-400'
+                    : 'text-gray-400 hover:text-white hover:bg-[#4f2e88]'
                 }`}
               >
                 <item.icon className="w-5 h-5" />
@@ -124,9 +124,9 @@ export default function AdminLayoutClient({ children }: AdminLayoutClientProps) 
         </nav>
 
         {/* User Section */}
-        <div className="p-4 border-t border-slate-800">
+        <div className="p-4 border-t border-[#4f2e88]">
           <div className="flex items-center gap-3 px-4 py-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-slate-900 font-bold">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-[#3d2063] font-bold">
               {admin?.name?.charAt(0) || 'A'}
             </div>
             <div className="flex-1 min-w-0">
@@ -160,13 +160,13 @@ export default function AdminLayoutClient({ children }: AdminLayoutClientProps) 
               animate={{ x: 0 }}
               exit={{ x: -300 }}
               transition={{ type: 'spring', damping: 25 }}
-              className="fixed inset-y-0 left-0 w-64 bg-slate-900 border-r border-slate-800 z-50 lg:hidden"
+              className="fixed inset-y-0 left-0 w-64 bg-[#2e1a52] border-r border-[#4f2e88] z-50 lg:hidden"
             >
               {/* Same content as desktop sidebar */}
-              <div className="flex items-center justify-between h-16 px-6 border-b border-slate-800">
+              <div className="flex items-center justify-between h-16 px-6 border-b border-[#4f2e88]">
                 <Link href="/admin" className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                    <span className="text-slate-900 font-bold text-sm">P</span>
+                  <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                    <span className="text-[#3d2063] font-bold text-sm">P</span>
                   </div>
                   <span className="text-white font-semibold">Admin Panel</span>
                 </Link>
@@ -184,8 +184,8 @@ export default function AdminLayoutClient({ children }: AdminLayoutClientProps) 
                       onClick={() => setSidebarOpen(false)}
                       className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                         isActive
-                          ? 'bg-yellow-500/10 text-yellow-400'
-                          : 'text-gray-400 hover:text-white hover:bg-slate-800'
+                          ? 'bg-amber-500/10 text-amber-400'
+                          : 'text-gray-400 hover:text-white hover:bg-[#4f2e88]'
                       }`}
                     >
                       <item.icon className="w-5 h-5" />
@@ -202,7 +202,7 @@ export default function AdminLayoutClient({ children }: AdminLayoutClientProps) 
       {/* Main Content */}
       <div className="flex-1 lg:pl-64">
         {/* Mobile Header */}
-        <header className="lg:hidden sticky top-0 z-30 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
+        <header className="lg:hidden sticky top-0 z-30 bg-[#2e1a52]/95 backdrop-blur-sm border-b border-[#4f2e88]">
           <div className="flex items-center justify-between h-16 px-4">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -211,8 +211,8 @@ export default function AdminLayoutClient({ children }: AdminLayoutClientProps) 
               <Menu className="w-6 h-6" />
             </button>
             <Link href="/admin" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                <span className="text-slate-900 font-bold text-sm">P</span>
+              <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                <span className="text-[#3d2063] font-bold text-sm">P</span>
               </div>
               <span className="text-white font-semibold">Admin</span>
             </Link>

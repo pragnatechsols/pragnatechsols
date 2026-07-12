@@ -255,7 +255,7 @@ export default function ApplicationsPage() {
             placeholder="Search applications..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="w-full pl-12 pr-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
           />
         </div>
         <div className="relative">
@@ -263,7 +263,7 @@ export default function ApplicationsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value as ApplicationStatus | '')}
-            className="pl-12 pr-10 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-500 cursor-pointer min-w-[180px]"
+            className="pl-12 pr-10 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white appearance-none focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer min-w-[180px]"
           >
             {statusOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -276,10 +276,10 @@ export default function ApplicationsPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+      <div className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] overflow-hidden">
         {loading ? (
           <div className="flex items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-yellow-500" />
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-amber-500" />
           </div>
         ) : applications.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-64 text-gray-400">
@@ -290,7 +290,7 @@ export default function ApplicationsPage() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-slate-700">
+                <tr className="border-b border-[#5e3a9e]">
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Candidate</th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Applied For</th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Experience</th>
@@ -299,18 +299,18 @@ export default function ApplicationsPage() {
                   <th className="px-6 py-4 text-right text-xs font-medium text-gray-400 uppercase">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-700">
+              <tbody className="divide-y divide-[#5e3a9e]">
                 {applications.map((app) => (
                   <motion.tr
                     key={app.id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="hover:bg-slate-700/30 transition-colors cursor-pointer"
+                    className="hover:bg-[#5e3a9e]/30 transition-colors cursor-pointer"
                     onClick={() => openDetailModal(app)}
                   >
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-slate-900 font-bold">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-[#3d2063] font-bold">
                           {app.full_name.charAt(0)}
                         </div>
                         <div>
@@ -335,14 +335,14 @@ export default function ApplicationsPage() {
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => openResume(app.id)}
-                          className="p-2 text-gray-400 hover:text-yellow-400 hover:bg-slate-700 rounded-lg transition-colors"
+                          className="p-2 text-gray-400 hover:text-amber-400 hover:bg-[#5e3a9e] rounded-lg transition-colors"
                           title="View Resume"
                         >
                           <ExternalLink className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => downloadResume(app.id, app.resume_filename)}
-                          className="p-2 text-gray-400 hover:text-green-400 hover:bg-slate-700 rounded-lg transition-colors"
+                          className="p-2 text-gray-400 hover:text-green-400 hover:bg-[#5e3a9e] rounded-lg transition-colors"
                           title="Download Resume"
                         >
                           <Download className="w-4 h-4" />
@@ -353,19 +353,19 @@ export default function ApplicationsPage() {
                               e.stopPropagation();
                               setActiveDropdown(activeDropdown === app.id ? null : app.id);
                             }}
-                            className="p-2 text-gray-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                            className="p-2 text-gray-400 hover:text-white hover:bg-[#5e3a9e] rounded-lg transition-colors"
                           >
                             <MoreVertical className="w-4 h-4" />
                           </button>
                           {activeDropdown === app.id && (
-                            <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-xl shadow-lg z-50 overflow-hidden">
+                            <div className="absolute right-0 mt-2 w-48 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl shadow-lg z-50 overflow-hidden">
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   openDetailModal(app);
                                   setActiveDropdown(null);
                                 }}
-                                className="w-full px-4 py-3 text-left text-sm text-white hover:bg-slate-700 flex items-center gap-2 transition-colors"
+                                className="w-full px-4 py-3 text-left text-sm text-white hover:bg-[#5e3a9e] flex items-center gap-2 transition-colors"
                               >
                                 <Eye className="w-4 h-4" />
                                 View Details
@@ -377,7 +377,7 @@ export default function ApplicationsPage() {
                                     handleDeleteApplication(app.id);
                                     setActiveDropdown(null);
                                   }}
-                                  className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-slate-700 flex items-center gap-2 transition-colors"
+                                  className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-[#5e3a9e] flex items-center gap-2 transition-colors"
                                 >
                                   <Trash2 className="w-4 h-4" />
                                   Delete Application
@@ -402,7 +402,7 @@ export default function ApplicationsPage() {
           <button
             onClick={() => setPage(Math.max(1, page - 1))}
             disabled={page === 1}
-            className="px-4 py-2 bg-slate-800 text-white rounded-lg disabled:opacity-50 hover:bg-slate-700"
+            className="px-4 py-2 bg-[#4f2e88] text-white rounded-lg disabled:opacity-50 hover:bg-[#5e3a9e]"
           >
             Previous
           </button>
@@ -412,7 +412,7 @@ export default function ApplicationsPage() {
           <button
             onClick={() => setPage(Math.min(totalPages, page + 1))}
             disabled={page === totalPages}
-            className="px-4 py-2 bg-slate-800 text-white rounded-lg disabled:opacity-50 hover:bg-slate-700"
+            className="px-4 py-2 bg-[#4f2e88] text-white rounded-lg disabled:opacity-50 hover:bg-[#5e3a9e]"
           >
             Next
           </button>
@@ -435,7 +435,7 @@ export default function ApplicationsPage() {
             {/* Header */}
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-slate-900 text-2xl font-bold">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-[#3d2063] text-2xl font-bold">
                   {selectedApp.full_name.charAt(0)}
                 </div>
                 <div>
@@ -448,43 +448,43 @@ export default function ApplicationsPage() {
 
             {/* Contact & Job Info */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <Mail className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <Mail className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Email</p>
                   <p className="text-white text-sm">{selectedApp.email}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <Phone className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <Phone className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Phone</p>
                   <p className="text-white text-sm">{selectedApp.phone}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <MapPin className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <MapPin className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Location</p>
                   <p className="text-white text-sm">{selectedApp.current_location}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <Briefcase className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <Briefcase className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Experience</p>
                   <p className="text-white text-sm">{selectedApp.years_of_experience} years</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <User className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <User className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Current Company</p>
                   <p className="text-white text-sm">{selectedApp.current_company || '-'}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 bg-slate-700/50 rounded-xl">
-                <Calendar className="w-5 h-5 text-yellow-400" />
+              <div className="flex items-center gap-3 p-4 bg-[#5e3a9e]/50 rounded-xl">
+                <Calendar className="w-5 h-5 text-amber-400" />
                 <div>
                   <p className="text-xs text-gray-400">Notice Period</p>
                   <p className="text-white text-sm">{selectedApp.notice_period}</p>
@@ -494,13 +494,13 @@ export default function ApplicationsPage() {
 
             {/* Portfolio */}
             {selectedApp.portfolio_url && (
-              <div className="p-4 bg-slate-700/50 rounded-xl">
+              <div className="p-4 bg-[#5e3a9e]/50 rounded-xl">
                 <p className="text-xs text-gray-400 mb-1">Portfolio / LinkedIn</p>
                 <a
                   href={selectedApp.portfolio_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-yellow-400 hover:text-yellow-300 flex items-center gap-1"
+                  className="text-amber-400 hover:text-amber-300 flex items-center gap-1"
                 >
                   {selectedApp.portfolio_url}
                   <ExternalLink className="w-4 h-4" />
@@ -509,14 +509,14 @@ export default function ApplicationsPage() {
             )}
 
             {/* Why Hire */}
-            <div className="p-4 bg-slate-700/50 rounded-xl">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-xl">
               <p className="text-xs text-gray-400 mb-2">Why should we hire you?</p>
               <p className="text-white whitespace-pre-wrap">{selectedApp.why_hire_you}</p>
             </div>
 
             {/* Resume */}
-            <div className="flex items-center gap-4 p-4 bg-slate-700/50 rounded-xl">
-              <FileText className="w-8 h-8 text-yellow-400" />
+            <div className="flex items-center gap-4 p-4 bg-[#5e3a9e]/50 rounded-xl">
+              <FileText className="w-8 h-8 text-amber-400" />
               <div className="flex-1">
                 <p className="text-white font-medium">{selectedApp.resume_filename}</p>
                 <p className="text-sm text-gray-400">Resume</p>
@@ -524,14 +524,14 @@ export default function ApplicationsPage() {
               <div className="flex gap-2">
                 <button
                   onClick={() => openResume(selectedApp.id)}
-                  className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-500 transition-colors flex items-center gap-2"
+                  className="px-4 py-2 bg-[#6d47b0] text-white rounded-lg hover:bg-[#7d55c0] transition-colors flex items-center gap-2"
                 >
                   <ExternalLink className="w-4 h-4" />
                   View
                 </button>
                 <button
                   onClick={() => downloadResume(selectedApp.id, selectedApp.resume_filename)}
-                  className="px-4 py-2 bg-yellow-500 text-slate-900 rounded-lg hover:bg-yellow-400 transition-colors flex items-center gap-2"
+                  className="px-4 py-2 bg-amber-500 text-[#3d2063] rounded-lg hover:bg-amber-400 transition-colors flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
                   Download
@@ -540,7 +540,7 @@ export default function ApplicationsPage() {
             </div>
 
             {/* Status Change */}
-            <div className="p-4 bg-slate-700/50 rounded-xl">
+            <div className="p-4 bg-[#5e3a9e]/50 rounded-xl">
               <p className="text-xs text-gray-400 mb-2">Update Status</p>
               <div className="flex flex-wrap gap-2">
                 {statusOptions.slice(1).map((option) => (
@@ -549,8 +549,8 @@ export default function ApplicationsPage() {
                     onClick={() => handleStatusChange(selectedApp.id, option.value as ApplicationStatus)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                       selectedApp.status === option.value
-                        ? 'bg-yellow-500 text-slate-900'
-                        : 'bg-slate-600 text-white hover:bg-slate-500'
+                        ? 'bg-amber-500 text-[#3d2063]'
+                        : 'bg-[#6d47b0] text-white hover:bg-[#7d55c0]'
                     }`}
                   >
                     {option.label}
@@ -567,9 +567,9 @@ export default function ApplicationsPage() {
                   <p className="text-gray-400 text-sm">No notes yet</p>
                 ) : (
                   comments.map((comment) => (
-                    <div key={comment.id} className="p-3 bg-slate-700/50 rounded-lg">
+                    <div key={comment.id} className="p-3 bg-[#5e3a9e]/50 rounded-lg">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-medium text-yellow-400">{comment.admin_name}</span>
+                        <span className="text-sm font-medium text-amber-400">{comment.admin_name}</span>
                         <span className="text-xs text-gray-400">{formatRelativeTime(comment.created_at)}</span>
                       </div>
                       <p className="text-sm text-white">{comment.comment}</p>
@@ -585,12 +585,12 @@ export default function ApplicationsPage() {
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
                   placeholder="Add a note..."
-                  className="flex-1 px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="flex-1 px-4 py-2 bg-[#5e3a9e] border border-[#6d47b0] rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
                 <button
                   onClick={handleAddComment}
                   disabled={!newComment.trim() || isSubmitting}
-                  className="px-4 py-2 bg-yellow-500 text-slate-900 rounded-lg font-medium hover:bg-yellow-400 transition-colors disabled:opacity-50"
+                  className="px-4 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-medium hover:bg-amber-400 transition-colors disabled:opacity-50"
                 >
                   Add
                 </button>

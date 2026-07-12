@@ -29,42 +29,46 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-white/10 ${
-        isScrolled
-          ? 'bg-[#0a0a0f]/90 backdrop-blur-xl'
-          : 'bg-transparent'
-      }`}
+      className="fixed top-4 inset-x-0 z-50 px-4"
     >
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-20">
+      <div
+        className={`mx-auto max-w-4xl rounded-[28px] transition-colors duration-500 border overflow-hidden ${
+          isMenuOpen
+            ? 'bg-[#2e1a52]/90 supports-[backdrop-filter]:bg-[#2e1a52]/70 backdrop-blur-2xl border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.45)]'
+            : isScrolled
+            ? 'bg-[#2e1a52]/70 supports-[backdrop-filter]:bg-white/10 backdrop-blur-2xl border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.35)]'
+            : 'bg-[#2e1a52]/50 supports-[backdrop-filter]:bg-white/5 backdrop-blur-xl border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.25)]'
+        }`}
+      >
+        <div className="flex items-center justify-between h-14 pl-6 pr-4">
           {/* Logo */}
           <Link href="/" className="group">
             <motion.span
               whileHover={{ scale: 1.02 }}
-              className="text-white font-bold text-lg tracking-tight"
+              className="text-white font-bold text-sm sm:text-base tracking-tight"
             >
               PRAGNA TECHSOLS
             </motion.span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-7">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className="relative py-2 text-sm font-medium transition-colors duration-200 group"
               >
-                <span className={pathname === link.href ? 'text-white' : 'text-gray-400 group-hover:text-white'}>
+                <span className={pathname === link.href ? 'text-white' : 'text-gray-300 group-hover:text-white'}>
                   {link.label}
                 </span>
                 {pathname === link.href && (
                   <motion.div
                     layoutId="navbar-indicator"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-yellow-400"
+                    className="absolute -bottom-0.5 left-0 right-0 h-px bg-amber-400"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -96,30 +100,33 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="md:hidden overflow-hidden absolute left-0 right-0 top-full bg-[#0a0a0f]/95 backdrop-blur-xl border-b border-white/10"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{
+                height: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
+                opacity: { duration: 0.2 },
+              }}
+              className="md:hidden overflow-hidden"
             >
-              <div className="py-6 px-6">
+              <div className="pb-4 px-4 pt-1">
                 <div className="flex flex-col gap-1">
                   {navLinks.map((link, index) => (
                     <motion.div
                       key={link.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.12 + index * 0.04, duration: 0.2 }}
                     >
                       <Link
                         href={link.href}
-                        className={`block px-4 py-3 text-base font-medium transition-colors duration-200 ${
+                        className={`block px-4 py-3 rounded-2xl text-base font-medium transition-colors duration-200 ${
                           pathname === link.href
-                            ? 'text-yellow-400'
-                            : 'text-gray-400 hover:text-white'
+                            ? 'text-amber-400 bg-white/5'
+                            : 'text-gray-300 hover:text-white hover:bg-white/5'
                         }`}
                         onClick={() => setIsMenuOpen(false)}
                       >

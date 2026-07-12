@@ -31,7 +31,7 @@ const services = [
       'Earthing & Lightning Protection',
       'Energy Audits & Optimization',
     ],
-    gradient: 'from-yellow-400 to-orange-500',
+    gradient: 'from-amber-400 to-orange-500',
   },
   {
     icon: <WrenchScrewdriverIcon className="w-10 h-10" />,
@@ -95,7 +95,7 @@ const services = [
       'Solar Street Lighting',
       'Solar System Maintenance',
     ],
-    gradient: 'from-amber-400 to-yellow-500',
+    gradient: 'from-amber-400 to-amber-500',
   },
   {
     icon: <VideoCameraIcon className="w-10 h-10" />,
@@ -111,7 +111,7 @@ const services = [
       'Access Control Integration',
       'Video Analytics',
     ],
-    gradient: 'from-purple-400 to-indigo-500',
+    gradient: 'from-purple-400 to-purple-500',
   },
   {
     icon: <CogIcon className="w-10 h-10" />,
@@ -143,7 +143,7 @@ const services = [
       'Building Automation',
       'Equipment Modernization',
     ],
-    gradient: 'from-indigo-400 to-purple-500',
+    gradient: 'from-purple-400 to-purple-500',
   },
 ];
 
@@ -152,13 +152,13 @@ export default function ServicesPage() {
     <>
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950/30 to-slate-950" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/20 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-yellow-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3d2063] via-[#2e1a52]/30 to-[#3d2063]" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full filter blur-3xl" />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1 bg-indigo-500/10 text-indigo-400 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block px-4 py-1 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium mb-4">
               Our Services
             </span>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -174,7 +174,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-slate-900/50">
+      <section className="py-20 bg-[#442676]/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-16">
             {services.map((service, index) => (
@@ -190,11 +190,11 @@ export default function ServicesPage() {
                     <div className="text-white">{service.icon}</div>
                   </div>
                   <h2 className="text-3xl font-bold text-white mb-2">{service.title}</h2>
-                  <p className="text-yellow-400 font-medium mb-4">{service.shortDesc}</p>
+                  <p className="text-amber-400 font-medium mb-4">{service.shortDesc}</p>
                   <p className="text-gray-400 mb-6">{service.description}</p>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center text-yellow-400 hover:text-yellow-300 font-medium transition-colors duration-200"
+                    className="inline-flex items-center text-amber-400 hover:text-amber-300 font-medium transition-colors duration-200"
                   >
                     Get a Quote
                     <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -204,12 +204,12 @@ export default function ServicesPage() {
                 </div>
 
                 <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
-                  <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700">
+                  <div className="bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e]">
                     <h3 className="text-lg font-semibold text-white mb-4">Key Features</h3>
                     <ul className="space-y-3">
                       {service.features.map((feature) => (
                         <li key={feature} className="flex items-start space-x-3">
-                          <svg className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                           <span className="text-gray-300 text-sm">{feature}</span>
@@ -225,10 +225,10 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-indigo-900/50 via-purple-900/50 to-indigo-900/50">
+      <section className="py-20 bg-gradient-to-r from-purple-900/50 via-purple-900/50 to-purple-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 rounded-3xl p-8 sm:p-12 border border-yellow-500/20 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-500/20 rounded-full filter blur-3xl" />
+          <div className="bg-gradient-to-r from-amber-500/10 to-amber-600/10 rounded-3xl p-8 sm:p-12 border border-amber-500/20 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/20 rounded-full filter blur-3xl" />
             <div className="relative z-10 text-center">
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                 Need a Custom Solution?
@@ -240,13 +240,13 @@ export default function ServicesPage() {
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Link
                   href="/contact"
-                  className="bg-yellow-500 hover:bg-yellow-400 text-slate-900 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/25"
+                  className="bg-amber-500 hover:bg-amber-400 text-[#3d2063] px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/25"
                 >
                   Contact Us Today
                 </Link>
                 <a
-                  href="tel:+919876543210"
-                  className="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-semibold border border-slate-700 transition-all duration-300 flex items-center justify-center gap-2"
+                  href="tel:+917036335500"
+                  className="bg-[#4f2e88] hover:bg-[#5e3a9e] text-white px-8 py-4 rounded-xl font-semibold border border-[#5e3a9e] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />

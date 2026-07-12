@@ -14,26 +14,57 @@ export const metadata: Metadata = {
   description: 'Learn about Pragna Techsols - Your trusted partner for MEPF consultancy and engineering services with over 15 years of expertise.',
 };
 
-const founders = [
+const team = [
   {
-    name: 'Founder Name 1',
-    role: 'Founder & CEO',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
-    description: 'With over 20 years of experience in the MEPF industry, leading Pragna Techsols to deliver excellence.',
+    name: 'Rajendra Prasad Chinnam',
+    role: 'Managing Director',
+    qualification: 'M.Tech (Electrical), MBA (HRM), PG Diploma in Fire & Safety',
   },
   {
-    name: 'Founder Name 2',
-    role: 'Co-Founder & COO',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80',
-    description: 'Expert in operations and project management, ensuring seamless execution of all projects.',
+    name: 'Vijaya Chandar Chinam',
+    role: 'Senior Electrical Consultant',
+    qualification: 'M.Tech (Electrical), M.Tech (CSE)',
   },
   {
-    name: 'Founder Name 3',
-    role: 'Co-Founder & CTO',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80',
-    description: 'Technical visionary driving innovation in electrical and automation solutions.',
+    name: 'Rajani Gandepudi',
+    role: 'Electrical Consultant',
+    qualification: 'M.Tech (Electrical)',
+  },
+  {
+    name: 'Preeth Balagari',
+    role: 'IT Consultant',
+    qualification: 'M.Tech (CSE)',
+  },
+  {
+    name: 'Keerthi Balagari',
+    role: 'Civil Consultant',
+    qualification: 'M.Tech (IIT Guwahati), Civil Structural',
+  },
+  {
+    name: 'Chandra Shekhara Rao Chinnam',
+    role: 'Mechanical Consultant',
+    qualification: 'B.Tech (Mechanical)',
+  },
+  {
+    name: 'Ratna Babu Kuchipudi',
+    role: 'Admin Operations',
+    qualification: 'MBA (HRM)',
+  },
+  {
+    name: 'Navanya Deepthi Gurvindapalli',
+    role: 'Electronics Consultant',
+    qualification: 'B.Tech (Electronics)',
   },
 ];
+
+const getInitials = (name: string) =>
+  name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join('')
+    .toUpperCase();
 
 const certifications = [
   {
@@ -85,13 +116,13 @@ export default function AboutPage() {
     <>
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950/30 to-slate-950" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3d2063] via-[#2e1a52]/30 to-[#3d2063]" />
         <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-yellow-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full filter blur-3xl" />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1 bg-indigo-500/10 text-indigo-400 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block px-4 py-1 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium mb-4">
               About Us
             </span>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -107,11 +138,11 @@ export default function AboutPage() {
       </section>
 
       {/* Company Story */}
-      <section className="py-20 bg-slate-900/50">
+      <section className="py-20 bg-[#442676]/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="inline-block px-4 py-1 bg-yellow-500/10 text-yellow-400 rounded-full text-sm font-medium mb-4">
+              <span className="inline-block px-4 py-1 bg-amber-500/10 text-amber-400 rounded-full text-sm font-medium mb-4">
                 Our Story
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -139,23 +170,23 @@ export default function AboutPage() {
             </div>
 
             <div className="relative">
-              <div className="bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-3xl p-8 border border-slate-700">
-                <div className="bg-slate-800 rounded-2xl p-8">
+              <div className="bg-gradient-to-br from-purple-500/20 to-purple-500/20 rounded-3xl p-8 border border-[#5e3a9e]">
+                <div className="bg-[#4f2e88] rounded-2xl p-8">
                   <h3 className="text-xl font-semibold text-white mb-6">Company Highlights</h3>
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between py-3 border-b border-slate-700">
+                    <div className="flex items-center justify-between py-3 border-b border-[#5e3a9e]">
                       <span className="text-gray-400">Established</span>
                       <span className="text-white font-semibold">2009</span>
                     </div>
-                    <div className="flex items-center justify-between py-3 border-b border-slate-700">
+                    <div className="flex items-center justify-between py-3 border-b border-[#5e3a9e]">
                       <span className="text-gray-400">Headquarters</span>
                       <span className="text-white font-semibold">Vijayawada, AP</span>
                     </div>
-                    <div className="flex items-center justify-between py-3 border-b border-slate-700">
+                    <div className="flex items-center justify-between py-3 border-b border-[#5e3a9e]">
                       <span className="text-gray-400">Projects Completed</span>
                       <span className="text-white font-semibold">500+</span>
                     </div>
-                    <div className="flex items-center justify-between py-3 border-b border-slate-700">
+                    <div className="flex items-center justify-between py-3 border-b border-[#5e3a9e]">
                       <span className="text-gray-400">Team Members</span>
                       <span className="text-white font-semibold">50+</span>
                     </div>
@@ -171,39 +202,33 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Founders Section */}
+      {/* Team Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-yellow-500/10 text-yellow-400 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block px-4 py-1 bg-amber-500/10 text-amber-400 rounded-full text-sm font-medium mb-4">
               Leadership
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Meet Our Founders
+              Meet Our Team
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Visionary leaders committed to excellence, innovation, and building lasting relationships.
+              A team of qualified engineers and consultants committed to excellence, innovation, and building lasting relationships.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {founders.map((founder) => (
-              <div 
-                key={founder.name}
-                className="bg-slate-800/50 rounded-2xl overflow-hidden border border-slate-700 hover:border-yellow-500/50 transition-all duration-300 group"
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {team.map((member, index) => (
+              <div
+                key={`${member.name}-${index}`}
+                className="bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e] hover:border-amber-500/50 transition-all duration-300 text-center flex flex-col items-center"
               >
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src={founder.image}
-                    alt={founder.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-[#3d2063] font-bold text-lg">{getInitials(member.name)}</span>
                 </div>
-                <div className="p-6 text-center">
-                  <h3 className="text-xl font-semibold text-white mb-1">{founder.name}</h3>
-                  <p className="text-yellow-400 text-sm font-medium mb-3">{founder.role}</p>
-                  <p className="text-gray-400 text-sm">{founder.description}</p>
-                </div>
+                <h3 className="text-lg font-semibold text-white mb-1">{member.name}</h3>
+                <p className="text-amber-400 text-sm font-medium mb-3">{member.role}</p>
+                <p className="text-gray-400 text-xs mt-auto">{member.qualification}</p>
               </div>
             ))}
           </div>
@@ -211,10 +236,10 @@ export default function AboutPage() {
       </section>
 
       {/* Certifications */}
-      <section className="py-20 bg-slate-900/50">
+      <section className="py-20 bg-[#442676]/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-indigo-500/10 text-indigo-400 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block px-4 py-1 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium mb-4">
               Certifications
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
@@ -229,10 +254,10 @@ export default function AboutPage() {
             {certifications.map((cert) => (
               <div 
                 key={cert.title}
-                className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700 hover:border-yellow-500/50 transition-all duration-300 text-center"
+                className="bg-[#4f2e88]/50 rounded-2xl p-8 border border-[#5e3a9e] hover:border-amber-500/50 transition-all duration-300 text-center"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <div className="text-slate-900">{cert.icon}</div>
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <div className="text-[#3d2063]">{cert.icon}</div>
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">{cert.title}</h3>
                 <p className="text-gray-400 text-sm">{cert.description}</p>
@@ -243,10 +268,10 @@ export default function AboutPage() {
       </section>
 
       {/* Expertise */}
-      <section className="py-20 bg-slate-900/50">
+      <section className="py-20 bg-[#442676]/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-yellow-500/10 text-yellow-400 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block px-4 py-1 bg-amber-500/10 text-amber-400 rounded-full text-sm font-medium mb-4">
               Our Expertise
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
@@ -261,10 +286,10 @@ export default function AboutPage() {
             {expertise.map((item) => (
               <div 
                 key={item.title}
-                className="bg-gradient-to-br from-slate-800 to-slate-800/50 rounded-2xl p-8 border border-slate-700 hover:border-indigo-500/50 transition-all duration-300"
+                className="bg-gradient-to-br from-[#4f2e88] to-[#4f2e88]/50 rounded-2xl p-8 border border-[#5e3a9e] hover:border-purple-500/50 transition-all duration-300"
               >
-                <div className="w-12 h-12 bg-indigo-500/20 rounded-lg flex items-center justify-center mb-4">
-                  <div className="text-indigo-400">{item.icon}</div>
+                <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4">
+                  <div className="text-purple-400">{item.icon}</div>
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
                 <p className="text-gray-400 text-sm">{item.description}</p>
@@ -279,7 +304,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="inline-block px-4 py-1 bg-indigo-500/10 text-indigo-400 rounded-full text-sm font-medium mb-4">
+              <span className="inline-block px-4 py-1 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium mb-4">
                 Our Values
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
@@ -294,7 +319,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 gap-4">
                 {values.map((value) => (
                   <div key={value} className="flex items-center space-x-3">
-                    <CheckCircleIcon className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+                    <CheckCircleIcon className="w-5 h-5 text-amber-400 flex-shrink-0" />
                     <span className="text-white">{value}</span>
                   </div>
                 ))}
@@ -302,9 +327,9 @@ export default function AboutPage() {
             </div>
 
             <div className="relative">
-              <div className="aspect-[4/3] bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-3xl p-6 border border-slate-700">
-                <div className="w-full h-full bg-slate-800 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent" />
+              <div className="aspect-[4/3] bg-gradient-to-br from-purple-500/20 to-purple-500/20 rounded-3xl p-6 border border-[#5e3a9e]">
+                <div className="w-full h-full bg-[#4f2e88] rounded-2xl flex items-center justify-center relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent" />
                   <div className="text-center p-8 relative z-10">
                     <div className="text-6xl font-bold gradient-text mb-4">15+</div>
                     <p className="text-white text-xl font-semibold mb-2">Years of Excellence</p>
@@ -318,12 +343,12 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-gradient-to-r from-indigo-900/50 via-purple-900/50 to-indigo-900/50">
+      <section className="py-20 bg-gradient-to-r from-purple-900/50 via-purple-900/50 to-purple-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700">
-              <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-[#4f2e88]/50 backdrop-blur-sm rounded-2xl p-8 border border-[#5e3a9e]">
+              <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-[#3d2063]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
@@ -334,8 +359,8 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700">
-              <div className="w-12 h-12 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-lg flex items-center justify-center mb-4">
+            <div className="bg-[#4f2e88]/50 backdrop-blur-sm rounded-2xl p-8 border border-[#5e3a9e]">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />

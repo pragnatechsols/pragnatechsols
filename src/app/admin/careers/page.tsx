@@ -214,7 +214,7 @@ export default function CareersAdminPage() {
             setFormData(initialFormState);
             setShowFormModal(true);
           }}
-          className="flex items-center gap-2 px-4 py-2 bg-yellow-500 text-slate-900 rounded-xl font-medium hover:bg-yellow-400 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-[#3d2063] rounded-xl font-medium hover:bg-amber-400 transition-colors"
         >
           <Plus className="w-5 h-5" />
           Add Job
@@ -229,7 +229,7 @@ export default function CareersAdminPage() {
           placeholder="Search jobs..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-12 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          className="w-full pl-12 pr-4 py-3 bg-[#4f2e88] border border-[#5e3a9e] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
         />
       </div>
 
@@ -237,15 +237,15 @@ export default function CareersAdminPage() {
       <div className="space-y-4">
         {loading ? (
           <div className="flex items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-yellow-500" />
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-amber-500" />
           </div>
         ) : jobs.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-64 bg-slate-800/50 rounded-xl border border-slate-700 text-gray-400">
+          <div className="flex flex-col items-center justify-center h-64 bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] text-gray-400">
             <Briefcase className="w-12 h-12 mb-4" />
             <p>No jobs found</p>
             <button
               onClick={() => setShowFormModal(true)}
-              className="mt-4 text-yellow-400 hover:text-yellow-300"
+              className="mt-4 text-amber-400 hover:text-amber-300"
             >
               Create your first job
             </button>
@@ -256,7 +256,7 @@ export default function CareersAdminPage() {
               key={job.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="p-6 bg-slate-800/50 rounded-xl border border-slate-700 hover:border-slate-600 transition-colors"
+              className="p-6 bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] hover:border-[#6d47b0] transition-colors"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
@@ -295,7 +295,7 @@ export default function CareersAdminPage() {
                       {job.skills.slice(0, 5).map((skill) => (
                         <span
                           key={skill}
-                          className="px-2 py-1 bg-slate-700 text-gray-300 rounded-lg text-xs"
+                          className="px-2 py-1 bg-[#5e3a9e] text-gray-300 rounded-lg text-xs"
                         >
                           {skill}
                         </span>
@@ -314,22 +314,22 @@ export default function CareersAdminPage() {
                 <div className="relative">
                   <button
                     onClick={() => setActionMenuId(actionMenuId === job.id ? null : job.id)}
-                    className="p-2 text-gray-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                    className="p-2 text-gray-400 hover:text-white hover:bg-[#5e3a9e] rounded-lg transition-colors"
                   >
                     <MoreVertical className="w-5 h-5" />
                   </button>
                   {actionMenuId === job.id && (
-                    <div className="absolute right-0 mt-2 w-40 bg-slate-800 rounded-xl border border-slate-700 shadow-xl z-10">
+                    <div className="absolute right-0 mt-2 w-40 bg-[#4f2e88] rounded-xl border border-[#5e3a9e] shadow-xl z-10">
                       <button
                         onClick={() => handleEdit(job)}
-                        className="w-full px-4 py-3 text-left text-sm text-white hover:bg-slate-700 flex items-center gap-2 rounded-t-xl"
+                        className="w-full px-4 py-3 text-left text-sm text-white hover:bg-[#5e3a9e] flex items-center gap-2 rounded-t-xl"
                       >
                         <Edit className="w-4 h-4" />
                         Edit
                       </button>
                       <button
                         onClick={() => handleToggleActive(job)}
-                        className="w-full px-4 py-3 text-left text-sm text-white hover:bg-slate-700 flex items-center gap-2"
+                        className="w-full px-4 py-3 text-left text-sm text-white hover:bg-[#5e3a9e] flex items-center gap-2"
                       >
                         {job.is_active ? (
                           <>
@@ -349,7 +349,7 @@ export default function CareersAdminPage() {
                           setShowDeleteModal(true);
                           setActionMenuId(null);
                         }}
-                        className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-slate-700 flex items-center gap-2 rounded-b-xl"
+                        className="w-full px-4 py-3 text-left text-sm text-red-400 hover:bg-[#5e3a9e] flex items-center gap-2 rounded-b-xl"
                       >
                         <Trash2 className="w-4 h-4" />
                         Delete
@@ -369,7 +369,7 @@ export default function CareersAdminPage() {
           <button
             onClick={() => setPage(Math.max(1, page - 1))}
             disabled={page === 1}
-            className="px-4 py-2 bg-slate-800 text-white rounded-lg disabled:opacity-50 hover:bg-slate-700"
+            className="px-4 py-2 bg-[#4f2e88] text-white rounded-lg disabled:opacity-50 hover:bg-[#5e3a9e]"
           >
             Previous
           </button>
@@ -379,7 +379,7 @@ export default function CareersAdminPage() {
           <button
             onClick={() => setPage(Math.min(totalPages, page + 1))}
             disabled={page === totalPages}
-            className="px-4 py-2 bg-slate-800 text-white rounded-lg disabled:opacity-50 hover:bg-slate-700"
+            className="px-4 py-2 bg-[#4f2e88] text-white rounded-lg disabled:opacity-50 hover:bg-[#5e3a9e]"
           >
             Next
           </button>
@@ -409,7 +409,7 @@ export default function CareersAdminPage() {
                 value={formData.title}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 placeholder="e.g. Senior Software Engineer"
               />
             </div>
@@ -423,7 +423,7 @@ export default function CareersAdminPage() {
                 value={formData.department}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 placeholder="e.g. Engineering"
               />
             </div>
@@ -437,7 +437,7 @@ export default function CareersAdminPage() {
                 value={formData.experience}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 placeholder="e.g. 3-5 years"
               />
             </div>
@@ -451,7 +451,7 @@ export default function CareersAdminPage() {
                 value={formData.location}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 placeholder="e.g. Vijayawada, India"
               />
             </div>
@@ -463,7 +463,7 @@ export default function CareersAdminPage() {
                 name="employment_type"
                 value={formData.employment_type}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
               >
                 {employmentTypes.map((type) => (
                   <option key={type.value} value={type.value}>
@@ -481,7 +481,7 @@ export default function CareersAdminPage() {
                 name="salary_range"
                 value={formData.salary_range}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 placeholder="e.g. ₹8-12 LPA"
               />
             </div>
@@ -497,7 +497,7 @@ export default function CareersAdminPage() {
               onChange={handleInputChange}
               required
               rows={6}
-              className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none"
+              className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
               placeholder="Enter detailed job description..."
             />
           </div>
@@ -512,13 +512,13 @@ export default function CareersAdminPage() {
                 value={skillInput}
                 onChange={(e) => setSkillInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddSkill())}
-                className="flex-1 px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="flex-1 px-4 py-2 bg-[#5e3a9e] border border-[#6d47b0] rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 placeholder="Add a skill..."
               />
               <button
                 type="button"
                 onClick={handleAddSkill}
-                className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-500 transition-colors"
+                className="px-4 py-2 bg-[#6d47b0] text-white rounded-lg hover:bg-[#7d55c0] transition-colors"
               >
                 Add
               </button>
@@ -527,13 +527,13 @@ export default function CareersAdminPage() {
               {formData.skills.map((skill) => (
                 <span
                   key={skill}
-                  className="flex items-center gap-1 px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-lg text-sm"
+                  className="flex items-center gap-1 px-3 py-1 bg-amber-500/20 text-amber-400 rounded-lg text-sm"
                 >
                   {skill}
                   <button
                     type="button"
                     onClick={() => handleRemoveSkill(skill)}
-                    className="hover:text-yellow-200"
+                    className="hover:text-amber-200"
                   >
                     ×
                   </button>
@@ -549,14 +549,14 @@ export default function CareersAdminPage() {
               name="is_active"
               checked={formData.is_active}
               onChange={(e) => setFormData((prev) => ({ ...prev, is_active: e.target.checked }))}
-              className="w-4 h-4 rounded border-slate-600 text-yellow-500 focus:ring-yellow-500"
+              className="w-4 h-4 rounded border-[#6d47b0] text-amber-500 focus:ring-amber-500"
             />
             <label htmlFor="is_active" className="text-sm text-gray-300">
               Active (visible on careers page)
             </label>
           </div>
 
-          <div className="flex gap-3 pt-4 border-t border-slate-700">
+          <div className="flex gap-3 pt-4 border-t border-[#5e3a9e]">
             <button
               type="button"
               onClick={() => {
@@ -564,14 +564,14 @@ export default function CareersAdminPage() {
                 setSelectedJob(null);
                 setFormData(initialFormState);
               }}
-              className="flex-1 px-4 py-3 bg-slate-700 text-white rounded-xl font-medium hover:bg-slate-600 transition-colors"
+              className="flex-1 px-4 py-3 bg-[#5e3a9e] text-white rounded-xl font-medium hover:bg-[#6d47b0] transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 px-4 py-3 bg-yellow-500 text-slate-900 rounded-xl font-medium hover:bg-yellow-400 transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-3 bg-amber-500 text-[#3d2063] rounded-xl font-medium hover:bg-amber-400 transition-colors disabled:opacity-50"
             >
               {isSubmitting ? 'Saving...' : selectedJob ? 'Update Job' : 'Create Job'}
             </button>
