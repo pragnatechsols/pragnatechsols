@@ -230,6 +230,30 @@ body {
   border: 1px solid rgba(94, 58, 158, 0.5);
 }
 
+/* Apple-style glass card (matches the floating navbar).
+   Falls back to a more opaque purple where backdrop-filter is
+   unsupported/weak (e.g. some mobile browsers) so content stays readable. */
+.glass-card {
+  background: rgba(46, 26, 82, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.glass-card:hover {
+  border-color: rgba(224, 176, 68, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
 /* Performance Optimizations */
 .will-change-transform {
   will-change: transform;

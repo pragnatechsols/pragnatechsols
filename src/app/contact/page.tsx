@@ -299,7 +299,7 @@ export default function ContactPage() {
                 {contactInfo.map((info) => (
                   <div
                     key={info.title}
-                    className="bg-[#4f2e88]/50 rounded-xl p-6 border border-[#5e3a9e] hover:border-amber-500/50 transition-all duration-300"
+                    className="glass-card rounded-xl p-6"
                   >
                     <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center mb-4">
                       <div className="text-[#3d2063]">{info.icon}</div>
@@ -324,7 +324,7 @@ export default function ContactPage() {
               </div>
 
               {/* Map Placeholder */}
-              <div className="bg-[#4f2e88]/50 rounded-2xl border border-[#5e3a9e] overflow-hidden">
+              <div className="glass-card rounded-2xl overflow-hidden">
                 <div className="aspect-[4/3] relative">
                   <iframe
                     src="https://maps.google.com/maps?q=16.4916763,80.6673729&z=17&hl=en&output=embed"

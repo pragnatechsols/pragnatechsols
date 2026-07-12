@@ -113,19 +113,19 @@ export default function ProjectsContent() {
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e]">
+            <div className="text-center glass-card rounded-2xl p-6">
               <div className="text-3xl font-bold text-amber-400">500+</div>
               <div className="text-gray-400 text-sm mt-1">Projects Completed</div>
             </div>
-            <div className="text-center bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e]">
+            <div className="text-center glass-card rounded-2xl p-6">
               <div className="text-3xl font-bold text-amber-400">50+</div>
               <div className="text-gray-400 text-sm mt-1">Ongoing Projects</div>
             </div>
-            <div className="text-center bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e]">
+            <div className="text-center glass-card rounded-2xl p-6">
               <div className="text-3xl font-bold text-amber-400">10+</div>
               <div className="text-gray-400 text-sm mt-1">States Covered</div>
             </div>
-            <div className="text-center bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e]">
+            <div className="text-center glass-card rounded-2xl p-6">
               <div className="text-3xl font-bold text-amber-400">100%</div>
               <div className="text-gray-400 text-sm mt-1">Client Satisfaction</div>
             </div>

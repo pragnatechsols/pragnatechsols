@@ -219,7 +219,7 @@ export default function CareersPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="group bg-[#4f2e88]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#5e3a9e] hover:border-amber-500/50 transition-all duration-300"
+                  className="group glass-card rounded-2xl p-6"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center gap-6">
                     <div className="flex-1">

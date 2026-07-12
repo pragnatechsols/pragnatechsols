@@ -206,7 +206,7 @@ function StoryCard({ story, index }: { story: typeof successStories[0]; index: n
         <p className="text-gray-500 text-sm mb-4">Client: {story.client}</p>
 
         <div className="space-y-4 mb-6">
-          <div className="bg-[#4f2e88]/50 rounded-xl p-4 border border-[#5e3a9e]">
+          <div className="glass-card rounded-xl p-4">
             <h4 className="text-red-400 font-semibold text-sm mb-2 flex items-center gap-2">
               <span className="w-2 h-2 bg-red-400 rounded-full"></span>
               The Challenge
@@ -214,7 +214,7 @@ function StoryCard({ story, index }: { story: typeof successStories[0]; index: n
             <p className="text-gray-400 text-sm">{story.problem}</p>
           </div>
 
-          <div className="bg-[#4f2e88]/50 rounded-xl p-4 border border-[#5e3a9e]">
+          <div className="glass-card rounded-xl p-4">
             <h4 className="text-blue-400 font-semibold text-sm mb-2 flex items-center gap-2">
               <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
               Our Solution
@@ -222,7 +222,7 @@ function StoryCard({ story, index }: { story: typeof successStories[0]; index: n
             <p className="text-gray-400 text-sm">{story.solution}</p>
           </div>
 
-          <div className="bg-[#4f2e88]/50 rounded-xl p-4 border border-[#5e3a9e]">
+          <div className="glass-card rounded-xl p-4">
             <h4 className="text-green-400 font-semibold text-sm mb-2 flex items-center gap-2">
               <CheckCircleIcon className="w-4 h-4" />
               The Result
@@ -296,7 +296,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof clientTes
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -5, scale: 1.02 }}
-      className="bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e] hover:border-amber-500/30 transition-all duration-300"
+      className="glass-card rounded-2xl p-6"
     >
       <div className="flex gap-1 mb-4">
         {[...Array(testimonial.rating)].map((_, i) => (
@@ -354,7 +354,7 @@ export default function TestimonialsContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-[#4f2e88]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#5e3a9e]"
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 glass-card rounded-2xl p-6"
           >
             <div className="text-center">
               <div className="text-3xl font-bold text-amber-400">500+</div>

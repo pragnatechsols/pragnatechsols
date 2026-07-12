@@ -16,7 +16,7 @@ export default function ServiceCard({ icon, title, description, href }: ServiceC
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-      className="group relative p-8 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-amber-400/30 transition-all duration-300 overflow-hidden h-full"
+      className="glass-card group relative p-8 rounded-2xl overflow-hidden h-full"
     >
       {/* Subtle glow on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-amber-400/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

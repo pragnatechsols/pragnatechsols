@@ -221,7 +221,7 @@ export default function AboutPage() {
             {team.map((member, index) => (
               <div
                 key={`${member.name}-${index}`}
-                className="bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e] hover:border-amber-500/50 transition-all duration-300 text-center flex flex-col items-center"
+                className="glass-card rounded-2xl p-6 text-center flex flex-col items-center"
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mb-4">
                   <span className="text-[#3d2063] font-bold text-lg">{getInitials(member.name)}</span>
@@ -254,7 +254,7 @@ export default function AboutPage() {
             {certifications.map((cert) => (
               <div 
                 key={cert.title}
-                className="bg-[#4f2e88]/50 rounded-2xl p-8 border border-[#5e3a9e] hover:border-amber-500/50 transition-all duration-300 text-center"
+                className="glass-card rounded-2xl p-8 text-center"
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <div className="text-[#3d2063]">{cert.icon}</div>
@@ -346,7 +346,7 @@ export default function AboutPage() {
       <section className="py-20 bg-gradient-to-r from-purple-900/50 via-purple-900/50 to-purple-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-[#4f2e88]/50 backdrop-blur-sm rounded-2xl p-8 border border-[#5e3a9e]">
+            <div className="glass-card rounded-2xl p-8">
               <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-[#3d2063]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -359,7 +359,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="bg-[#4f2e88]/50 backdrop-blur-sm rounded-2xl p-8 border border-[#5e3a9e]">
+            <div className="glass-card rounded-2xl p-8">
               <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

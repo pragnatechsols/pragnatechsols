@@ -204,7 +204,7 @@ export default function ServicesPage() {
                 </div>
 
                 <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
-                  <div className="bg-[#4f2e88]/50 rounded-2xl p-6 border border-[#5e3a9e]">
+                  <div className="glass-card rounded-2xl p-6">
                     <h3 className="text-lg font-semibold text-white mb-4">Key Features</h3>
                     <ul className="space-y-3">
                       {service.features.map((feature) => (

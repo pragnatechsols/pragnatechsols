@@ -9,7 +9,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ title, description, category, imageSrc }: ProjectCardProps) {
   return (
-    <div className="group relative overflow-hidden rounded-2xl bg-[#4f2e88] border border-[#5e3a9e] hover:border-amber-500/50 transition-all duration-300">
+    <div className="glass-card group relative overflow-hidden rounded-2xl">
       <div className="aspect-[4/3] relative overflow-hidden">
         <Image
           src={imageSrc}

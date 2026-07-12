@@ -16,12 +16,12 @@ interface StatCardProps {
 }
 
 const colorClasses = {
-  default: 'bg-[#4f2e88]/50 border-[#5e3a9e]',
-  blue: 'bg-blue-500/10 border-blue-500/30',
-  green: 'bg-green-500/10 border-green-500/30',
-  yellow: 'bg-amber-500/10 border-amber-500/30',
-  red: 'bg-red-500/10 border-red-500/30',
-  purple: 'bg-purple-500/10 border-purple-500/30',
+  default: 'glass-card',
+  blue: 'bg-blue-500/10 border border-blue-500/30 backdrop-blur-sm',
+  green: 'bg-green-500/10 border border-green-500/30 backdrop-blur-sm',
+  yellow: 'bg-amber-500/10 border border-amber-500/30 backdrop-blur-sm',
+  red: 'bg-red-500/10 border border-red-500/30 backdrop-blur-sm',
+  purple: 'bg-purple-500/10 border border-purple-500/30 backdrop-blur-sm',
 };
 
 const iconColors = {
@@ -44,7 +44,7 @@ export default function StatCard({
   return (
     <div
       className={cn(
-        'p-6 rounded-xl border backdrop-blur-sm',
+        'p-6 rounded-xl',
         colorClasses[color],
         className
       )}
