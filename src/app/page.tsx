@@ -214,9 +214,9 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section ref={containerRef} className="relative min-h-[110vh] flex items-center overflow-hidden bg-[#3d2063]">
-        {/* Purple gradient base - lighter top-left to deeper bottom-right (matches reference) */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#5b3aa0] via-[#3d2063] to-[#2a1548]" />
+      <section ref={containerRef} className="relative min-h-[110vh] flex items-center overflow-hidden bg-transparent">
+        {/* Purple gradient base - lighter top-left to deeper bottom-right, semi-transparent so the light leaks bleed through */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#5b3aa0]/40 via-[#3d2063]/35 to-[#2a1548]/45" />
 
         {/* Soft glow accents */}
         <div className="absolute inset-0 overflow-hidden">
@@ -289,13 +289,13 @@ export default function Home() {
             </motion.div>
 
             {/* Main headline */}
-            <div className="overflow-hidden mb-6 pb-2">
-              <h1 className="text-[clamp(2.5rem,8vw,7rem)] font-bold leading-[1] tracking-[-0.03em] text-white">
+            <div className="overflow-hidden mb-6 pb-4">
+              <h1 className="text-[clamp(2.5rem,8vw,7rem)] font-bold leading-[1.15] tracking-[-0.03em] text-white">
                 <AnimatedTitle>Engineering</AnimatedTitle>
               </h1>
             </div>
-            <div className="overflow-hidden mb-6 pb-2">
-              <h1 className="text-[clamp(2.5rem,8vw,7rem)] font-bold leading-[1] tracking-[-0.03em]">
+            <div className="overflow-hidden mb-6 pb-4">
+              <h1 className="text-[clamp(2.5rem,8vw,7rem)] font-bold leading-[1.15] tracking-[-0.03em]">
                 <motion.span
                   initial={{ opacity: 0, y: 100 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -306,8 +306,8 @@ export default function Home() {
                 </motion.span>
               </h1>
             </div>
-            <div className="overflow-hidden mb-12 pb-2">
-              <h1 className="text-[clamp(2.5rem,8vw,7rem)] font-bold leading-[1] tracking-[-0.03em] text-white">
+            <div className="overflow-hidden mb-12 pb-4">
+              <h1 className="text-[clamp(2.5rem,8vw,7rem)] font-bold leading-[1.15] tracking-[-0.03em] text-white">
                 <AnimatedTitle>Delivered.</AnimatedTitle>
               </h1>
             </div>
@@ -393,7 +393,7 @@ export default function Home() {
       </section>
 
       {/* Vendor / Partner Logo Strip */}
-      <section className="py-20 bg-[#3d2063] overflow-hidden relative z-10">
+      <section className="py-20 bg-[#3d2063]/50 overflow-hidden relative z-10">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-12">
           <div className="flex items-center gap-4 mb-6 justify-center">
             <div className="h-px w-12 bg-amber-400" />
@@ -436,7 +436,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-32 bg-[#3d2063] relative">
+      <section className="py-32 bg-[#3d2063]/50 relative">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <AnimatedSection className="mb-20">
             <div className="flex items-center gap-4 mb-6">
@@ -478,7 +478,7 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-32 bg-[#2e1a52] relative overflow-hidden">
+      <section className="py-32 bg-[#2e1a52]/50 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[128px]" />
         </div>
@@ -524,7 +524,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 bg-[#3d2063] relative">
+      <section className="py-32 bg-[#3d2063]/50 relative">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="relative p-12 lg:p-20 rounded-3xl bg-gradient-to-br from-amber-400/10 via-transparent to-purple-500/10 border border-white/5 overflow-hidden">
             <div className="relative text-center">

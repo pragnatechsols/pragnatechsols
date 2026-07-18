@@ -1,85 +1,84 @@
 'use client';
 
 import { useState } from 'react';
-import { ProjectCard } from '@/components';
 import Link from 'next/link';
 
+// Real clients and the work Pragna delivered for them (source: company records).
 const projects = [
   {
-    title: 'Vijayawada Tech Park',
-    description: 'Complete MEPF installation for a 10-story IT park including electrical systems, HVAC, fire safety, and smart building integration.',
-    category: 'Commercial',
-    imageSrc: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
-  },
-  {
-    title: 'Green Valley Apartments',
-    description: 'Residential complex with sustainable energy solutions, centralized HVAC, and modern plumbing systems for 200+ units.',
-    category: 'Residential',
-    imageSrc: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80',
-  },
-  {
-    title: 'Andhra Steel Works',
-    description: 'Industrial electrical infrastructure, heavy-duty HVAC systems, and comprehensive fire safety solutions for manufacturing facility.',
+    title: 'Bharat Electronics Limited, AP',
+    works: ['Supply of Circuit Breakers'],
     category: 'Industrial',
-    imageSrc: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
+    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845627/pragna-techsols/vendors/bel.png',
   },
   {
-    title: 'City Center Mall',
-    description: 'Large-scale retail complex with integrated MEP systems, energy-efficient lighting, and advanced fire suppression systems.',
-    category: 'Commercial',
-    imageSrc: 'https://images.unsplash.com/photo-1567449303078-57ad995bd329?w=800&q=80',
-  },
-  {
-    title: 'Solar Farm Project',
-    description: '5MW solar power installation with grid integration, monitoring systems, and maintenance infrastructure.',
-    category: 'Solar',
-    imageSrc: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80',
-  },
-  {
-    title: 'Heritage Hospital',
-    description: 'Healthcare facility with critical power systems, specialized HVAC for operation theaters, and medical gas infrastructure.',
-    category: 'Healthcare',
-    imageSrc: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80',
-  },
-  {
-    title: 'Luxury Hotel & Resort',
-    description: 'Premium hospitality project with smart room controls, central plant systems, and integrated building management.',
-    category: 'Hospitality',
-    imageSrc: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80',
-  },
-  {
-    title: 'Water Treatment Plant',
-    description: '10 MLD STP with advanced treatment technology, automation, and SCADA integration for municipal corporation.',
-    category: 'Infrastructure',
-    imageSrc: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80',
-  },
-  {
-    title: 'University Campus',
-    description: 'Educational institution with multiple buildings, centralized power distribution, and campus-wide CCTV surveillance.',
+    title: 'VIT-AP University',
+    works: [
+      'Switch Gears',
+      'Cable laying (300 sq.mm electrical cable)',
+      'Lightning Arrestors',
+    ],
     category: 'Educational',
-    imageSrc: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
+    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845628/pragna-techsols/vendors/vit-ap.png',
   },
   {
-    title: 'Smart Warehouse',
-    description: 'Modern logistics facility with automated systems, energy-efficient lighting, and advanced fire detection systems.',
+    title: 'SRM University, AP',
+    works: ['Water tank cleaning', 'Material supply — Glowguard'],
+    category: 'Educational',
+    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845629/pragna-techsols/vendors/srm-ap.png',
+  },
+  {
+    title: 'NID, AP',
+    works: [
+      'Electrical cable laying & associated works',
+      'Transformer oil filtration',
+    ],
+    category: 'Educational',
+    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845630/pragna-techsols/vendors/nid-ap.png',
+  },
+  {
+    title: 'UltraTech, AP',
+    works: [
+      'Transformer oil service',
+      'Supply of lights',
+      'Electrical circuit checking & new electrical works',
+    ],
     category: 'Industrial',
-    imageSrc: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80',
+    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845631/pragna-techsols/vendors/ultratech.png',
   },
   {
-    title: 'Residential Township',
-    description: 'Large-scale township project with sustainable infrastructure, rainwater harvesting, and solar-powered common areas.',
-    category: 'Residential',
-    imageSrc: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80',
-  },
-  {
-    title: 'Corporate Headquarters',
-    description: 'Modern office building with BMS integration, efficient HVAC systems, and state-of-the-art electrical infrastructure.',
+    title: 'Sentini Group',
+    works: ['Electrical works — Elevate Mall'],
     category: 'Commercial',
-    imageSrc: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845634/pragna-techsols/vendors/sentini.jpg',
+  },
+  {
+    title: 'MEIL',
+    works: ['MEP works at Medical College, Piduguralla, Andhra Pradesh'],
+    category: 'Infrastructure',
+    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845636/pragna-techsols/vendors/meil.jpg',
+  },
+  {
+    title: 'Blue Star, Vijayawada',
+    works: ['MEPF engineering services'],
+    category: 'Commercial',
+    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845632/pragna-techsols/vendors/blue-star.jpg',
+  },
+  {
+    title: 'Zomato',
+    works: ['MEPF engineering services'],
+    category: 'Commercial',
+    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845633/pragna-techsols/vendors/zomato.png',
+  },
+  {
+    title: 'ACT Fibernet',
+    works: ['MEPF engineering services'],
+    category: 'Infrastructure',
+    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845636/pragna-techsols/vendors/act-fibernet.png',
   },
 ];
 
-const categories = ['All', 'Commercial', 'Residential', 'Industrial', 'Solar', 'Healthcare', 'Hospitality', 'Infrastructure', 'Educational'];
+const categories = ['All', 'Commercial', 'Industrial', 'Educational', 'Infrastructure'];
 
 export default function ProjectsContent() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -160,7 +159,38 @@ export default function ProjectsContent() {
           {filteredProjects.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => (
-                <ProjectCard key={project.title} {...project} />
+                <div
+                  key={project.title}
+                  className="glass-card group flex flex-col overflow-hidden rounded-2xl"
+                >
+                  {/* Logo panel on a light backdrop so the client mark reads clearly */}
+                  <div className="relative flex h-40 items-center justify-center bg-white p-8">
+                    <img
+                      src={project.logo}
+                      alt={project.title}
+                      className="max-h-full max-w-[70%] object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <span className="absolute top-4 left-4 inline-block rounded-full bg-amber-500/90 px-3 py-1 text-xs font-medium text-[#3d2063]">
+                      {project.category}
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3 className="mb-4 text-lg font-semibold text-white transition-colors duration-200 group-hover:text-amber-400">
+                      {project.title}
+                    </h3>
+                    <ul className="space-y-2">
+                      {project.works.map((work) => (
+                        <li
+                          key={work}
+                          className="flex items-start gap-2 text-sm text-gray-400"
+                        >
+                          <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-amber-400" />
+                          <span>{work}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               ))}
             </div>
           ) : (

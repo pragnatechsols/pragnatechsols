@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #3d2063;
+  --background: #150a24;
   --foreground: #f3eefb;
+
+  /* Near-black base for the light-leak theme */
+  --base-black: #0a0512;
+  --base-deep: #150a24;
 
   /* Royal purple ramp (base -> light surfaces) */
   --purple-darkest: #2e1a52;
@@ -16,6 +20,12 @@
   --gold: #e0b044;
   --gold-bright: #f0c968;
   --gold-deep: #c99a2e;
+
+  /* Light-leak accent hues (magenta -> violet -> indigo -> blue) */
+  --leak-magenta: #d6249f;
+  --leak-violet: #7c3aed;
+  --leak-indigo: #4f46e5;
+  --leak-blue: #2563eb;
 }
 
 @theme inline {
@@ -30,10 +40,72 @@ html {
 }
 
 body {
-  background: var(--background);
+  background: var(--base-black);
   color: var(--foreground);
   font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
   letter-spacing: -0.01em;
+}
+
+/* ------------------------------------------------------------------
+   Light-leak dark theme
+   A fixed, full-viewport backdrop of soft colored blooms (magenta ->
+   violet -> indigo -> blue) over a near-black base. Sits behind all
+   content so existing purple/gold sections glow over it. Sections that
+   want to reveal the leaks can use `bg-transparent`; opaque sections
+   still layer on top unchanged.
+------------------------------------------------------------------- */
+.light-leak-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 52% at 0% 10%, rgba(232, 46, 175, 0.55) 0%, transparent 55%),
+    radial-gradient(52% 48% at 8% 40%, rgba(139, 68, 255, 0.55) 0%, transparent 56%),
+    radial-gradient(48% 44% at 28% 92%, rgba(94, 84, 255, 0.45) 0%, transparent 55%),
+    radial-gradient(44% 44% at 97% 88%, rgba(45, 120, 255, 0.42) 0%, transparent 56%),
+    radial-gradient(58% 58% at 88% 8%, rgba(139, 68, 255, 0.30) 0%, transparent 60%),
+    radial-gradient(130% 130% at 55% 45%, #0d0619 30%, #030008 78%);
+  background-attachment: fixed;
+}
+
+/* Slow drift so the leaks feel alive without distracting. */
+@keyframes leak-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(1.5%, -1.5%, 0) scale(1.05);
+    opacity: 0.92;
+  }
+}
+
+.light-leak-bg::after {
+  content: '';
+  position: absolute;
+  inset: -10%;
+  background:
+    radial-gradient(38% 38% at 18% 28%, rgba(232, 46, 175, 0.38) 0%, transparent 58%),
+    radial-gradient(42% 42% at 82% 72%, rgba(45, 120, 255, 0.34) 0%, transparent 60%);
+  animation: leak-drift 18s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .light-leak-bg::after {
+    animation: none;
+  }
+}
+
+/* Reusable inline leak glow for section corners (non-fixed). */
+.leak-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  pointer-events: none;
+  will-change: transform;
 }
 
 /* Premium Typography */

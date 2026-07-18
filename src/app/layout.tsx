@@ -42,7 +42,7 @@ export default function RootLayout({
       lang="en"
       className={`${poppins.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#3d2063] font-sans">
+      <body className="min-h-full flex flex-col bg-[#030008] font-sans">
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>

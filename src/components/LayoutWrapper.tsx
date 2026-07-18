@@ -22,7 +22,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
 
   // Prevent hydration mismatch by rendering a minimal shell until mounted
   if (!mounted) {
-    return <div className="min-h-screen bg-[#3d2063]">{children}</div>;
+    return <div className="min-h-screen bg-[#030008]">{children}</div>;
   }
 
   // Admin routes get their own layout without public navbar/footer
@@ -35,6 +35,8 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
   // extra top padding so the floating pill clears their page titles.
   return (
     <ClientWrapper>
+      {/* Fixed light-leak backdrop shared across all public pages */}
+      <div className="light-leak-bg" aria-hidden="true" />
       <Navbar />
       <main className={`flex-grow ${isHome ? '' : 'pt-24'}`}>{children}</main>
       <Footer />
