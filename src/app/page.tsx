@@ -26,36 +26,42 @@ const services = [
     title: 'Electrical',
     description: 'Complete electrical solutions for residential, commercial, and industrial projects.',
     href: '/services#electrical',
+    imageSrc: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80',
   },
   {
     icon: <WrenchScrewdriverIcon className="w-6 h-6" />,
     title: 'HVAC',
     description: 'Heating, ventilation, and air conditioning systems for optimal comfort.',
     href: '/services#hvac',
+    imageSrc: 'https://images.unsplash.com/photo-1631545806609-c2b999c8b28f?w=800&q=80',
   },
   {
     icon: <BeakerIcon className="w-6 h-6" />,
     title: 'Plumbing',
     description: 'Comprehensive plumbing solutions including installation and maintenance.',
     href: '/services#plumbing',
+    imageSrc: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=800&q=80',
   },
   {
     icon: <FireIcon className="w-6 h-6" />,
     title: 'Fire & Safety',
     description: 'Advanced fire detection, suppression systems, and safety compliance.',
     href: '/services#fire-safety',
+    imageSrc: 'https://images.unsplash.com/photo-1599691889120-3f70a41b3e75?w=800&q=80',
   },
   {
     icon: <SunIcon className="w-6 h-6" />,
     title: 'Solar Projects',
     description: 'Sustainable solar energy solutions for reduced energy costs.',
     href: '/services#solar-projects',
+    imageSrc: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80',
   },
   {
     icon: <VideoCameraIcon className="w-6 h-6" />,
     title: 'CCTV',
     description: 'State-of-the-art surveillance systems for comprehensive security.',
     href: '/services#cctv',
+    imageSrc: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&q=80',
   },
 ];
 

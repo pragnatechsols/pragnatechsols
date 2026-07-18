@@ -9,15 +9,28 @@ interface ServiceCardProps {
   title: string;
   description: string;
   href?: string;
+  imageSrc?: string;
 }
 
-export default function ServiceCard({ icon, title, description, href }: ServiceCardProps) {
+export default function ServiceCard({ icon, title, description, href, imageSrc }: ServiceCardProps) {
   const CardContent = (
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       className="glass-card group relative p-8 rounded-2xl overflow-hidden h-full"
     >
+      {/* Background image revealed on hover */}
+      {imageSrc && (
+        <>
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-0 scale-105 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"
+            style={{ backgroundImage: `url(${imageSrc})` }}
+          />
+          {/* Dark overlay so text stays readable over the image */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f2e] via-[#1a0f2e]/80 to-[#1a0f2e]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        </>
+      )}
+
       {/* Subtle glow on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-amber-400/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -30,7 +43,7 @@ export default function ServiceCard({ icon, title, description, href }: ServiceC
         <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-amber-400 transition-colors">
           {title}
         </h3>
-        <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
+        <p className="text-gray-500 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">{description}</p>
 
         {/* Arrow indicator */}
         <div className="mt-6 flex items-center gap-2 text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity">

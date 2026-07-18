@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { ReactNode, useState, useEffect } from 'react';
 import { Navbar, Footer } from '@/components';
 import ClientWrapper from './ClientWrapper';
+import FloatingContact from './FloatingContact';
 
 interface LayoutWrapperProps {
   children: ReactNode;
@@ -40,6 +41,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
       <Navbar />
       <main className={`flex-grow ${isHome ? '' : 'pt-24'}`}>{children}</main>
       <Footer />
+      <FloatingContact />
     </ClientWrapper>
   );
 }
