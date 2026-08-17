@@ -11,8 +11,10 @@ import {
   Clock,
   CheckCircle,
   XCircle,
+  ClipboardList,
 } from 'lucide-react';
 import StatCard from '@/components/ui/StatCard';
+import { formatRelativeTime } from '@/lib/utils';
 
 interface DashboardStats {
   enquiries: {
@@ -47,9 +49,20 @@ interface DashboardStats {
   };
 }
 
+interface TaskUpdate {
+  id: string;
+  task_id: string;
+  task_title: string;
+  author_type: 'member' | 'admin';
+  author_name: string;
+  note: string;
+  created_at: string;
+}
+
 export default function AdminDashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [taskUpdates, setTaskUpdates] = useState<TaskUpdate[]>([]);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -66,7 +79,18 @@ export default function AdminDashboardPage() {
       }
     };
 
+    const fetchTaskUpdates = async () => {
+      try {
+        const res = await fetch('/api/admin/tasks/recent-updates?limit=8');
+        const data = await res.json();
+        if (data.success) setTaskUpdates(data.data);
+      } catch {
+        // non-fatal
+      }
+    };
+
     fetchStats();
+    fetchTaskUpdates();
   }, []);
 
   if (loading) {
@@ -264,6 +288,47 @@ export default function AdminDashboardPage() {
           </div>
         </motion.div>
       </div>
+
+      {/* Recent Task Updates */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+        className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] p-6"
+      >
+        <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <ClipboardList className="w-5 h-5 text-amber-400" />
+          Recent Task Updates
+        </h2>
+        {taskUpdates.length === 0 ? (
+          <p className="text-sm text-gray-400">No task activity yet.</p>
+        ) : (
+          <div className="space-y-3">
+            {taskUpdates.map((u) => (
+              <div key={u.id} className="flex gap-3 items-start">
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-none ${
+                    u.author_type === 'admin'
+                      ? 'bg-purple-500/30 text-purple-200'
+                      : 'bg-amber-500/30 text-amber-200'
+                  }`}
+                >
+                  {u.author_name?.charAt(0).toUpperCase() || '?'}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-gray-300">
+                    <span className="font-medium text-white">{u.author_name}</span>
+                    {' · '}
+                    <span className="text-amber-400">{u.task_title}</span>
+                  </p>
+                  <p className="text-sm text-gray-400 truncate">{u.note}</p>
+                </div>
+                <span className="text-xs text-gray-500 flex-none">{formatRelativeTime(u.created_at)}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </motion.div>
     </div>
   );
 }

@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Plus, MoreVertical, ClipboardList, Edit, Trash2, Calendar, User } from 'lucide-react';
+import { Search, Plus, MoreVertical, ClipboardList, Edit, Trash2, Calendar, User, MessageSquare, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Modal from '@/components/ui/Modal';
 import ConfirmModal from '@/components/ui/ConfirmModal';
-import { formatDate } from '@/lib/utils';
-import type { Task, TeamMember, TaskStatus, TaskPriority } from '@/types';
+import { formatDate, formatRelativeTime } from '@/lib/utils';
+import type { Task, TeamMember, TaskStatus, TaskPriority, TaskNote } from '@/types';
 
 const STATUS_OPTIONS: { value: TaskStatus; label: string }[] = [
   { value: 'open', label: 'Open' },
@@ -55,6 +55,62 @@ export default function TasksAdminPage() {
   const [formData, setFormData] = useState(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [actionMenuId, setActionMenuId] = useState<string | null>(null);
+
+  // Notes thread state
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [notes, setNotes] = useState<TaskNote[]>([]);
+  const [notesLoading, setNotesLoading] = useState(false);
+  const [noteDraft, setNoteDraft] = useState('');
+  const [addingNote, setAddingNote] = useState(false);
+
+  const fetchNotes = useCallback(async (taskId: string) => {
+    setNotesLoading(true);
+    try {
+      const res = await fetch(`/api/admin/tasks/${taskId}/notes`);
+      const data = await res.json();
+      if (data.success) setNotes(data.data);
+    } catch {
+      toast.error('Failed to load notes');
+    } finally {
+      setNotesLoading(false);
+    }
+  }, []);
+
+  const toggleNotes = (taskId: string) => {
+    if (expandedId === taskId) {
+      setExpandedId(null);
+      setNotes([]);
+    } else {
+      setExpandedId(taskId);
+      setNoteDraft('');
+      setNotes([]);
+      fetchNotes(taskId);
+    }
+  };
+
+  const handleAddAdminNote = async (taskId: string) => {
+    const note = noteDraft.trim();
+    if (!note) return;
+    setAddingNote(true);
+    try {
+      const res = await fetch(`/api/admin/tasks/${taskId}/notes`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ note }),
+      });
+      if (res.ok) {
+        setNoteDraft('');
+        fetchNotes(taskId);
+      } else {
+        const data = await res.json();
+        toast.error(data.error || 'Failed to add note');
+      }
+    } catch {
+      toast.error('Failed to add note');
+    } finally {
+      setAddingNote(false);
+    }
+  };
 
   const fetchTeam = useCallback(async () => {
     try {
@@ -279,6 +335,14 @@ export default function TasksAdminPage() {
                         Due {formatDate(t.due_date)}
                       </span>
                     )}
+                    <span className="text-xs text-gray-500">Updated {formatRelativeTime(t.updated_at)}</span>
+                    <button
+                      onClick={() => toggleNotes(t.id)}
+                      className="flex items-center gap-1 text-amber-400 hover:text-amber-300"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                      {expandedId === t.id ? 'Hide notes' : 'Notes'}
+                    </button>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -315,6 +379,63 @@ export default function TasksAdminPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Notes thread */}
+              {expandedId === t.id && (
+                <div className="mt-4 pt-4 border-t border-[#5e3a9e]">
+                  {notesLoading ? (
+                    <div className="flex justify-center py-4">
+                      <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-amber-500" />
+                    </div>
+                  ) : notes.length > 0 ? (
+                    <div className="space-y-3 mb-4">
+                      {notes.map((n) => (
+                        <div key={n.id} className="flex gap-3">
+                          <div
+                            className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-none ${
+                              n.author_type === 'admin'
+                                ? 'bg-purple-500/30 text-purple-200'
+                                : 'bg-amber-500/30 text-amber-200'
+                            }`}
+                          >
+                            {n.author_name?.charAt(0).toUpperCase() || '?'}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-medium text-white">{n.author_name}</span>
+                              <span className="text-xs text-gray-500">
+                                {n.author_type === 'admin' ? 'Admin' : 'Team'} · {formatRelativeTime(n.created_at)}
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-300">{n.note}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-gray-500 mb-4">No notes yet.</p>
+                  )}
+
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={noteDraft}
+                      onChange={(e) => setNoteDraft(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddAdminNote(t.id))}
+                      placeholder="Add a note..."
+                      className="flex-1 px-4 py-2 bg-[#5e3a9e] border border-[#6d47b0] rounded-lg text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    />
+                    <button
+                      onClick={() => handleAddAdminNote(t.id)}
+                      disabled={addingNote || !noteDraft.trim()}
+                      className="px-4 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-medium hover:bg-amber-400 transition-colors disabled:opacity-50 flex items-center gap-1"
+                    >
+                      <Send className="w-4 h-4" />
+                      Add
+                    </button>
+                  </div>
+                </div>
+              )}
             </motion.div>
           ))
         )}

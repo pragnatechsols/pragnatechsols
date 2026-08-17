@@ -224,6 +224,22 @@ export interface Task {
   updated_at: string;
 }
 
+export type TaskNoteAuthorType = 'member' | 'admin';
+
+export interface TaskNote {
+  id: string;
+  task_id: string;
+  author_type: TaskNoteAuthorType;
+  author_id: string | null;
+  author_name: string;
+  note: string;
+  created_at: string;
+}
+
+export interface TaskWithNotes extends Task {
+  notes: TaskNote[];
+}
+
 // ============================================
 // SETTINGS TYPES (key/value site config)
 // ============================================
