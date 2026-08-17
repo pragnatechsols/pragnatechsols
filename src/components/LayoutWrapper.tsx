@@ -19,6 +19,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
   }, []);
 
   const isAdminRoute = pathname?.startsWith('/admin');
+  const isTeamRoute = pathname?.startsWith('/team');
   const isHome = pathname === '/';
 
   // Prevent hydration mismatch by rendering a minimal shell until mounted
@@ -26,8 +27,8 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
     return <div className="min-h-screen bg-[#030008]">{children}</div>;
   }
 
-  // Admin routes get their own layout without public navbar/footer
-  if (isAdminRoute) {
+  // Admin and team portals get their own layout without public navbar/footer/contact.
+  if (isAdminRoute || isTeamRoute) {
     return <>{children}</>;
   }
 

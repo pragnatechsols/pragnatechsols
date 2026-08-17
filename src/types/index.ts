@@ -196,6 +196,7 @@ export interface TeamMember {
   id: string;
   name: string;
   email: string | null;
+  employee_id: string | null;
   role: string | null;
   is_active: boolean;
   is_deleted: boolean;

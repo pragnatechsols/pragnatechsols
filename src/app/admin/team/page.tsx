@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Plus, MoreVertical, UserCog, Edit, Trash2, Eye, EyeOff, Mail } from 'lucide-react';
+import { Search, Plus, MoreVertical, UserCog, Edit, Trash2, Eye, EyeOff, Mail, KeyRound, IdCard, Copy } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Modal from '@/components/ui/Modal';
 import ConfirmModal from '@/components/ui/ConfirmModal';
@@ -11,6 +11,7 @@ import type { TeamMember } from '@/types';
 const initialFormState = {
   name: '',
   email: '',
+  employee_id: '',
   role: '',
   is_active: true,
 };
@@ -25,6 +26,12 @@ export default function TeamAdminPage() {
   const [formData, setFormData] = useState(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [actionMenuId, setActionMenuId] = useState<string | null>(null);
+
+  // Login-code modal state
+  const [showCodeModal, setShowCodeModal] = useState(false);
+  const [codeMember, setCodeMember] = useState<TeamMember | null>(null);
+  const [generatedCode, setGeneratedCode] = useState('');
+  const [generatingCode, setGeneratingCode] = useState(false);
 
   const fetchMembers = useCallback(async () => {
     setLoading(true);
@@ -51,6 +58,14 @@ export default function TeamAdminPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.name.trim()) {
+      toast.error('Name is required');
+      return;
+    }
+    if (!formData.email.trim()) {
+      toast.error('Email is required');
+      return;
+    }
     setIsSubmitting(true);
     try {
       const url = selected ? `/api/admin/team/${selected.id}` : '/api/admin/team';
@@ -81,11 +96,44 @@ export default function TeamAdminPage() {
     setFormData({
       name: m.name,
       email: m.email || '',
+      employee_id: m.employee_id || '',
       role: m.role || '',
       is_active: m.is_active,
     });
     setShowFormModal(true);
     setActionMenuId(null);
+  };
+
+  const handleGenerateCode = async (m: TeamMember) => {
+    setActionMenuId(null);
+    setCodeMember(m);
+    setGeneratedCode('');
+    setShowCodeModal(true);
+    setGeneratingCode(true);
+    try {
+      const res = await fetch(`/api/admin/team/${m.id}/login-code`, { method: 'POST' });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setGeneratedCode(data.data.code);
+      } else {
+        toast.error(data.error || 'Failed to generate code');
+        setShowCodeModal(false);
+      }
+    } catch {
+      toast.error('Failed to generate code');
+      setShowCodeModal(false);
+    } finally {
+      setGeneratingCode(false);
+    }
+  };
+
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(generatedCode);
+      toast.success('Code copied');
+    } catch {
+      toast.error('Could not copy');
+    }
   };
 
   const handleToggleActive = async (m: TeamMember) => {
@@ -192,6 +240,12 @@ export default function TeamAdminPage() {
                     </div>
                     <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
                       {m.role && <span>{m.role}</span>}
+                      {m.employee_id && (
+                        <span className="flex items-center gap-1">
+                          <IdCard className="w-4 h-4" />
+                          {m.employee_id}
+                        </span>
+                      )}
                       {m.email && (
                         <span className="flex items-center gap-1">
                           <Mail className="w-4 h-4" />
@@ -215,6 +269,9 @@ export default function TeamAdminPage() {
                       </button>
                       <button onClick={() => handleToggleActive(m)} className="w-full px-4 py-3 text-left text-sm text-white hover:bg-[#5e3a9e] flex items-center gap-2">
                         {m.is_active ? (<><EyeOff className="w-4 h-4" /> Deactivate</>) : (<><Eye className="w-4 h-4" /> Activate</>)}
+                      </button>
+                      <button onClick={() => handleGenerateCode(m)} className="w-full px-4 py-3 text-left text-sm text-white hover:bg-[#5e3a9e] flex items-center gap-2">
+                        <KeyRound className="w-4 h-4" /> Generate login code
                       </button>
                       <button
                         onClick={() => { setSelected(m); setShowDeleteModal(true); setActionMenuId(null); }}
@@ -251,16 +308,28 @@ export default function TeamAdminPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Email *</label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
+                required
                 className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 placeholder="name@example.com"
               />
+              <p className="text-xs text-gray-500 mt-1">Used to sign in to the team portal.</p>
             </div>
             <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Employee ID</label>
+              <input
+                type="text"
+                value={formData.employee_id}
+                onChange={(e) => setFormData((p) => ({ ...p, employee_id: e.target.value }))}
+                className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                placeholder="e.g. EMP-1024 (optional)"
+              />
+            </div>
+            <div className="sm:col-span-2">
               <label className="block text-sm font-medium text-gray-300 mb-2">Role</label>
               <input
                 type="text"
@@ -311,6 +380,47 @@ export default function TeamAdminPage() {
         variant="danger"
         isLoading={isSubmitting}
       />
+
+      {/* Login code modal */}
+      <Modal
+        isOpen={showCodeModal}
+        onClose={() => { setShowCodeModal(false); setCodeMember(null); setGeneratedCode(''); }}
+        title="Team Login Code"
+      >
+        <div className="p-6 space-y-4">
+          <p className="text-sm text-gray-300">
+            Share this one-time code with{' '}
+            <span className="font-medium text-white">{codeMember?.name}</span> if they didn&apos;t
+            receive the email. They enter it at <span className="text-amber-400">/team/login</span>{' '}
+            after typing their email ({codeMember?.email}). It expires in 10 minutes.
+          </p>
+
+          {generatingCode ? (
+            <div className="flex justify-center py-6">
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-amber-500" />
+            </div>
+          ) : (
+            <div className="flex items-center justify-between gap-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl p-4">
+              <span className="text-3xl font-bold tracking-[0.4em] text-amber-400">{generatedCode}</span>
+              <button
+                onClick={copyCode}
+                className="flex items-center gap-1 px-3 py-2 bg-[#6d47b0] hover:bg-[#7d55c0] text-white rounded-lg text-sm transition-colors"
+              >
+                <Copy className="w-4 h-4" /> Copy
+              </button>
+            </div>
+          )}
+
+          <div className="flex justify-end pt-2">
+            <button
+              onClick={() => { setShowCodeModal(false); setCodeMember(null); setGeneratedCode(''); }}
+              className="px-4 py-2 bg-[#5e3a9e] text-white rounded-lg font-medium hover:bg-[#6d47b0] transition-colors"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

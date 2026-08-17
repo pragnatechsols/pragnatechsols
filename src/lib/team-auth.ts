@@ -79,3 +79,18 @@ export function generateLoginCode(): string {
   crypto.getRandomValues(array);
   return String(array[0] % 1_000_000).padStart(6, '0');
 }
+
+// Generate a readable random initial password (no ambiguous chars).
+export function generateInitialPassword(): string {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+  const array = new Uint32Array(10);
+  crypto.getRandomValues(array);
+  return Array.from(array, (n) => chars[n % chars.length]).join('');
+}
+
+// Generate a URL-safe reset token.
+export function generateResetToken(): string {
+  const array = new Uint8Array(32);
+  crypto.getRandomValues(array);
+  return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join('');
+}

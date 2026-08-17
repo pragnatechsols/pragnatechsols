@@ -13,7 +13,32 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 
     const updates: Record<string, unknown> = {};
     if (body.name !== undefined) updates.name = body.name;
-    if (body.email !== undefined) updates.email = body.email;
+    if (body.email !== undefined) {
+      const normalizedEmail = (body.email as string | undefined)?.trim().toLowerCase();
+      if (!normalizedEmail) {
+        return NextResponse.json({ success: false, error: 'Email is required' }, { status: 400 });
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(normalizedEmail)) {
+        return NextResponse.json({ success: false, error: 'Please enter a valid email' }, { status: 400 });
+      }
+      // Ensure no other member uses this email
+      const { data: clash } = await supabaseAdmin
+        .from('team_members')
+        .select('id')
+        .eq('email', normalizedEmail)
+        .eq('is_deleted', false)
+        .neq('id', id)
+        .maybeSingle();
+      if (clash) {
+        return NextResponse.json(
+          { success: false, error: 'Another team member already uses this email' },
+          { status: 400 }
+        );
+      }
+      updates.email = normalizedEmail;
+    }
+    if (body.employee_id !== undefined) updates.employee_id = body.employee_id?.trim() || null;
     if (body.role !== undefined) updates.role = body.role;
     if (body.is_active !== undefined) updates.is_active = body.is_active;
 

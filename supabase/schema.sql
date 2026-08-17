@@ -375,14 +375,34 @@ CREATE TABLE IF NOT EXISTS team_members (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255),
+  employee_id VARCHAR(100),
   role VARCHAR(255),
   is_active BOOLEAN DEFAULT true,
   is_deleted BOOLEAN DEFAULT false,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+-- employee_id added post-hoc for existing DBs; see migrations_team_employee_id.sql.
+ALTER TABLE team_members ADD COLUMN IF NOT EXISTS employee_id VARCHAR(100);
+-- password_hash for team login; see migrations_team_password.sql.
+ALTER TABLE team_members ADD COLUMN IF NOT EXISTS password_hash VARCHAR(255);
 
 CREATE INDEX IF NOT EXISTS idx_team_members_is_active ON team_members(is_active);
+
+-- Team password reset tokens (self-service forgot-password)
+CREATE TABLE IF NOT EXISTS team_password_resets (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  team_member_id UUID NOT NULL REFERENCES team_members(id) ON DELETE CASCADE,
+  token VARCHAR(255) NOT NULL,
+  expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
+  used_at TIMESTAMP WITH TIME ZONE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_team_password_resets_member ON team_password_resets(team_member_id);
+CREATE INDEX IF NOT EXISTS idx_team_password_resets_token ON team_password_resets(token);
+ALTER TABLE team_password_resets ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Service role has full access to team_password_resets" ON team_password_resets;
+CREATE POLICY "Service role has full access to team_password_resets" ON team_password_resets FOR ALL USING (true);
 
 -- ============================================
 -- TASKS TABLE (internal assignment)
