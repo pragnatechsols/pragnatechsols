@@ -236,7 +236,7 @@ export default function Home() {
             viewBox="0 0 600 800"
             className="absolute right-0 bottom-0 h-full w-auto"
             fill="none"
-            stroke="rgba(224,176,68,0.35)"
+            stroke="rgba(245, 184, 31,0.35)"
             strokeWidth="1"
             preserveAspectRatio="xMaxYMax meet"
           >
@@ -383,7 +383,7 @@ export default function Home() {
       </section>
 
       {/* Marquee Section */}
-      <section className="py-8 bg-amber-400 overflow-hidden relative z-10" style={{ backgroundColor: '#e0b044' }}>
+      <section className="py-8 bg-amber-400 overflow-hidden relative z-10" style={{ backgroundColor: '#f5b81f' }}>
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(2)].map((_, i) => (
             <div key={i} className="flex items-center gap-8 mx-8">

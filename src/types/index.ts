@@ -152,6 +152,90 @@ export interface AdminUser {
 }
 
 // ============================================
+// SERVICE TYPES (admin-managed /services content)
+// ============================================
+export interface Service {
+  id: string;
+  title: string;
+  slug: string;
+  short_desc: string | null;
+  description: string | null;
+  features: string[];
+  icon_name: string | null;
+  icon_image_url: string | null;
+  icon_cloudinary_id: string | null;
+  gradient: string;
+  sort_order: number;
+  is_active: boolean;
+  is_deleted: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+// ============================================
+// PROJECT TYPES (admin-managed /projects content)
+// ============================================
+export interface Project {
+  id: string;
+  title: string;
+  works: string[];
+  category: string;
+  logo_url: string | null;
+  logo_cloudinary_id: string | null;
+  sort_order: number;
+  is_active: boolean;
+  is_deleted: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+// ============================================
+// TEAM MEMBER TYPES (internal staff / task assignees)
+// ============================================
+export interface TeamMember {
+  id: string;
+  name: string;
+  email: string | null;
+  role: string | null;
+  is_active: boolean;
+  is_deleted: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+// ============================================
+// TASK TYPES (internal assignment)
+// ============================================
+export type TaskStatus = 'open' | 'in_progress' | 'done';
+export type TaskPriority = 'high' | 'medium' | 'low';
+
+export interface Task {
+  id: string;
+  title: string;
+  description: string | null;
+  assignee_id: string | null;
+  assignee_name: string | null;
+  status: TaskStatus;
+  priority: TaskPriority;
+  due_date: string | null;
+  created_by: string | null;
+  is_deleted: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+// ============================================
+// SETTINGS TYPES (key/value site config)
+// ============================================
+export interface Setting {
+  id: string;
+  key: string;
+  value: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+// ============================================
 // STATS TYPES
 // ============================================
 export interface EnquiryStats {

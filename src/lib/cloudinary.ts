@@ -86,6 +86,47 @@ export async function deleteFile(publicId: string): Promise<boolean> {
   }
 }
 
+// Upload an image (service icons, project logos) to Cloudinary.
+export async function uploadImage(
+  file: Buffer,
+  filename: string,
+  folder: string
+): Promise<UploadResult> {
+  return new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream(
+      {
+        folder,
+        resource_type: 'image',
+        public_id: `${Date.now()}_${filename.replace(/\.[^/.]+$/, '').replace(/[^a-zA-Z0-9-_]/g, '-')}`,
+      },
+      (error, result) => {
+        if (error) {
+          reject(error);
+        } else if (result) {
+          resolve({
+            url: result.secure_url,
+            publicId: result.public_id,
+            filename,
+          });
+        }
+      }
+    );
+
+    uploadStream.end(file);
+  });
+}
+
+// Delete an image from Cloudinary (resource_type image).
+export async function deleteImage(publicId: string): Promise<boolean> {
+  try {
+    await cloudinary.uploader.destroy(publicId, { resource_type: 'image' });
+    return true;
+  } catch (error) {
+    console.error('Error deleting image from Cloudinary:', error);
+    return false;
+  }
+}
+
 export function getSecureUrl(publicId: string): string {
   return cloudinary.url(publicId, {
     secure: true,

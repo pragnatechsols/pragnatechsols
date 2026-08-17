@@ -1,91 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import type { Project } from '@/types';
 
-// Real clients and the work Pragna delivered for them (source: company records).
-const projects = [
-  {
-    title: 'Bharat Electronics Limited, AP',
-    works: ['Supply of Circuit Breakers'],
-    category: 'Industrial',
-    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845627/pragna-techsols/vendors/bel.png',
-  },
-  {
-    title: 'VIT-AP University',
-    works: [
-      'Switch Gears',
-      'Cable laying (300 sq.mm electrical cable)',
-      'Lightning Arrestors',
-    ],
-    category: 'Educational',
-    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845628/pragna-techsols/vendors/vit-ap.png',
-  },
-  {
-    title: 'SRM University, AP',
-    works: ['Water tank cleaning', 'Material supply — Glowguard'],
-    category: 'Educational',
-    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845629/pragna-techsols/vendors/srm-ap.png',
-  },
-  {
-    title: 'NID, AP',
-    works: [
-      'Electrical cable laying & associated works',
-      'Transformer oil filtration',
-    ],
-    category: 'Educational',
-    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845630/pragna-techsols/vendors/nid-ap.png',
-  },
-  {
-    title: 'UltraTech, AP',
-    works: [
-      'Transformer oil service',
-      'Supply of lights',
-      'Electrical circuit checking & new electrical works',
-    ],
-    category: 'Industrial',
-    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845631/pragna-techsols/vendors/ultratech.png',
-  },
-  {
-    title: 'Sentini Group',
-    works: ['Electrical works — Elevate Mall'],
-    category: 'Commercial',
-    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845634/pragna-techsols/vendors/sentini.jpg',
-  },
-  {
-    title: 'MEIL',
-    works: ['MEP works at Medical College, Piduguralla, Andhra Pradesh'],
-    category: 'Infrastructure',
-    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845636/pragna-techsols/vendors/meil.jpg',
-  },
-  {
-    title: 'Blue Star, Vijayawada',
-    works: ['MEPF engineering services'],
-    category: 'Commercial',
-    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845632/pragna-techsols/vendors/blue-star.jpg',
-  },
-  {
-    title: 'Zomato',
-    works: ['MEPF engineering services'],
-    category: 'Commercial',
-    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845633/pragna-techsols/vendors/zomato.png',
-  },
-  {
-    title: 'ACT Fibernet',
-    works: ['MEPF engineering services'],
-    category: 'Infrastructure',
-    logo: 'https://res.cloudinary.com/dpxp9pfui/image/upload/v1783845636/pragna-techsols/vendors/act-fibernet.png',
-  },
-];
-
-const categories = ['All', 'Commercial', 'Industrial', 'Educational', 'Infrastructure'];
+const FIXED_CATEGORIES = ['All', 'Commercial', 'Industrial', 'Educational', 'Infrastructure'];
 
 export default function ProjectsContent() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const filteredProjects = selectedCategory === 'All' 
-    ? projects 
-    : projects.filter(project => project.category === selectedCategory);
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch('/api/projects');
+        const data = await res.json();
+        if (data.success) setProjects(data.data);
+      } catch (error) {
+        console.error('Failed to fetch projects:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
+
+  // Categories: the standard set plus any custom category present in the data.
+  const categories = [
+    ...FIXED_CATEGORIES,
+    ...Array.from(new Set(projects.map((p) => p.category))).filter(
+      (c) => !FIXED_CATEGORIES.includes(c)
+    ),
+  ];
+
+  const filteredProjects =
+    selectedCategory === 'All'
+      ? projects
+      : projects.filter((project) => project.category === selectedCategory);
 
   return (
     <>
@@ -156,20 +108,28 @@ export default function ProjectsContent() {
       {/* Projects Grid */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredProjects.length > 0 ? (
+          {loading ? (
+            <div className="flex items-center justify-center h-64">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500" />
+            </div>
+          ) : filteredProjects.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => (
                 <div
-                  key={project.title}
+                  key={project.id}
                   className="glass-card group flex flex-col overflow-hidden rounded-2xl"
                 >
                   {/* Logo panel on a light backdrop so the client mark reads clearly */}
                   <div className="relative flex h-40 items-center justify-center bg-white p-8">
-                    <img
-                      src={project.logo}
-                      alt={project.title}
-                      className="max-h-full max-w-[70%] object-contain transition-transform duration-500 group-hover:scale-105"
-                    />
+                    {project.logo_url ? (
+                      <img
+                        src={project.logo_url}
+                        alt={project.title}
+                        className="max-h-full max-w-[70%] object-contain transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <span className="text-2xl font-bold text-[#3d2063]">{project.title}</span>
+                    )}
                     <span className="absolute top-4 left-4 inline-block rounded-full bg-amber-500/90 px-3 py-1 text-xs font-medium text-[#3d2063]">
                       {project.category}
                     </span>

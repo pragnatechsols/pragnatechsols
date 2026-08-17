@@ -49,9 +49,9 @@ export function AnimatedWires({ className = '' }: { className?: string }) {
     >
       <defs>
         <linearGradient id="wireGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#e0b044" stopOpacity="0" />
-          <stop offset="50%" stopColor="#e0b044" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#e0b044" stopOpacity="0" />
+          <stop offset="0%" stopColor="#f5b81f" stopOpacity="0" />
+          <stop offset="50%" stopColor="#f5b81f" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#f5b81f" stopOpacity="0" />
         </linearGradient>
         <linearGradient id="wireGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#a855f7" stopOpacity="0" />
@@ -111,7 +111,7 @@ export function ElectricalNode({
       <div
         className={`${sizes[size]} bg-gradient-to-br from-amber-400 to-amber-600 rounded-full`}
         style={{
-          boxShadow: '0 0 10px rgba(224, 176, 68, 0.5)',
+          boxShadow: '0 0 10px rgba(245, 184, 31, 0.5)',
         }}
       />
     </div>
@@ -162,11 +162,11 @@ export function CircuitDivider({ className = '' }: { className?: string }) {
       >
         <defs>
           <linearGradient id="dividerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#e0b044" stopOpacity="0" />
-            <stop offset="20%" stopColor="#e0b044" stopOpacity="0.3" />
-            <stop offset="50%" stopColor="#e0b044" stopOpacity="0.5" />
-            <stop offset="80%" stopColor="#e0b044" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#e0b044" stopOpacity="0" />
+            <stop offset="0%" stopColor="#f5b81f" stopOpacity="0" />
+            <stop offset="20%" stopColor="#f5b81f" stopOpacity="0.3" />
+            <stop offset="50%" stopColor="#f5b81f" stopOpacity="0.5" />
+            <stop offset="80%" stopColor="#f5b81f" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#f5b81f" stopOpacity="0" />
           </linearGradient>
         </defs>
         <line
@@ -178,8 +178,8 @@ export function CircuitDivider({ className = '' }: { className?: string }) {
           strokeWidth="1"
         />
         {/* Center node */}
-        <circle cx="50%" cy="50%" r="4" fill="#e0b044" opacity="0.5" />
-        <circle cx="50%" cy="50%" r="2" fill="#e0b044" />
+        <circle cx="50%" cy="50%" r="4" fill="#f5b81f" opacity="0.5" />
+        <circle cx="50%" cy="50%" r="2" fill="#f5b81f" />
         {/* Side nodes */}
         <circle cx="25%" cy="50%" r="2" fill="#a855f7" opacity="0.5" />
         <circle cx="75%" cy="50%" r="2" fill="#a855f7" opacity="0.5" />
@@ -252,9 +252,9 @@ export function EnergyFlowLine({
     >
       <defs>
         <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#e0b044" stopOpacity="0" />
-          <stop offset="50%" stopColor="#e0b044" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#e0b044" stopOpacity="0" />
+          <stop offset="0%" stopColor="#f5b81f" stopOpacity="0" />
+          <stop offset="50%" stopColor="#f5b81f" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#f5b81f" stopOpacity="0" />
         </linearGradient>
       </defs>
       <motion.path

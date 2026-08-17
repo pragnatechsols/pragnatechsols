@@ -16,10 +16,10 @@
   --purple-surface: #5e3a9e;
   --purple-surface-2: #6d47b0;
 
-  /* Warm metallic gold */
-  --gold: #e0b044;
-  --gold-bright: #f0c968;
-  --gold-deep: #c99a2e;
+  /* Warm metallic gold — richer, more vibrant golden-amber */
+  --gold: #f5b81f;
+  --gold-bright: #ffd23d;
+  --gold-deep: #e0a010;
 
   /* Light-leak accent hues (magenta -> violet -> indigo -> blue) */
   --leak-magenta: #d6249f;
@@ -33,6 +33,15 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-poppins);
   --font-display: var(--font-space);
+
+  /* Vibrant golden-amber ramp — overrides Tailwind's default amber so every
+     amber-* utility across the site and admin panel picks up the richer gold. */
+  --color-amber-200: #ffe89a;
+  --color-amber-300: #ffdd63;
+  --color-amber-400: #f5b81f;
+  --color-amber-500: #e8a814;
+  --color-amber-600: #e0a010;
+  --color-amber-700: #c98a08;
 }
 
 html {
@@ -224,10 +233,10 @@ body {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(224, 176, 68, 0.3);
+    box-shadow: 0 0 20px rgba(245, 184, 31, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(224, 176, 68, 0.6);
+    box-shadow: 0 0 40px rgba(245, 184, 31, 0.6);
   }
 }
 
@@ -271,7 +280,7 @@ body {
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, #c99a2e 0%, #e0b044 50%, #f0c968 100%);
+  background: linear-gradient(135deg, #e0a010 0%, #f5b81f 50%, #ffd23d 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -292,7 +301,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e0b044;
+  background: #f5b81f;
 }
 
 /* Glass Effect */
@@ -322,7 +331,7 @@ body {
 }
 
 .glass-card:hover {
-  border-color: rgba(224, 176, 68, 0.4);
+  border-color: rgba(245, 184, 31, 0.4);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
@@ -344,14 +353,14 @@ body {
 
 /* Smooth Focus States */
 *:focus-visible {
-  outline: 2px solid #e0b044;
+  outline: 2px solid #f5b81f;
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 /* Selection Styling */
 ::selection {
-  background: rgba(224, 176, 68, 0.3);
+  background: rgba(245, 184, 31, 0.3);
   color: #fff;
 }
 
@@ -390,7 +399,7 @@ button:active:not(:disabled),
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, transparent, rgba(224, 176, 68, 0.3), transparent);
+  background: linear-gradient(135deg, transparent, rgba(245, 184, 31, 0.3), transparent);
   -webkit-mask: 
     linear-gradient(#fff 0 0) content-box, 
     linear-gradient(#fff 0 0);
@@ -452,7 +461,7 @@ button:active:not(:disabled),
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(224, 176, 68, 0.1) 50%,
+    rgba(245, 184, 31, 0.1) 50%,
     transparent 100%
   );
   background-size: 200% 100%;

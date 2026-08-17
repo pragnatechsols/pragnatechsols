@@ -154,7 +154,7 @@ export default function CustomCursor() {
           }}
           transition={{ type: 'spring', stiffness: 500, damping: 30 }}
           style={{
-            boxShadow: '0 0 8px rgba(224, 176, 68, 0.6)',
+            boxShadow: '0 0 8px rgba(245, 184, 31, 0.6)',
           }}
         />
       </motion.div>

@@ -49,6 +49,26 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
       );
     }
 
+    // Enforce the admin-configured word limit on "why_hire_you"
+    let maxWords = 200;
+    const { data: setting } = await supabaseAdmin
+      .from('settings')
+      .select('value')
+      .eq('key', 'why_hire_you_max_words')
+      .single();
+    if (setting?.value) {
+      const parsed = parseInt(setting.value, 10);
+      if (!isNaN(parsed) && parsed > 0) maxWords = parsed;
+    }
+
+    const wordCount = why_hire_you.trim().split(/\s+/).filter(Boolean).length;
+    if (wordCount > maxWords) {
+      return NextResponse.json(
+        { success: false, error: `"Why should we hire you?" must be ${maxWords} words or fewer` },
+        { status: 400 }
+      );
+    }
+
     // Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {

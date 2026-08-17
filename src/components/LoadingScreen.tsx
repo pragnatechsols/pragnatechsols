@@ -89,15 +89,15 @@ export default function LoadingScreen() {
               >
                 <path
                   d="M 50 0 L 50 30 M 50 70 L 50 100 M 0 50 L 30 50 M 70 50 L 100 50"
-                  stroke="#e0b044"
+                  stroke="#f5b81f"
                   strokeWidth="0.5"
                   fill="none"
                 />
-                <circle cx="50" cy="50" r="3" fill="#e0b044" />
-                <circle cx="50" cy="30" r="2" fill="#e0b044" />
-                <circle cx="50" cy="70" r="2" fill="#e0b044" />
-                <circle cx="30" cy="50" r="2" fill="#e0b044" />
-                <circle cx="70" cy="50" r="2" fill="#e0b044" />
+                <circle cx="50" cy="50" r="3" fill="#f5b81f" />
+                <circle cx="50" cy="30" r="2" fill="#f5b81f" />
+                <circle cx="50" cy="70" r="2" fill="#f5b81f" />
+                <circle cx="30" cy="50" r="2" fill="#f5b81f" />
+                <circle cx="70" cy="50" r="2" fill="#f5b81f" />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#circuit-pattern)" />
@@ -128,9 +128,9 @@ export default function LoadingScreen() {
             />
             <defs>
               <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#e0b044" stopOpacity="0" />
-                <stop offset="50%" stopColor="#e0b044" stopOpacity="1" />
-                <stop offset="100%" stopColor="#e0b044" stopOpacity="0" />
+                <stop offset="0%" stopColor="#f5b81f" stopOpacity="0" />
+                <stop offset="50%" stopColor="#f5b81f" stopOpacity="1" />
+                <stop offset="100%" stopColor="#f5b81f" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>

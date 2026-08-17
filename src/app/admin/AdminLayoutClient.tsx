@@ -15,6 +15,10 @@ import {
   Menu,
   X,
   ChevronRight,
+  LayoutGrid,
+  FolderKanban,
+  ClipboardList,
+  UserCog,
 } from 'lucide-react';
 import ToastProvider from '@/components/ui/ToastProvider';
 import type { AdminUser } from '@/types';
@@ -29,6 +33,10 @@ const navItems = [
   { href: '/admin/leads', label: 'Leads', icon: Users },
   { href: '/admin/careers', label: 'Careers', icon: Briefcase },
   { href: '/admin/applications', label: 'Applications', icon: FileText },
+  { href: '/admin/services', label: 'Services', icon: LayoutGrid },
+  { href: '/admin/projects', label: 'Projects', icon: FolderKanban },
+  { href: '/admin/tasks', label: 'Tasks', icon: ClipboardList },
+  { href: '/admin/team', label: 'Team', icon: UserCog },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ];
 

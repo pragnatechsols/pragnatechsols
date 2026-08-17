@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { User, Lock, Shield, Plus, Trash2, UserCheck } from 'lucide-react';
+import { User, Lock, Shield, Plus, Trash2, UserCheck, SlidersHorizontal } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface AdminUser {
@@ -44,6 +44,23 @@ export default function SettingsPage() {
   const [newAdminName, setNewAdminName] = useState('');
   const [isCreatingAdmin, setIsCreatingAdmin] = useState(false);
 
+  // Site configuration state
+  const [whyHireMaxWords, setWhyHireMaxWords] = useState('200');
+  const [isSavingConfig, setIsSavingConfig] = useState(false);
+
+  // Fetch site configuration
+  const fetchConfig = useCallback(async () => {
+    try {
+      const res = await fetch('/api/admin/settings/config');
+      const data = await res.json();
+      if (data.success && data.data?.why_hire_you_max_words != null) {
+        setWhyHireMaxWords(String(data.data.why_hire_you_max_words));
+      }
+    } catch {
+      // non-fatal
+    }
+  }, []);
+
   // Fetch current user profile
   const fetchProfile = useCallback(async () => {
     try {
@@ -77,7 +94,8 @@ export default function SettingsPage() {
   useEffect(() => {
     fetchProfile();
     fetchAdmins();
-  }, [fetchProfile, fetchAdmins]);
+    fetchConfig();
+  }, [fetchProfile, fetchAdmins, fetchConfig]);
 
   // Handle profile update
   const handleProfileUpdate = async (e: React.FormEvent) => {
@@ -152,10 +170,41 @@ export default function SettingsPage() {
     }
   };
 
+  // Handle site configuration save
+  const handleConfigSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const n = parseInt(whyHireMaxWords, 10);
+    if (isNaN(n) || n < 10 || n > 5000) {
+      toast.error('Word limit must be a number between 10 and 5000');
+      return;
+    }
+
+    setIsSavingConfig(true);
+    try {
+      const res = await fetch('/api/admin/settings/config', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ why_hire_you_max_words: String(n) }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success('Configuration saved');
+        setWhyHireMaxWords(String(n));
+      } else {
+        toast.error(data.error || 'Failed to save configuration');
+      }
+    } catch {
+      toast.error('Failed to save configuration');
+    } finally {
+      setIsSavingConfig(false);
+    }
+  };
+
   // Handle create admin
   const handleCreateAdmin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!newAdminEmail || !newAdminPassword || !newAdminName) {
       toast.error('All fields are required');
       return;
@@ -359,6 +408,51 @@ export default function SettingsPage() {
               className="px-6 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-medium hover:bg-amber-400 transition-colors disabled:opacity-50"
             >
               {isUpdatingPassword ? 'Updating...' : 'Update Password'}
+            </button>
+          </form>
+        </motion.div>
+
+        {/* Site Configuration Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="bg-[#4f2e88]/50 rounded-xl border border-[#5e3a9e] p-6"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 bg-amber-500/20 rounded-lg">
+              <SlidersHorizontal className="w-5 h-5 text-amber-400" />
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold text-white">Site Configuration</h2>
+              <p className="text-sm text-gray-400">Control site-wide settings</p>
+            </div>
+          </div>
+
+          <form onSubmit={handleConfigSave} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                &quot;Why should we hire you?&quot; — Maximum words
+              </label>
+              <input
+                type="number"
+                min={10}
+                max={5000}
+                value={whyHireMaxWords}
+                onChange={(e) => setWhyHireMaxWords(e.target.value)}
+                className="w-full sm:w-64 px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                placeholder="200"
+              />
+              <p className="text-xs text-gray-500 mt-2">
+                Applicants&apos; answer to this careers question is limited to this many words.
+              </p>
+            </div>
+            <button
+              type="submit"
+              disabled={isSavingConfig}
+              className="px-6 py-2 bg-amber-500 text-[#3d2063] rounded-lg font-medium hover:bg-amber-400 transition-colors disabled:opacity-50"
+            >
+              {isSavingConfig ? 'Saving...' : 'Save Configuration'}
             </button>
           </form>
         </motion.div>

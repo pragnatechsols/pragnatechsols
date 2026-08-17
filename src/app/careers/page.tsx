@@ -29,8 +29,30 @@ export default function CareersPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [maxWords, setMaxWords] = useState(200);
+  const [whyHireText, setWhyHireText] = useState('');
+
+  const countWords = (text: string) => text.trim().split(/\s+/).filter(Boolean).length;
+  const whyHireWordCount = countWords(whyHireText);
+  const whyHireOverLimit = whyHireWordCount > maxWords;
 
   const departments = [...new Set(jobs.map((j) => j.department))];
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const res = await fetch('/api/settings');
+        const data = await res.json();
+        if (data.success && data.data?.why_hire_you_max_words) {
+          const n = parseInt(data.data.why_hire_you_max_words, 10);
+          if (!isNaN(n) && n > 0) setMaxWords(n);
+        }
+      } catch {
+        // fall back to default 200
+      }
+    };
+    fetchSettings();
+  }, []);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -61,6 +83,7 @@ export default function CareersPage() {
     setSelectedJob(job);
     setShowApplicationForm(true);
     setSubmitSuccess(false);
+    setWhyHireText('');
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,6 +112,11 @@ export default function CareersPage() {
   const handleSubmitApplication = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!selectedJob || !resumeFile) return;
+
+    if (whyHireOverLimit) {
+      toast.error(`"Why should we hire you?" must be ${maxWords} words or fewer`);
+      return;
+    }
 
     setIsSubmitting(true);
 
@@ -472,16 +500,36 @@ export default function CareersPage() {
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                          Why should we hire you? *
-                        </label>
+                        <div className="flex items-center justify-between mb-2">
+                          <label className="block text-sm font-medium text-gray-300">
+                            Why should we hire you? *
+                          </label>
+                          <span
+                            className={`text-xs font-medium ${
+                              whyHireOverLimit ? 'text-red-400' : 'text-gray-400'
+                            }`}
+                          >
+                            {whyHireWordCount} / {maxWords} words
+                          </span>
+                        </div>
                         <textarea
                           name="why_hire_you"
                           required
                           rows={4}
-                          className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
+                          value={whyHireText}
+                          onChange={(e) => setWhyHireText(e.target.value)}
+                          className={`w-full px-4 py-3 bg-[#5e3a9e] border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 resize-none ${
+                            whyHireOverLimit
+                              ? 'border-red-500 focus:ring-red-500'
+                              : 'border-[#6d47b0] focus:ring-amber-500'
+                          }`}
                           placeholder="Tell us about your skills, experience, and what makes you a great fit..."
                         />
+                        {whyHireOverLimit && (
+                          <p className="text-xs text-red-400 mt-1">
+                            Please keep your answer to {maxWords} words or fewer.
+                          </p>
+                        )}
                       </div>
 
                       <div>
@@ -534,7 +582,7 @@ export default function CareersPage() {
                         </button>
                         <button
                           type="submit"
-                          disabled={isSubmitting || !resumeFile}
+                          disabled={isSubmitting || !resumeFile || whyHireOverLimit}
                           className="flex-1 px-4 py-3 bg-amber-500 text-[#3d2063] rounded-xl font-semibold hover:bg-amber-400 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                         >
                           {isSubmitting ? (
