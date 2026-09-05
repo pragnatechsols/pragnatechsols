@@ -65,6 +65,19 @@ const services = [
   },
 ];
 
+const heroImages = [
+  '/hero/hero-1.jpg',
+  '/hero/hero-2.jpg',
+  '/hero/hero-3.jpg',
+  '/hero/hero-4.jpg',
+  '/hero/hero-5.jpg',
+  '/hero/hero-6.jpg',
+  '/hero/hero-7.jpg',
+  '/hero/hero-8.jpg',
+  '/hero/hero-9.jpg',
+  '/hero/hero-10.jpg',
+];
+
 const stats = [
   { value: '15', suffix: '+', label: 'Years' },
   { value: '500', suffix: '+', label: 'Projects' },
@@ -221,8 +234,28 @@ export default function Home() {
     <>
       {/* Hero Section */}
       <section ref={containerRef} className="relative min-h-[110vh] flex items-center overflow-hidden bg-transparent">
-        {/* Purple gradient base - lighter top-left to deeper bottom-right, semi-transparent so the light leaks bleed through */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#5b3aa0]/40 via-[#3d2063]/35 to-[#2a1548]/45" />
+        {/* Scrolling image carousel background */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="flex h-full w-max animate-hero-scroll">
+            {[...heroImages, ...heroImages].map((src, i) => (
+              <div
+                key={i}
+                className="relative h-full w-screen md:w-[60vw] lg:w-[45vw] flex-none"
+              >
+                <img
+                  src={src}
+                  alt=""
+                  aria-hidden="true"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Purple gradient base - lighter top-left to deeper bottom-right, over the carousel so text stays readable */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3d2063]/85 via-[#3d2063]/80 to-[#2a1548]/90" />
 
         {/* Soft glow accents */}
         <div className="absolute inset-0 overflow-hidden">
@@ -362,6 +395,27 @@ export default function Home() {
                   <div className="text-gray-500 text-sm uppercase tracking-wider">{stat.label}</div>
                 </div>
               ))}
+            </motion.div>
+
+            {/* Scripture verse */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="flex flex-col items-center text-center gap-4 mt-8"
+            >
+              <img
+                src="/bible-verse.png"
+                alt="Open Bible with a radiant cross"
+                className="w-16 h-16 lg:w-20 lg:h-20 object-contain drop-shadow-[0_0_20px_rgba(245,184,31,0.35)]"
+              />
+              <p className="text-lg lg:text-2xl font-medium text-white/90 max-w-2xl leading-relaxed">
+                &ldquo;Built on <span className="text-amber-400">GOD&rsquo;s</span> Faithfulness,
+                Driven by <span className="text-amber-400">HIS</span> Excellence&rdquo;
+              </p>
+              <span className="text-amber-400/80 text-sm font-medium tracking-[0.2em] uppercase">
+                Colossians 3:23
+              </span>
             </motion.div>
           </div>
         </motion.div>

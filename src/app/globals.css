@@ -156,6 +156,17 @@ body {
   animation: marquee 30s linear infinite;
 }
 
+/* Hero background carousel - slow continuous horizontal scroll */
+.animate-hero-scroll {
+  animation: marquee 75s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-scroll {
+    animation: none;
+  }
+}
+
 /* Smooth Letter Spacing Animation */
 @keyframes letter-spacing {
   0%, 100% { letter-spacing: 0.05em; }

@@ -45,7 +45,12 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between h-14 pl-6 pr-4">
           {/* Logo */}
-          <Link href="/" className="group">
+          <Link href="/" className="group flex items-center gap-2.5">
+            <img
+              src="/pragna-logo.png"
+              alt="Pragna Techsols logo"
+              className="h-9 w-auto"
+            />
             <motion.span
               whileHover={{ scale: 1.02 }}
               className="text-white font-bold text-sm sm:text-base tracking-tight"
