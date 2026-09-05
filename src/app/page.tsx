@@ -309,8 +309,29 @@ export default function Home() {
           }}
         />
 
-        <motion.div 
-          style={isMobile ? {} : { y, opacity }} 
+        {/* Scripture verse - pinned top-right */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="hidden md:flex absolute top-28 right-6 lg:right-12 z-20 flex-col items-end text-right gap-2 max-w-xs pointer-events-none"
+        >
+          <img
+            src="/bible-verse.png"
+            alt="Open Bible with a radiant cross"
+            className="w-14 h-14 lg:w-16 lg:h-16 object-contain drop-shadow-[0_0_20px_rgba(245,184,31,0.35)]"
+          />
+          <p className="text-sm lg:text-base font-medium text-white/90 leading-relaxed">
+            &ldquo;Built on <span className="text-amber-400">GOD&rsquo;s</span> Faithfulness,
+            Driven by <span className="text-amber-400">HIS</span>{' '}Excellence&rdquo;
+          </p>
+          <span className="text-amber-400/80 text-xs font-medium tracking-[0.2em] uppercase">
+            Colossians 3:23
+          </span>
+        </motion.div>
+
+        <motion.div
+          style={isMobile ? {} : { y, opacity }}
           className="relative w-full"
         >
           <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-32 pb-40">
@@ -395,27 +416,6 @@ export default function Home() {
                   <div className="text-gray-500 text-sm uppercase tracking-wider">{stat.label}</div>
                 </div>
               ))}
-            </motion.div>
-
-            {/* Scripture verse */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="flex flex-col items-center text-center gap-4 mt-8"
-            >
-              <img
-                src="/bible-verse.png"
-                alt="Open Bible with a radiant cross"
-                className="w-16 h-16 lg:w-20 lg:h-20 object-contain drop-shadow-[0_0_20px_rgba(245,184,31,0.35)]"
-              />
-              <p className="text-lg lg:text-2xl font-medium text-white/90 max-w-2xl leading-relaxed">
-                &ldquo;Built on <span className="text-amber-400">GOD&rsquo;s</span> Faithfulness,
-                Driven by <span className="text-amber-400">HIS</span> Excellence&rdquo;
-              </p>
-              <span className="text-amber-400/80 text-sm font-medium tracking-[0.2em] uppercase">
-                Colossians 3:23
-              </span>
             </motion.div>
           </div>
         </motion.div>
