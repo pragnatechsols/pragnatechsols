@@ -228,17 +228,17 @@ export default function AboutPage() {
                 key={`${member.name}-${index}`}
                 className="glass-card rounded-2xl p-6 text-center flex flex-col items-center"
               >
-                <div className="w-16 h-16 rounded-full overflow-hidden mb-4 flex items-center justify-center bg-gradient-to-br from-amber-400 to-amber-600">
+                <div className="w-32 h-32 rounded-full overflow-hidden mb-4 flex items-center justify-center bg-gradient-to-br from-amber-400 to-amber-600">
                   {member.image ? (
                     <Image
                       src={member.image}
                       alt={member.name}
-                      width={64}
-                      height={64}
+                      width={128}
+                      height={128}
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <span className="text-[#3d2063] font-bold text-lg">{getInitials(member.name)}</span>
+                    <span className="text-[#3d2063] font-bold text-2xl">{getInitials(member.name)}</span>
                   )}
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-1">{member.name}</h3>
