@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from './supabase';
 import type { AdminUser } from '@/types';
 
@@ -64,29 +64,48 @@ export async function clearAdminSession(): Promise<void> {
 
 export async function verifyAdminRequest(request: NextRequest): Promise<AdminUser | null> {
   const sessionCookie = request.cookies.get(ADMIN_SESSION_COOKIE);
-  
+
   if (!sessionCookie?.value) {
     return null;
   }
-  
+
   const [adminId] = sessionCookie.value.split(':');
-  
+
   if (!adminId) {
     return null;
   }
-  
+
   const { data: admin, error } = await supabaseAdmin
     .from('admin_users')
     .select('id, email, name, role, is_active, created_at, updated_at')
     .eq('id', adminId)
     .eq('is_active', true)
     .single();
-  
+
   if (error || !admin) {
     return null;
   }
-  
+
   return admin as AdminUser;
+}
+
+// Verify the request belongs to an active super admin.
+// Returns the admin on success, or a 401/403 NextResponse to return directly.
+export async function requireSuperAdmin(
+  request: NextRequest
+): Promise<{ admin: AdminUser } | { response: NextResponse }> {
+  const admin = await verifyAdminRequest(request);
+  if (!admin) {
+    return {
+      response: NextResponse.json({ success: false, error: 'Not authenticated' }, { status: 401 }),
+    };
+  }
+  if (admin.role !== 'super_admin') {
+    return {
+      response: NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 }),
+    };
+  }
+  return { admin };
 }
 
 function generateSessionToken(): string {

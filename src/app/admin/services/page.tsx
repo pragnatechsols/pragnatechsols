@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Search, Plus, MoreVertical, LayoutGrid, Edit, Trash2, Eye, EyeOff, Upload, X } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -26,6 +27,8 @@ const initialFormState = {
 type IconMode = 'preset' | 'image';
 
 export default function ServicesAdminPage() {
+  const router = useRouter();
+  const [authorized, setAuthorized] = useState(false);
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -54,8 +57,27 @@ export default function ServicesAdminPage() {
   }, [search]);
 
   useEffect(() => {
-    fetchServices();
-  }, [fetchServices]);
+    // Services is a super-admin-only section. Verify role before loading;
+    // bounce non-super admins back to the dashboard.
+    const checkRole = async () => {
+      try {
+        const res = await fetch('/api/admin/auth/me');
+        const data = await res.json();
+        if (res.ok && data.data?.role === 'super_admin') {
+          setAuthorized(true);
+        } else {
+          router.replace('/admin');
+        }
+      } catch {
+        router.replace('/admin');
+      }
+    };
+    checkRole();
+  }, [router]);
+
+  useEffect(() => {
+    if (authorized) fetchServices();
+  }, [authorized, fetchServices]);
 
   const resetForm = () => {
     setFormData(initialFormState);
@@ -190,6 +212,14 @@ export default function ServicesAdminPage() {
       setIsSubmitting(false);
     }
   };
+
+  if (!authorized) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

@@ -27,12 +27,20 @@ export async function GET(request: NextRequest) {
   const taskIds = [...new Set(noteList.map((n) => n.task_id))];
 
   const titles: Record<string, string> = {};
+  const statuses: Record<string, string> = {};
   if (taskIds.length > 0) {
-    const { data: tasks } = await supabaseAdmin.from('tasks').select('id, title').in('id', taskIds);
-    for (const t of tasks || []) titles[t.id] = t.title;
+    const { data: tasks } = await supabaseAdmin.from('tasks').select('id, title, status').in('id', taskIds);
+    for (const t of tasks || []) {
+      titles[t.id] = t.title;
+      statuses[t.id] = t.status;
+    }
   }
 
-  const data = noteList.map((n) => ({ ...n, task_title: titles[n.task_id] || 'Task' }));
+  const data = noteList.map((n) => ({
+    ...n,
+    task_title: titles[n.task_id] || 'Task',
+    task_status: statuses[n.task_id] || null,
+  }));
 
   return NextResponse.json({ success: true, data });
 }

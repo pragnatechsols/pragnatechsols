@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { requireSuperAdmin } from '@/lib/auth';
 import type { Service, PaginatedResponse } from '@/types';
 
 // GET /api/admin/services - Get all services (admin)
 export async function GET(request: NextRequest) {
   try {
+    const auth = await requireSuperAdmin(request);
+    if ('response' in auth) return auth.response;
+
     const searchParams = request.nextUrl.searchParams;
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '50');
@@ -49,6 +53,9 @@ export async function GET(request: NextRequest) {
 // POST /api/admin/services - Create new service
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireSuperAdmin(request);
+    if ('response' in auth) return auth.response;
+
     const body = await request.json();
     const {
       title,

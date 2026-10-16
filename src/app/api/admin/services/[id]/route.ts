@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { requireSuperAdmin } from '@/lib/auth';
 import { deleteImage } from '@/lib/cloudinary';
 
 interface RouteParams {
@@ -9,6 +10,9 @@ interface RouteParams {
 // GET /api/admin/services/[id] - Get single service
 export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
+    const auth = await requireSuperAdmin(request);
+    if ('response' in auth) return auth.response;
+
     const { id } = await params;
 
     const { data, error } = await supabaseAdmin
@@ -32,6 +36,9 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 // PATCH /api/admin/services/[id] - Update service
 export async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
+    const auth = await requireSuperAdmin(request);
+    if ('response' in auth) return auth.response;
+
     const { id } = await params;
     const body = await request.json();
 
@@ -76,6 +83,9 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 // DELETE /api/admin/services/[id] - Soft delete service
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
+    const auth = await requireSuperAdmin(request);
+    if ('response' in auth) return auth.response;
+
     const { id } = await params;
 
     // Best-effort cleanup of an uploaded icon image

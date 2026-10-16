@@ -2,8 +2,8 @@
 
 import { PhoneIcon } from '@heroicons/react/24/solid';
 
-const PHONE = '+917036335500';
-const WHATSAPP = '917036335500';
+const PHONE = '+917036335511';
+const WHATSAPP = '917036335511';
 
 /**
  * Floating quick-contact buttons (call + WhatsApp) fixed to the

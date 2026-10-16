@@ -33,8 +33,8 @@ const navItems = [
   { href: '/admin/leads', label: 'Leads', icon: Users },
   { href: '/admin/careers', label: 'Careers', icon: Briefcase },
   { href: '/admin/applications', label: 'Applications', icon: FileText },
-  { href: '/admin/services', label: 'Services', icon: LayoutGrid },
-  { href: '/admin/projects', label: 'Projects', icon: FolderKanban },
+  { href: '/admin/services', label: 'Services', icon: LayoutGrid, superAdminOnly: true },
+  { href: '/admin/projects', label: 'Projects', icon: FolderKanban, superAdminOnly: true },
   { href: '/admin/tasks', label: 'Tasks', icon: ClipboardList },
   { href: '/admin/team', label: 'Team', icon: UserCog },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
@@ -76,6 +76,9 @@ export default function AdminLayoutClient({ children }: AdminLayoutClientProps) 
     router.push('/admin/login');
   };
 
+  const isSuperAdmin = admin?.role === 'super_admin';
+  const visibleNavItems = navItems.filter((item) => !item.superAdminOnly || isSuperAdmin);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#3d2063] flex items-center justify-center">
@@ -111,7 +114,7 @@ export default function AdminLayoutClient({ children }: AdminLayoutClientProps) 
 
         {/* Navigation */}
         <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
-          {navItems.map((item) => {
+          {visibleNavItems.map((item) => {
             const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
             return (
               <Link
@@ -183,7 +186,7 @@ export default function AdminLayoutClient({ children }: AdminLayoutClientProps) 
                 </button>
               </div>
               <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
-                {navItems.map((item) => {
+                {visibleNavItems.map((item) => {
                   const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
                   return (
                     <Link

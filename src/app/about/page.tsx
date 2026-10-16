@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import {
   ShieldCheckIcon,
   AcademicCapIcon,
@@ -19,6 +20,7 @@ const team = [
     name: 'Rajendra Prasad Chinnam',
     role: 'Managing Director',
     qualification: 'M.Tech (Electrical), MBA (HRM), PG Diploma in Fire & Safety',
+    image: '/team/rajendra.jpeg',
   },
   {
     name: 'Vijaya Chandar Chinam',
@@ -31,24 +33,27 @@ const team = [
     qualification: 'M.Tech (Electrical)',
   },
   {
-    name: 'Preeth Balagari',
-    role: 'IT Consultant',
-    qualification: 'M.Tech (CSE)',
-  },
-  {
-    name: 'Keerthi Balagari',
-    role: 'Civil Consultant',
-    qualification: 'M.Tech (IIT Guwahati), Civil Structural',
-  },
-  {
     name: 'Chandra Shekhara Rao Chinnam',
     role: 'Mechanical Consultant',
     qualification: 'B.Tech (Mechanical)',
   },
   {
+    name: 'Preethi Balagari',
+    role: 'IT Consultant',
+    qualification: 'M.Tech (CSE)',
+    image: '/team/preethi.jpeg',
+  },
+  {
+    name: 'Keerthi Balagari',
+    role: 'Civil Consultant',
+    qualification: 'M.Tech (IIT Guwahati), Civil Structural',
+    image: '/team/keerthi.jpeg',
+  },
+  {
     name: 'Ratna Babu Kuchipudi',
     role: 'Admin Operations',
     qualification: 'MBA (HRM)',
+    image: '/team/ratna-babu.jpeg',
   },
   {
     name: 'Navanya Deepthi Gurvindapalli',
@@ -223,8 +228,18 @@ export default function AboutPage() {
                 key={`${member.name}-${index}`}
                 className="glass-card rounded-2xl p-6 text-center flex flex-col items-center"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-[#3d2063] font-bold text-lg">{getInitials(member.name)}</span>
+                <div className="w-16 h-16 rounded-full overflow-hidden mb-4 flex items-center justify-center bg-gradient-to-br from-amber-400 to-amber-600">
+                  {member.image ? (
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-[#3d2063] font-bold text-lg">{getInitials(member.name)}</span>
+                  )}
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-1">{member.name}</h3>
                 <p className="text-amber-400 text-sm font-medium mb-3">{member.role}</p>

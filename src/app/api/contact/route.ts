@@ -260,7 +260,7 @@ export async function POST(request: NextRequest) {
                 <div style="text-align: center; padding: 20px 0; border-top: 1px solid #334155;">
                   <p style="margin: 0 0 10px; color: #94a3b8; font-size: 14px;">Need immediate assistance?</p>
                   <p style="margin: 0; color: #f1f5f9; font-size: 15px;">
-                    <a href="tel:+917036335500" style="color: #eab308; text-decoration: none;">+91 70363 35500</a>
+                    <a href="tel:+917036335511" style="color: #eab308; text-decoration: none;">+91 70363 35511</a>
                     &nbsp;|&nbsp;
                     <a href="mailto:pragnatechsols@gmail.com" style="color: #eab308; text-decoration: none;">pragnatechsols@gmail.com</a>
                   </p>

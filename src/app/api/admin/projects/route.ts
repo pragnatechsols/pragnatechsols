@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { requireSuperAdmin } from '@/lib/auth';
 import type { Project, PaginatedResponse } from '@/types';
 
 // GET /api/admin/projects - Get all projects (admin)
 export async function GET(request: NextRequest) {
   try {
+    const auth = await requireSuperAdmin(request);
+    if ('response' in auth) return auth.response;
+
     const searchParams = request.nextUrl.searchParams;
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '50');
@@ -54,6 +58,9 @@ export async function GET(request: NextRequest) {
 // POST /api/admin/projects - Create new project
 export async function POST(request: NextRequest) {
   try {
+    const auth = await requireSuperAdmin(request);
+    if ('response' in auth) return auth.response;
+
     const body = await request.json();
     const { title, works, category, logo_url, logo_cloudinary_id, sort_order, is_active } = body;
 

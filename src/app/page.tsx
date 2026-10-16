@@ -76,6 +76,11 @@ const heroImages = [
   '/hero/hero-8.jpg',
   '/hero/hero-9.jpg',
   '/hero/hero-10.jpg',
+  '/hero/hero-11.png',
+  '/hero/hero-12.png',
+  '/hero/hero-13.png',
+  '/hero/hero-14.png',
+  '/hero/hero-15.png',
 ];
 
 const stats = [

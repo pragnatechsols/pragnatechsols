@@ -181,10 +181,10 @@ export default function Footer() {
                   <PhoneIcon className="w-4 h-4 text-amber-400" />
                 </div>
                 <a
-                  href="tel:+917036335500"
+                  href="tel:+917036335511"
                   className="text-gray-400 hover:text-amber-400 text-sm transition-colors duration-200"
                 >
-                  +91 70363 35500
+                  +91 70363 35511
                 </a>
               </li>
             </ul>

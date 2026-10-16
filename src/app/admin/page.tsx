@@ -53,11 +53,24 @@ interface TaskUpdate {
   id: string;
   task_id: string;
   task_title: string;
+  task_status: 'open' | 'in_progress' | 'done' | null;
   author_type: 'member' | 'admin';
   author_name: string;
   note: string;
   created_at: string;
 }
+
+const taskStatusStyles: Record<string, string> = {
+  open: 'bg-blue-500/20 text-blue-400',
+  in_progress: 'bg-amber-500/20 text-amber-400',
+  done: 'bg-green-500/20 text-green-400',
+};
+
+const taskStatusLabels: Record<string, string> = {
+  open: 'Open',
+  in_progress: 'In Progress',
+  done: 'Done',
+};
 
 export default function AdminDashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
@@ -316,10 +329,19 @@ export default function AdminDashboardPage() {
                   {u.author_name?.charAt(0).toUpperCase() || '?'}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-gray-300">
+                  <p className="text-sm text-gray-300 flex items-center flex-wrap gap-2">
                     <span className="font-medium text-white">{u.author_name}</span>
-                    {' · '}
+                    <span className="text-gray-500">·</span>
                     <span className="text-amber-400">{u.task_title}</span>
+                    {u.task_status && (
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                          taskStatusStyles[u.task_status] || 'bg-gray-500/20 text-gray-400'
+                        }`}
+                      >
+                        {taskStatusLabels[u.task_status] || u.task_status}
+                      </span>
+                    )}
                   </p>
                   <p className="text-sm text-gray-400 truncate">{u.note}</p>
                 </div>

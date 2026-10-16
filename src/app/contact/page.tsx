@@ -38,8 +38,8 @@ const contactInfo = [
   {
     icon: <PhoneIcon className="w-6 h-6" />,
     title: 'Call Us',
-    content: '+91 70363 35500',
-    href: 'tel:+917036335500',
+    content: '+91 70363 35511',
+    href: 'tel:+917036335511',
   },
   {
     icon: <ClockIcon className="w-6 h-6" />,
@@ -341,7 +341,7 @@ export default function ContactPage() {
 
               {/* WhatsApp Button */}
               <a
-                href="https://wa.me/917036335500?text=Hi%2C%20I%27m%20interested%20in%20your%20MEPF%20services."
+                href="https://wa.me/917036335511?text=Hi%2C%20I%27m%20interested%20in%20your%20MEPF%20services."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-3 w-full bg-green-600 hover:bg-green-500 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300"
