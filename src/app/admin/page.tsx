@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   MessageSquare,
@@ -318,7 +319,11 @@ export default function AdminDashboardPage() {
         ) : (
           <div className="space-y-3">
             {taskUpdates.map((u) => (
-              <div key={u.id} className="flex gap-3 items-start">
+              <Link
+                key={u.id}
+                href={`/admin/tasks?task=${u.task_id}`}
+                className="flex gap-3 items-start rounded-lg -mx-2 px-2 py-1.5 hover:bg-[#5e3a9e]/40 transition-colors"
+              >
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-none ${
                     u.author_type === 'admin'
@@ -346,7 +351,7 @@ export default function AdminDashboardPage() {
                   <p className="text-sm text-gray-400 truncate">{u.note}</p>
                 </div>
                 <span className="text-xs text-gray-500 flex-none">{formatRelativeTime(u.created_at)}</span>
-              </div>
+              </Link>
             ))}
           </div>
         )}

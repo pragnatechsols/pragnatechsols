@@ -149,6 +149,20 @@ export default function TasksAdminPage() {
     fetchTasks();
   }, [fetchTasks]);
 
+  // Deep-link from the dashboard "Recent Task Updates" feed: ?task=<id> opens
+  // that task's notes thread (its full history) once tasks have loaded.
+  useEffect(() => {
+    if (loading || tasks.length === 0) return;
+    const params = new URLSearchParams(window.location.search);
+    const taskId = params.get('task');
+    if (!taskId || expandedId === taskId) return;
+    if (!tasks.some((t) => t.id === taskId)) return;
+    setExpandedId(taskId);
+    setNoteDraft('');
+    setNotes([]);
+    fetchNotes(taskId);
+  }, [loading, tasks, expandedId, fetchNotes]);
+
   const resetForm = () => {
     setFormData(initialFormState);
     setSelected(null);
