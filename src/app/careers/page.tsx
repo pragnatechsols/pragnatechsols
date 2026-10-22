@@ -435,7 +435,7 @@ export default function CareersPage() {
                             name="phone"
                             required
                             className="w-full px-4 py-3 bg-[#5e3a9e] border border-[#6d47b0] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                            placeholder="+91 70363 35500"
+                            placeholder="+91 70363 35511"
                           />
                         </div>
                         <div>

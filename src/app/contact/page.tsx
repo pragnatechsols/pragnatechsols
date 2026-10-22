@@ -210,7 +210,7 @@ export default function ContactPage() {
                       onBlur={handlePhoneBlur}
                       required
                       className={`w-full px-4 py-3 bg-[#4f2e88] border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200 ${phoneError ? 'border-red-500' : 'border-[#5e3a9e]'}`}
-                      placeholder="+91 70363 35500"
+                      placeholder="+91 70363 35511"
                     />
                     {phoneError && (
                       <p className="mt-1 text-sm text-red-400">{phoneError}</p>
